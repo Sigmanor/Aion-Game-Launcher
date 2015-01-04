@@ -1,4 +1,4 @@
 ﻿Aion-Game-Launcher
 ==================
 
-Alternative launcher for the game on US servers Aion.
+Alternative launcher for the Aion game on US servers. 
