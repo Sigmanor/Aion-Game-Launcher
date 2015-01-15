@@ -14,7 +14,7 @@ Features
 
 Download and Install
 ==================
-The latest version always available **[here](http://sigmanor.tk/aion-game-launcher/#download)**. Just extract downloaded zip wherever you want.
+The latest version always available **<a href="http://sigmanor.tk/aion-game-launcher/#download" target="_blank">here</a>**. Just extract downloaded zip wherever you want.
 
 Build
 ==================
