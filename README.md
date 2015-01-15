@@ -2,6 +2,8 @@ Description
 ==================
 
 Alternative launcher for the Aion. Created specifically for the **Russian-speaking** community in the US servers.
+<!--![Image](https://octodex.github.com/images/yaktocat.png)-->
+ <video class="shadowBorder" poster="../img/pre.png" preload autoplay loop src="http://sigmanor.tk/aion-game-launcher/agl-slider.webm" type="video/webm; codecs="vp8, vorbis""></video>
 
 Features
 ==================
