@@ -3,11 +3,7 @@ Description
 
 Alternative launcher for the Aion. Created specifically for the **Russian-speaking** community in the US servers.
 
-<<<<<<< HEAD
 ![](https://raw.githubusercontent.com/Sigmanor/Aion-Game-Launcher/master/screenshot.png)  
-=======
-![](https://raw.githubusercontent.com/Sigmanor/Aion-Game-Launcher/master/main.gif)
->>>>>>> e93909ce6208343d0ef73dc868ce75b48215fb04
 
 Features
 ==================
