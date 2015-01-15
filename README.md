@@ -1,4 +1,4 @@
-Aion-Game-Launcher
+Description
 ==================
 
 Alternative launcher for the Aion. Created specifically for the **Russian-speaking** community in the US servers.
