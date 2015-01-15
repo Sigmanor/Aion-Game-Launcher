@@ -1,7 +1,7 @@
 Aion-Game-Launcher
 ==================
 
-Alternative launcher for the Aion. Created specifically for the Russian-speaking community in the US servers. 
+Alternative launcher for the Aion. Created specifically for the **Russian-speaking** community in the US servers. 
 
 Features
 ==================
@@ -14,7 +14,7 @@ Features
 
 Download
 ==================
-The latest version always available [here](http://sigmanor.tk/aion-game-launcher/#download)
+The latest version always available **[here](http://sigmanor.tk/aion-game-launcher/#download)**.
 
 Build
 ==================
