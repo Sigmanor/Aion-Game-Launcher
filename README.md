@@ -12,13 +12,13 @@ Features
 * Configuring additional settings for the game.
 * Monitoring the status of servers.
 
-Download
+Download and Install
 ==================
-The latest version always available **[here](http://sigmanor.tk/aion-game-launcher/#download)**.
+The latest version always available **[here](http://sigmanor.tk/aion-game-launcher/#download)**. Just extract downloaded zip wherever you want.
 
 Build
 ==================
-Just run the .sln file in VS(built in 2013 version).
+Just run the .sln file in VS (built in 2013 version).
 The code is very shi~ and sometimes (or perhaps completely) is Delphi thinking. There are no comments. No following the OOP rules. Learn the code at your own risk.
 
 ToDO
