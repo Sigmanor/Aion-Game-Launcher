@@ -1,7 +1,7 @@
 Aion-Game-Launcher
 ==================
 
-Alternative launcher for the Aion. Created specifically for the **Russian-speaking** community in the US servers. 
+Alternative launcher for the Aion. Created specifically for the **Russian-speaking** community in the US servers.
 
 Features
 ==================
@@ -18,6 +18,8 @@ The latest version always available **[here](http://sigmanor.tk/aion-game-launch
 
 Build
 ==================
+Just run the .sln file in VS(built in 2013 version).
+The code is very shi~ and sometimes (or perhaps completely) is Delphi thinking. There are no comments. No following the OOP rules. Learn the code at your own risk.
 
 ToDO
 ==================
