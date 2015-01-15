@@ -14,6 +14,7 @@ Features
 
 Download
 ==================
+The latest version always available [here](http://sigmanor.tk/aion-game-launcher/#download)
 
 Build
 ==================
