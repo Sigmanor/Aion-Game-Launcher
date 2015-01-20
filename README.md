@@ -8,7 +8,7 @@ Alternative launcher for the Aion. Created special for the **Russian-speaking** 
 Features
 ==================
 * Running the game without checking client files.
-* Memorization the username and password.
+* Remember login and password.
 * Running 64bit game client.
 * Quick Launch.
 * Configuring additional settings for the game.
