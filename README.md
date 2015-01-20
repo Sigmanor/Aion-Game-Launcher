@@ -9,7 +9,7 @@ Features
 ==================
 * Running the game without checking client files.
 * Remember login and password.
-* Running 64bit game client.
+* Running 64-bit game client.
 * Quick Launch.
 * Configuring additional settings for the game.
 * Monitoring the status of servers.
