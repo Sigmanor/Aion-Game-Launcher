@@ -759,7 +759,7 @@ namespace Aion_Launcher
 
             private void gButton4_Click(object sender, EventArgs e)
             {
-                Process.Start("http://vk.cc/3lktHA");
+                Process.Start("http://vk.cc/3lktHA"); 
                 //Process.Start("https://docs.google.com/spreadsheet/pub?key=0AnN1zLx9Y8jidFVXVmFETWU0OGpBbHVZMFpvbVppZWc&usp=drive_web#gid=0");
             }
 
