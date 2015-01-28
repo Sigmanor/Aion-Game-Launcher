@@ -759,7 +759,7 @@ namespace Aion_Launcher
 
             private void gButton4_Click(object sender, EventArgs e)
             {
-                Process.Start("http://vk.cc/3lktHA"); 
+                Process.Start("https://docs.google.com/spreadsheet/ccc?key=0AtDAFcPW1M8fdGc2UWJUVHJpelNhZlVncXdhNnlnQnc&usp=drive_web#gid=115");
                 //Process.Start("https://docs.google.com/spreadsheet/pub?key=0AnN1zLx9Y8jidFVXVmFETWU0OGpBbHVZMFpvbVppZWc&usp=drive_web#gid=0");
             }
 
@@ -851,10 +851,13 @@ namespace Aion_Launcher
                     p = "";
                 }
 
-                Process pr = new Process();
-                pr.StartInfo.FileName = @"C:\Program Files"+p+@"\NCWest\NCLauncher\NCLauncher.exe";
-                pr.StartInfo.Arguments = @"/LauncherID:""NCWest"" /CompanyID:""12"" /GameID:""AION"" /LUpdateAddr:""updater.nclauncher.ncsoft.com""";
-                pr.Start();
+                if ((File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) || (File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
+                {
+                    Process pr = new Process();
+                    pr.StartInfo.FileName = @"C:\Program Files" + p + @"\NCWest\NCLauncher\NCLauncher.exe";
+                    pr.StartInfo.Arguments = @"/LauncherID:""NCWest"" /CompanyID:""12"" /GameID:""AION"" /LUpdateAddr:""updater.nclauncher.ncsoft.com""";
+                    pr.Start();
+                }
 
                 if ((!File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) && (!File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
                 {
