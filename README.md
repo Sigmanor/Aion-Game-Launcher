@@ -25,5 +25,5 @@ The code is very shi~ and sometimes (or perhaps completely) is Delphi thinking. 
 
 ToDO
 ==================
-- [ ] Add support for the European server.
+- [ ] Optimization program code.
 - [ ] Add english and then more translations.
