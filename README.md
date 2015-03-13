@@ -18,6 +18,10 @@ Download and Install
 ==================
 The latest version always available **<a href="http://sigmanor.tk/aion-game-launcher/#download" target="_blank">here</a>**. Just extract downloaded zip wherever you want.
 
+Beta
+==================
+The latest beta version from github repository available **<a href="http://sigmanor.tk/soft/Aion-Game-Launcher/beta/" target="_blank">here</a>**.
+
 Build
 ==================
 Just run the .sln file in VS (built in 2013 version).
