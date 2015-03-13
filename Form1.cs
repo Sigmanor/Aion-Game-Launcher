@@ -1,17 +1,13 @@
-﻿using System;
-using System.Text;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
-using Microsoft.Win32;
-using System.Xml.Linq;
+using System.Drawing;
 using System.IO;
 using System.Net;
-using System.Threading;
-using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
-using System.Security.Cryptography;
 using System.Net.NetworkInformation;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace Aion_Launcher
 {
@@ -23,8 +19,6 @@ namespace Aion_Launcher
         string[] arg;
         public Form1(string[] args)
         {
-            //Properties.Settings prop = Properties.Settings.Default;
-
             if (ps.License == 0)
             {
                 InitializeComponent();
@@ -42,6 +36,8 @@ namespace Aion_Launcher
                 LoginTextBox.ForeColor = Color.Gray;
                 PasswordTextBox.ForeColor = Color.Gray;
             }
+            statusStrip1.Padding = new Padding(statusStrip1.Padding.Left,
+            statusStrip1.Padding.Top, statusStrip1.Padding.Left, statusStrip1.Padding.Bottom);
         }
 
         private bool RemoteFileExists(string url)
@@ -84,13 +80,15 @@ namespace Aion_Launcher
       
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            //Properties.Settings ps = Properties.Settings.Default;
             if (checkBox1.Checked == true)
             {
-               ps.Pass = PasswordTextBox.Text;
-               ps.Log = LoginTextBox.Text;
-               ps.Checked = checkBox1.Checked;
-               ps.Save();
+                if (PasswordTextBox.Text != "Пароль" && LoginTextBox.Text != "Логин" && PasswordTextBox.Text != "" && LoginTextBox.Text != "")
+                {
+                    ps.Pass = PasswordTextBox.Text;
+                    ps.Log = LoginTextBox.Text;
+                    ps.Checked = checkBox1.Checked;
+                    ps.Save();
+                }
             }
             if (checkBox1.Checked == false)
             {
@@ -102,139 +100,202 @@ namespace Aion_Launcher
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (ps.RestartAlert == true) { RestartAlert(); }         
+            /* Потоки */
+            Thread s = new Thread(ServerStatus);
+            Thread t = new Thread(AutoUPD);
+            s.Start();
+            t.Start();
+            /* Потоки */
 
-            if (arg.Length == 0) /*Аргумент = 0*/
+            if (ps.RestartAlert == true)
+            {
+                RestartAlert();
+            }
+
+            if (ps.Ping == true)
+            {
+                pingStatusLabel.Visible = true;
+                pingCheck();
+            }
+
+            if (ps.Ping == false)
+            {
+                pingStatusLabel.Visible = false;
+            }
+
+            ServerStatusCheck();
+
+            LoginTextBox.Text = ps.Log;
+            PasswordTextBox.Text = ps.Pass;
+            checkBox1.Checked = ps.Checked;
+
+
+            if (ps.GamePath == "")/* Получение пути к игре */
+            {
+                RegistryKey registryKey1 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\NCWest\AION");
+                if (registryKey1 != null)
                 {
-                    Thread s = new Thread(ServerStatus);
-                    Thread t = new Thread(AutoUPD);
-                    s.Start();
-                    t.Start();
-
-                    ServerStatusCheck();
-
-                    //Properties.Settings ps = Properties.Settings.Default;
-                    LoginTextBox.Text = ps.Log;
-                    PasswordTextBox.Text = ps.Pass;                 
-                    checkBox1.Checked = ps.Checked;
-
-                    if (ps.GamePath == "")/* Получение пути к игре */
-                    {
-                        RegistryKey registryKey1 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\NCWest\AION");
-                        if (registryKey1 != null)
-                        {
-                            string path1 = (string)registryKey1.GetValue("BaseDir");
-                            ps.GamePath = path1;
-                            ps.Save();
-                            registryKey1.Close();
-
-                        }
-
-                        RegistryKey registryKey2 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\NCWest\AION");
-                        if (registryKey2 != null)
-                        {
-                            string path2 = (string)registryKey2.GetValue("BaseDir");
-                            ps.GamePath = path2;
-                            ps.Save();
-                            registryKey2.Close();
-                        }
-                    } /* Получение пути к игре */              
-
-                    if (ps.Priority == true)
-                    {
-                        toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-
-                        this.WindowState = FormWindowState.Minimized;
-                        toolStripDropDownButton1.Visible = true;
-                        i = 3;
-                        toolStripDropDownButton1.Text = "Запуск игры через: " + i.ToString();
-                        PriorityTimer.Interval = 1000;
-                        PriorityTimer.Enabled = true;
-                        PriorityTimer.Start();
-                    }
-
-                    if (LoginTextBox.Text == "Логин" | PasswordTextBox.Text == "Пароль")
-                    {
-                        LoginTextBox.ForeColor = Color.Gray;
-                        PasswordTextBox.ForeColor = Color.Gray;
-                        PasswordTextBox.UseSystemPasswordChar = false;
-                    }
-                    else
-                    {
-                        Font font = new Font(LoginTextBox.Font, FontStyle.Regular);
-                        LoginTextBox.Font = font;
-                        PasswordTextBox.Font = font;
-                        LoginTextBox.ForeColor = Color.Black;
-                        PasswordTextBox.ForeColor = Color.Black;
-                    }
+                    string path1 = (string)registryKey1.GetValue("BaseDir");
+                    ps.GamePath = path1;
+                    ps.Save();
+                    registryKey1.Close();
 
                 }
 
-                else if (arg[0] == "upd") /*Аргумент = upd*/
+                RegistryKey registryKey2 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\NCWest\AION");
+                if (registryKey2 != null)
                 {
-                    Thread s = new Thread(ServerStatus);
-                    Thread t = new Thread(AutoUPD);
-                    s.Start();
-                    t.Start();
+                    string path2 = (string)registryKey2.GetValue("BaseDir");
+                    ps.GamePath = path2;
+                    ps.Save();
+                    registryKey2.Close();
+                }
+            } /* Получение пути к игре */
 
-                    ServerStatusCheck();
 
-                    //Properties.Settings ps = Properties.Settings.Default;
-                    LoginTextBox.Text = ps.Log;
-                    PasswordTextBox.Text = ps.Pass;
-                    checkBox1.Checked = ps.Checked;
+            if (LoginTextBox.Text == "Логин" | PasswordTextBox.Text == "Пароль")
+            {
+                LoginTextBox.ForeColor = Color.Gray;
+                PasswordTextBox.ForeColor = Color.Gray;
+                PasswordTextBox.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                Font font = new Font(LoginTextBox.Font, FontStyle.Regular);
+                LoginTextBox.Font = font;
+                PasswordTextBox.Font = font;
+                LoginTextBox.ForeColor = Color.Black;
+                PasswordTextBox.ForeColor = Color.Black;
+            }
 
-                    if (ps.GamePath == "")/* Получение пути к игре */
-                    {
-                        RegistryKey registryKey1 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\NCWest\AION");
-                        if (registryKey1 != null)
-                        {
-                            string path1 = (string)registryKey1.GetValue("BaseDir");
-                            ps.GamePath = path1;
-                            ps.Save();
-                            registryKey1.Close();
 
-                        }
+            if (arg.Length == 0) /*Аргумент = 0*/
+            {
+                //Thread s = new Thread(ServerStatus);
+                //Thread t = new Thread(AutoUPD);
+                //s.Start();
+                //t.Start();
 
-                        RegistryKey registryKey2 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\NCWest\AION");
-                        if (registryKey2 != null)
-                        {
-                            string path2 = (string)registryKey2.GetValue("BaseDir");
-                            ps.GamePath = path2;
-                            ps.Save();
-                            registryKey2.Close();
-                        }
-                    } /* Получение пути к игре */
+                //ServerStatusCheck();
 
-                    if (LoginTextBox.Text == "Логин" | PasswordTextBox.Text == "Пароль")
-                    {
-                        LoginTextBox.ForeColor = Color.Gray;
-                        PasswordTextBox.ForeColor = Color.Gray;
-                        PasswordTextBox.UseSystemPasswordChar = false;
-                    }
-                    else
-                    {
-                        Font font = new Font(LoginTextBox.Font, FontStyle.Regular);
-                        LoginTextBox.Font = font;
-                        PasswordTextBox.Font = font;
-                        LoginTextBox.ForeColor = Color.Black;
-                        PasswordTextBox.ForeColor = Color.Black;
-                    }
+                //LoginTextBox.Text = ps.Log;
+                //PasswordTextBox.Text = ps.Pass;
+                //checkBox1.Checked = ps.Checked;
 
-                    string f = Path.GetDirectoryName(Application.ExecutablePath) + @"\Updater.exe";
-                    if (File.Exists(f))
-                    {
-                        File.Delete(f);
-                    }
+                //if (ps.GamePath == "")/* Получение пути к игре */
+                //{
+                //    RegistryKey registryKey1 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\NCWest\AION");
+                //    if (registryKey1 != null)
+                //    {
+                //        string path1 = (string)registryKey1.GetValue("BaseDir");
+                //        ps.GamePath = path1;
+                //        ps.Save();
+                //        registryKey1.Close();
 
-                    Version_Info v = new Version_Info();
-                    v.ShowDialog();
-                }			
+                //    }
+
+                //    RegistryKey registryKey2 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\NCWest\AION");
+                //    if (registryKey2 != null)
+                //    {
+                //        string path2 = (string)registryKey2.GetValue("BaseDir");
+                //        ps.GamePath = path2;
+                //        ps.Save();
+                //        registryKey2.Close();
+                //    }
+                //} /* Получение пути к игре */              
+
+                if (ps.Priority == true)
+                {
+                    this.WindowState = FormWindowState.Minimized;
+                    toolStripStatusLabel1.Visible = false;
+                    toolStripDropDownButton1.Visible = true;
+                    i = 3;
+                    toolStripDropDownButton1.Text = "Запуск игры через: " + i.ToString();
+                    PriorityTimer.Interval = 1000;
+                    PriorityTimer.Enabled = true;
+                    PriorityTimer.Start();
+                }
+
+                //if (LoginTextBox.Text == "Логин" | PasswordTextBox.Text == "Пароль")
+                //{
+                //    LoginTextBox.ForeColor = Color.Gray;
+                //    PasswordTextBox.ForeColor = Color.Gray;
+                //    PasswordTextBox.UseSystemPasswordChar = false;
+                //}
+                //else
+                //{
+                //    Font font = new Font(LoginTextBox.Font, FontStyle.Regular);
+                //    LoginTextBox.Font = font;
+                //    PasswordTextBox.Font = font;
+                //    LoginTextBox.ForeColor = Color.Black;
+                //    PasswordTextBox.ForeColor = Color.Black;
+                //}
+
+            }
+
+            else if (arg[0] == "upd") /*Аргумент = upd*/
+            {
+                //Thread ss = new Thread(ServerStatus);
+                //Thread upd = new Thread(AutoUPD);
+                //ss.Start();
+                //upd.Start();
+
+                //ServerStatusCheck();
+
+                //LoginTextBox.Text = ps.Log;
+                //PasswordTextBox.Text = ps.Pass;
+                //checkBox1.Checked = ps.Checked;
+
+                //if (ps.GamePath == "")/* Получение пути к игре */
+                //{
+                //    RegistryKey registryKey1 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\NCWest\AION");
+                //    if (registryKey1 != null)
+                //    {
+                //        string path1 = (string)registryKey1.GetValue("BaseDir");
+                //        ps.GamePath = path1;
+                //        ps.Save();
+                //        registryKey1.Close();
+
+                //    }
+
+                //    RegistryKey registryKey2 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\NCWest\AION");
+                //    if (registryKey2 != null)
+                //    {
+                //        string path2 = (string)registryKey2.GetValue("BaseDir");
+                //        ps.GamePath = path2;
+                //        ps.Save();
+                //        registryKey2.Close();
+                //    }
+                //} /* Получение пути к игре */
+
+                //if (LoginTextBox.Text == "Логин" | PasswordTextBox.Text == "Пароль")
+                //{
+                //    LoginTextBox.ForeColor = Color.Gray;
+                //    PasswordTextBox.ForeColor = Color.Gray;
+                //    PasswordTextBox.UseSystemPasswordChar = false;
+                //}
+                //else
+                //{
+                //    Font font = new Font(LoginTextBox.Font, FontStyle.Regular);
+                //    LoginTextBox.Font = font;
+                //    PasswordTextBox.Font = font;
+                //    LoginTextBox.ForeColor = Color.Black;
+                //    PasswordTextBox.ForeColor = Color.Black;
+                //}
+
+                string f = Path.GetDirectoryName(Application.ExecutablePath) + @"\Updater.exe";
+                if (File.Exists(f))
+                {
+                    File.Delete(f);
+                }
+
+                Version_Info v = new Version_Info();
+                v.ShowDialog();
+            }			
         }
 
         public void ServerStatusCheck()
         {
-            //Properties.Settings ps = Properties.Settings.Default;
         	toolStripStatusLabel3.Text = ps.SCCB;
         }
 
@@ -242,6 +303,7 @@ namespace Aion_Launcher
         {
             pictureBox1.Focus(); 
         }
+
 
         #region Рестарт
         public void RestartAlert()
@@ -274,13 +336,7 @@ namespace Aion_Launcher
 
                 else
                 {
-                    MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-                    label6.BeginInvoke(bl);
-                    MethodInvoker gocrab = () => toolStripStatusLabel1.Text = "Го крабить!";
-                    label6.Invoke(gocrab);
-                    Bitmap crabimg = Properties.Resources.crab;
-                    MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
-                    pictureBox2.BeginInvoke(gc);
+                    return;
                 }
 
                 } catch { }
@@ -353,46 +409,7 @@ namespace Aion_Launcher
                         MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
                         pictureBox2.BeginInvoke(gc);
                     }
-
-                    //HttpWebRequest req;
-                    //HttpWebResponse resp;
-                    //StreamReader sr;
-                    //string C;
-                    //string RS;
-
-                    //req = (HttpWebRequest)WebRequest.Create("http://24timezones.com/usa_time/tx_galveston/texas_city.htm");
-                    //resp = (HttpWebResponse)req.GetResponse();
-                    //sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("UTF-8"));
-                    //C = sr.ReadToEnd();
-                    //sr.Close();
-
-                    //RS = "Sunday";                 
-
-                    //if (C.IndexOf(RS) > -1)
-                    //{                       
-                    //        MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-                    //        label6.BeginInvoke(bl);
-                    //        MethodInvoker restnow = () => toolStripStatusLabel1.Text = "Сегодня рестарт!";
-                    //        label6.Invoke(restnow);
-                    //        Bitmap restimg = Properties.Resources.restart;
-                    //        MethodInvoker hj = () => toolStripStatusLabel1.Image = restimg;
-                    //        pictureBox2.BeginInvoke(hj);                    
-                    //}
-
-                    //} /* Restart Check */
-
-                    //else
-                    //{
-                    //    MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-                    //    label6.BeginInvoke(bl);
-                    //    MethodInvoker gocrab = () => toolStripStatusLabel1.Text = "Го крабить!";
-                    //    label6.Invoke(gocrab);
-                    //    Bitmap crabimg = Properties.Resources.crab;
-                    //    MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
-                    //    pictureBox2.BeginInvoke(gc);
-                    //}
-
-
+                  
                 }
 
             }
@@ -409,17 +426,238 @@ namespace Aion_Launcher
 
                 System.Threading.Thread.Sleep(3000);
 
-                MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-                label6.BeginInvoke(bl);
-                MethodInvoker gocrab = () => toolStripStatusLabel1.Text = "Го крабить!";
-                label6.Invoke(gocrab);
-                Bitmap crabimg = Properties.Resources.crab;
-                MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
-                pictureBox2.BeginInvoke(gc);
+                //pingCheck();
+
+                if (ps.RestartAlert == true) /* Restart Check */
+                {
+                    RestartAlert();
+                }
+
+                else
+                {
+                    MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
+                    label6.BeginInvoke(bl);
+                    MethodInvoker gocrab = () => toolStripStatusLabel1.Text = "Го крабить!";
+                    label6.Invoke(gocrab);
+
+                    Bitmap crabimg = Properties.Resources.crab;
+                    MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
+                    pictureBox2.BeginInvoke(gc);
+                }
 
             }
         }
             #endregion
+
+        #region Проверка пинга
+        public void pingCheck()
+        {
+            try
+            {
+                pingStatusLabel.Text = "Пинг: " + new Ping().Send("64.25.35.103").RoundtripTime.ToString() + " мсек.";
+            }
+            catch (WebException)
+            {
+                pingStatusLabel.Text = "Ошибка";
+            }
+        }
+        #endregion
+
+        #region Поток автоматической проверки обновлений
+        public void AutoUPD()
+        {
+            try
+            {
+                WebClient client = new WebClient();
+                Stream stream = client.OpenRead("http://sigmanor.tk/soft/Aion-Game-Launcher/version");
+                StreamReader reader = new StreamReader(stream);
+                String content = reader.ReadToEnd();
+                String version = Application.ProductVersion;
+
+                int con = Convert.ToInt32(content.Replace(".", ""));
+                int ver = Convert.ToInt32(version.Replace(".", ""));
+
+                if (con != ver)
+                {
+                    if (ps.AutoUPD == true)
+                    {
+                        Bitmap crabimg = Properties.Resources.upd;
+                        MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
+                        pictureBox2.BeginInvoke(gc);
+
+                        MethodInvoker w = () => toolStripStatusLabel1.Text = "Доступна новая версия!";
+                        label6.BeginInvoke(w);
+
+                        MethodInvoker r = () => toolStripStatusLabel1.Font = new Font(label6.Text, 8, FontStyle.Regular | FontStyle.Underline);
+                        label6.BeginInvoke(r);
+
+                        MethodInvoker t = () => toolStripStatusLabel1.ForeColor = SystemColors.HotTrack;
+                        label6.BeginInvoke(t);
+
+                        MethodInvoker ha = () => toolStripStatusLabel1.IsLink = true;
+                        label6.BeginInvoke(ha);
+                    }
+                }
+            }
+            catch
+            {
+            }
+
+        }
+        #endregion
+
+        #region Поток проверки статуса серверов
+        public void ServerStatus()
+        {
+            HttpWebRequest req;
+            HttpWebResponse resp;
+            StreamReader sr;
+            string C;
+            string IS = "", KR = "", SL = "", TM = "", LG = "";
+            string site = "";
+
+            try
+            {
+                if (ps.Monitoring == 0)
+                {
+                    site = "http://aionstatus.net/";
+                }
+
+                if (ps.Monitoring == 1)
+                {
+                    site = "http://aion.im/status/status.php";
+                }
+
+                if (ps.Monitoring == 2)
+                {
+                    site = "http://aion.mouseclic.com/tool/status/";
+                }
+
+                //if (ps.Monitoring == 2)
+                //{
+                //    site = "http://rainy.ws/server-status/";
+                //}
+
+
+                req = (HttpWebRequest)WebRequest.Create(site);
+                resp = (HttpWebResponse)req.GetResponse();
+                sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("windows-1251"));
+                C = sr.ReadToEnd();
+                sr.Close();
+
+                if (ps.Monitoring == 0)
+                {
+                    IS = "Online</font></td><td><a href=\"fav.php?favorite=Israphel";
+                    KR = "Online</font></td><td><a href=\"fav.php?favorite=Kahrun";
+                    SL = "Online</font></td><td><a href=\"fav.php?favorite=Siel";
+                    TM = "Online</font></td><td><a href=\"fav.php?favorite=Tiamat";
+                    LG = "Online</font></td><td><a href=\"fav.php?favorite=NA_Login";
+                }
+
+                if (ps.Monitoring == 1)
+                {
+                    IS = "class=\"lang-na\"></span>Israphel<span class=\"status-1\">";
+                    KR = "class=\"lang-na\"></span>Kahrun<span class=\"status-1\">";
+                    SL = "class=\"lang-na\"></span>Siel<span class=\"status-1\">";
+                    TM = "class=\"lang-na\"></span>Tiamat<span class=\"status-1\">";
+                    LG = "class=\"lang-na\"></span>NCSoft Login<span class=\"status-1\">";
+                }
+
+                if (ps.Monitoring == 2)
+                {
+                    //C = C.Replace("\n", string.Empty);
+                    //C = C.Replace(" ", string.Empty);
+                    IS = "online.png\" /> Israphel";
+                    KR = "online.png\" /> Kahrun";
+                    SL = "online.png\" /> Siel";
+                    TM = "online.png\" /> Tiamat";
+                    LG = "online.png\" /> Login(NA)";
+                }
+
+                Bitmap on = Properties.Resources.bullet_green;
+                Bitmap off = Properties.Resources.bullet_red;
+
+                if (ps.SCCB == "Israphel")
+                {
+                    if (C.IndexOf(IS) > -1)
+                    {
+                        MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
+                        pictureBox2.BeginInvoke(gc);
+                    }
+                    else
+                    {
+                        MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
+                        pictureBox2.BeginInvoke(gc);
+                    }
+                }
+
+
+                if (ps.SCCB == "Kahrun")
+                {
+                    if (C.IndexOf(KR) > -1)
+                    {
+                        MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
+                        pictureBox2.BeginInvoke(gc);
+                    }
+                    else
+                    {
+                        MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
+                        pictureBox2.BeginInvoke(gc);
+                    }
+                }
+
+                if (ps.SCCB == "Siel")
+                {
+                    if (C.IndexOf(SL) > -1)
+                    {
+                        MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
+                        pictureBox2.BeginInvoke(gc);
+                    }
+                    else
+                    {
+                        MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
+                        pictureBox2.BeginInvoke(gc);
+                    }
+                }
+
+                if (ps.SCCB == "Tiamat")
+                {
+                    if (C.IndexOf(TM) > -1)
+                    {
+                        MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
+                        pictureBox2.BeginInvoke(gc);
+                    }
+                    else
+                    {
+                        MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
+                        pictureBox2.BeginInvoke(gc);
+                    }
+                }
+
+                /* NC Login */
+                if (C.IndexOf(LG) > -1)
+                {
+                    MethodInvoker gc = () => toolStripStatusLabel2.Image = on;
+                    pictureBox2.BeginInvoke(gc);
+                }
+                else
+                {
+                    MethodInvoker gc = () => toolStripStatusLabel2.Image = off;
+                    pictureBox2.BeginInvoke(gc);
+                }
+            }
+            catch /*(WebException)*/
+            {
+                /*MethodInvoker err1 = () => toolStripStatusLabel3.Image = Properties.Resources.bullet_purple;
+                pictureBox2.BeginInvoke(err1);
+
+                MethodInvoker err2 = () => toolStripStatusLabel2.Image = Properties.Resources.bullet_purple;
+                pictureBox2.BeginInvoke(err2);*/
+                //MessageBox.Show("Exception");
+            }
+        }
+        #endregion
+
 
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -450,205 +688,207 @@ namespace Aion_Launcher
             }
         }
 
-        #region Поток автоматической проверки обновлений
-        public void AutoUPD()
-            {      
-                    //Properties.Settings ps = Properties.Settings.Default;
+        #region commented out
+        //#region Поток автоматической проверки обновлений
+        //public void AutoUPD()
+        //    {      
+        //            try
+        //            {
+        //                WebClient client = new WebClient();
+        //                Stream stream = client.OpenRead("http://sigmanor.tk/soft/Aion-Game-Launcher/version");
+        //                StreamReader reader = new StreamReader(stream);
+        //                String content = reader.ReadToEnd();
+        //                String version = Application.ProductVersion;
 
-                    try
-                    {
-                        WebClient client = new WebClient();
-                        Stream stream = client.OpenRead("http://sigmanor.tk/soft/Aion-Game-Launcher/version");
-                        StreamReader reader = new StreamReader(stream);
-                        String content = reader.ReadToEnd();
-                        String version = Application.ProductVersion;
+        //                int con = Convert.ToInt32(content.Replace(".", ""));
+        //                int ver = Convert.ToInt32(version.Replace(".", ""));
 
-                        int con = Convert.ToInt32(content.Replace(".", ""));
-                        int ver = Convert.ToInt32(version.Replace(".", ""));
+        //                if (con != ver)
+        //                {
+        //                    if (ps.AutoUPD == true)
+        //                    {
+        //                        Bitmap crabimg = Properties.Resources.upd;
+        //                        MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
+        //                        pictureBox2.BeginInvoke(gc);
 
-                        if (con != ver)
-                        {
-                            if (ps.AutoUPD == true)
-                            {
-                                Bitmap crabimg = Properties.Resources.upd;
-                                MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
-                                pictureBox2.BeginInvoke(gc);
+        //                        MethodInvoker w = () => toolStripStatusLabel1.Text = "Доступна новая версия!";
+        //                        label6.BeginInvoke(w);
 
-                                MethodInvoker w = () => toolStripStatusLabel1.Text = "Доступна новая версия!";
-                                label6.BeginInvoke(w);
+        //                        MethodInvoker r = () => toolStripStatusLabel1.Font = new Font(label6.Text, 8, FontStyle.Regular | FontStyle.Underline);
+        //                        label6.BeginInvoke(r);
 
-                                MethodInvoker r = () => toolStripStatusLabel1.Font = new Font(label6.Text, 8, FontStyle.Regular | FontStyle.Underline);
-                                label6.BeginInvoke(r);
+        //                        MethodInvoker t = () => toolStripStatusLabel1.ForeColor = SystemColors.HotTrack;
+        //                        label6.BeginInvoke(t);
 
-                                MethodInvoker t = () => toolStripStatusLabel1.ForeColor = SystemColors.HotTrack;
-                                label6.BeginInvoke(t);
+        //                        MethodInvoker ha = () => toolStripStatusLabel1.IsLink = true;
+        //                        label6.BeginInvoke(ha);
+        //                    }
+        //                }
+        //            }
+        //            catch (WebException)
+        //            {
+        //                //Bitmap ufail = Properties.Resources.updfail;
+        //                //MethodInvoker uimg = () => toolStripStatusLabel1.Image = ufail;
+        //                //pictureBox2.BeginInvoke(uimg);
 
-                                MethodInvoker ha = () => toolStripStatusLabel1.IsLink = true;
-                                label6.BeginInvoke(ha);
-                            }
-                        }
-                    }
-                    catch (WebException)
-                    {
-                        //Bitmap ufail = Properties.Resources.updfail;
-                        //MethodInvoker uimg = () => toolStripStatusLabel1.Image = ufail;
-                        //pictureBox2.BeginInvoke(uimg);
+        //                //MethodInvoker cl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Red;
+        //                //label6.BeginInvoke(cl);
+        //                //MethodInvoker ls = () => toolStripStatusLabel1.Text = "Ошибка соединения!";
+        //                //label6.BeginInvoke(ls);
+        //            }
+        //    }
+        //    #endregion
 
-                        //MethodInvoker cl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Red;
-                        //label6.BeginInvoke(cl);
-                        //MethodInvoker ls = () => toolStripStatusLabel1.Text = "Ошибка соединения!";
-                        //label6.BeginInvoke(ls);
-                    }
-            }
-            #endregion
+        //#region Поток проверки статуса серверов
+        //    public void ServerStatus()
+        //    {
+        //        HttpWebRequest req;
+        //        HttpWebResponse resp;
+        //        StreamReader sr;
+        //        string C;
+        //        string IS = "", KR = "", SL = "", TM = "", LG = "";
+        //        string site = "";
 
-        #region Поток проверки статуса серверов
-            public void ServerStatus()
-            {
-                HttpWebRequest req;
-                HttpWebResponse resp;
-                StreamReader sr;
-                string C;
-                string IS = "", KR = "", SL = "", TM = "", LG = "";
-                string site = "";
+        //        try
+        //        {
+        //            if (ps.Monitoring == 0) { site = "http://aionstatus.net/"; }
 
-                try
-                {
-                    if (ps.Monitoring == 0) { site = "http://aionstatus.net/"; }
+        //            if (ps.Monitoring == 1) { site = "http://aion.im/status/status.php"; }
 
-                    if (ps.Monitoring == 1) { site = "http://aion.im/status/status.php"; }
+        //            if (ps.Monitoring == 2) { site = "http://aion.mouseclic.com/tool/status/"; }              
 
-                    //if (ps.Monitoring == 2)
-                    //{
-                    //    site = "http://rainy.ws/server-status/";
-                    //}
+        //            //if (ps.Monitoring == 2)
+        //            //{
+        //            //    site = "http://rainy.ws/server-status/";
+        //            //}
 
 
-                    req = (HttpWebRequest)WebRequest.Create(site);
-                    resp = (HttpWebResponse)req.GetResponse();
-                    sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("windows-1251"));
-                    C = sr.ReadToEnd();
-                    sr.Close();
+        //            req = (HttpWebRequest)WebRequest.Create(site);
+        //            resp = (HttpWebResponse)req.GetResponse();
+        //            sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("windows-1251"));
+        //            C = sr.ReadToEnd();
+        //            sr.Close();
 
-                    if (ps.Monitoring == 0)
-                    {
-                        IS = "Online</font></td><td><a href=\"fav.php?favorite=Israphel";
-                        KR = "Online</font></td><td><a href=\"fav.php?favorite=Kahrun";
-                        SL = "Online</font></td><td><a href=\"fav.php?favorite=Siel";
-                        TM = "Online</font></td><td><a href=\"fav.php?favorite=Tiamat";
-                        LG = "Online</font></td><td><a href=\"fav.php?favorite=NA_Login";
-                    }
+        //            if (ps.Monitoring == 0)
+        //            {
+        //                IS = "Online</font></td><td><a href=\"fav.php?favorite=Israphel";
+        //                KR = "Online</font></td><td><a href=\"fav.php?favorite=Kahrun";
+        //                SL = "Online</font></td><td><a href=\"fav.php?favorite=Siel";
+        //                TM = "Online</font></td><td><a href=\"fav.php?favorite=Tiamat";
+        //                LG = "Online</font></td><td><a href=\"fav.php?favorite=NA_Login";
+        //            }
 
-                    if (ps.Monitoring == 1)
-                    {
-                        IS = "class=\"lang-na\"></span>Israphel<span class=\"status-1\">";
-                        KR = "class=\"lang-na\"></span>Kahrun<span class=\"status-1\">";
-                        SL = "class=\"lang-na\"></span>Siel<span class=\"status-1\">";
-                        TM = "class=\"lang-na\"></span>Tiamat<span class=\"status-1\">";
-                        LG = "class=\"lang-na\"></span>NCSoft Login<span class=\"status-1\">";
-                    }
+        //            if (ps.Monitoring == 1)
+        //            {
+        //                IS = "class=\"lang-na\"></span>Israphel<span class=\"status-1\">";
+        //                KR = "class=\"lang-na\"></span>Kahrun<span class=\"status-1\">";
+        //                SL = "class=\"lang-na\"></span>Siel<span class=\"status-1\">";
+        //                TM = "class=\"lang-na\"></span>Tiamat<span class=\"status-1\">";
+        //                LG = "class=\"lang-na\"></span>NCSoft Login<span class=\"status-1\">";
+        //            }
 
-                    //if (ps.Monitoring == 2)
-                    //{
-                    //    C = C.Replace("\n", string.Empty);
-                    //    C = C.Replace(" ", string.Empty);
+        //            if (ps.Monitoring == 2)
+        //            {
+        //                //C = C.Replace("\n", string.Empty);
+        //                //C = C.Replace(" ", string.Empty);
+        //                IS = "online.png\" /> Israphel";
+        //                KR = "online.png\" /> Kahrun";
+        //                SL = "online.png\" /> Siel";
+        //                TM = "online.png\" /> Tiamat";
+        //                LG = "online.png\" /> Login(NA)";
+        //            }
 
-                    //    IS = "Israphel</td><td><imgsrc=\"/server/images/online.gif\"";
-                    //    KR = "Kahrun</td><td><imgsrc=\"/server/images/online.gif\"";
-                    //    SL = "Siel</td><td><imgsrc=\"/server/images/online.gif\"";
-                    //    TM = "Tiamat</td><td><imgsrc=\"/server/images/online.gif\"";
-                    //    LG = "NCSoftLogin(NA)</td><td><imgsrc=\"/server/images/online.gif\"";
-                    //}
+        //            Bitmap on = Properties.Resources.bullet_green;
+        //            Bitmap off = Properties.Resources.bullet_red;
 
-                    Bitmap on = Properties.Resources.bullet_green;
-                    Bitmap off = Properties.Resources.bullet_red;
-                    
-                    if (ps.SCCB == "Israphel")
-                    	{
-                    if (C.IndexOf(IS) > -1)
-                    { 
-                        MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                    else
-                    { 
-                    	MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
-                        pictureBox2.BeginInvoke(gc);
-                    }                    
-                	    }
-                    
-                    if (ps.SCCB == "Kahrun")
-                    	{
-                    if (C.IndexOf(KR) > -1)
-                    { 
-                        MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                    else
-                    { 
-                    	MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
-                        pictureBox2.BeginInvoke(gc);
-                    }                    
-                	    }
+        //            if (ps.SCCB == "Israphel")
+        //            {
+        //                if (C.IndexOf(IS) > -1)
+        //                {
+        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
+        //                    pictureBox2.BeginInvoke(gc);
+        //                }
+        //                else
+        //                {
+        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
+        //                    pictureBox2.BeginInvoke(gc);
+        //                }
+        //            }
 
-					if (ps.SCCB == "Siel")
-                    	{
-                    if (C.IndexOf(SL) > -1)
-                    { 
-                        MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                    else
-                    { 
-                    	MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
-                        pictureBox2.BeginInvoke(gc);
-                    }                    
-                	    }
+
+        //            if (ps.SCCB == "Kahrun")
+        //            {
+        //                if (C.IndexOf(KR) > -1)
+        //                {
+        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
+        //                    pictureBox2.BeginInvoke(gc);
+        //                }
+        //                else
+        //                {
+        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
+        //                    pictureBox2.BeginInvoke(gc);
+        //                }
+        //            }
+
+        //            if (ps.SCCB == "Siel")
+        //            {
+        //                if (C.IndexOf(SL) > -1)
+        //                {
+        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
+        //                    pictureBox2.BeginInvoke(gc);
+        //                }
+        //                else
+        //                {
+        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
+        //                    pictureBox2.BeginInvoke(gc);
+        //                }
+        //            }
+
+        //            if (ps.SCCB == "Tiamat")
+        //            {
+        //                if (C.IndexOf(TM) > -1)
+        //                {
+        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
+        //                    pictureBox2.BeginInvoke(gc);
+        //                }
+        //                else
+        //                {
+        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
+        //                    pictureBox2.BeginInvoke(gc);
+        //                }
+        //            }
 					
-					if (ps.SCCB == "Tiamat")
-                    	{
-                    if (C.IndexOf(TM) > -1)
-                    { 
-                        MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                    else
-                    { 
-                    	MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
-                        pictureBox2.BeginInvoke(gc);
-                    }                    
-                	    }
-					
-                    /* NC Login */
-					 if (C.IndexOf(LG) > -1)
-                    { 
-                        MethodInvoker gc = () => toolStripStatusLabel2.Image = on;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                    else
-                    { 
-                    	MethodInvoker gc = () => toolStripStatusLabel2.Image = off;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                }
-                catch /*(WebException)*/
-                {
-                    /*MethodInvoker err1 = () => toolStripStatusLabel3.Image = Properties.Resources.bullet_purple;
-                    pictureBox2.BeginInvoke(err1);
+        //            /* NC Login */
+        //             if (C.IndexOf(LG) > -1)
+        //            {
+        //                MethodInvoker gc = () => toolStripStatusLabel2.Image = on;
+        //                pictureBox2.BeginInvoke(gc);
+        //            }
+        //            else
+        //            { 
+        //                MethodInvoker gc = () => toolStripStatusLabel2.Image = off;
+        //                pictureBox2.BeginInvoke(gc);
+        //            }
+        //        }
+        //        catch /*(WebException)*/
+        //        {
+        //            /*MethodInvoker err1 = () => toolStripStatusLabel3.Image = Properties.Resources.bullet_purple;
+        //            pictureBox2.BeginInvoke(err1);
 
-                    MethodInvoker err2 = () => toolStripStatusLabel2.Image = Properties.Resources.bullet_purple;
-                    pictureBox2.BeginInvoke(err2);*/
-                    //MessageBox.Show("Exception");
-                }
-            }
-             #endregion
+        //            MethodInvoker err2 = () => toolStripStatusLabel2.Image = Properties.Resources.bullet_purple;
+        //            pictureBox2.BeginInvoke(err2);*/
+        //            //MessageBox.Show("Exception");
+        //        }
+        //    }
+        //     #endregion
+        #endregion
 
-            private void Form1_Activated(object sender, EventArgs e)
+        private void Form1_Activated(object sender, EventArgs e)
             {
                 if (Aion_Launcher.Settings.PubVar.toggle == true)
                 {                
                     Aion_Launcher.Settings.PubVar.toggle = false;
-
+                    toolStripStatusLabel1.Visible = true;
                     ServerStatusCheck();
                     Thread s = new Thread(ServerStatus);
                     s.Start();
@@ -657,6 +897,17 @@ namespace Aion_Launcher
                         PriorityTimer.Stop();
                         toolStripDropDownButton1.Visible = false;
                     }
+
+                    if (ps.Ping == true)
+                    {
+                        pingStatusLabel.Visible = true;
+                        pingCheck();
+                    }
+
+                    if (ps.Ping == false)
+                    {
+                        pingStatusLabel.Visible = false;
+                    }  
                 }
             }
 
@@ -765,7 +1016,6 @@ namespace Aion_Launcher
 
             private void GoNagibatButton_Click(object sender, EventArgs e)
             {
-                //Properties.Settings ps = Properties.Settings.Default;
                 string sd = "/" + System.Environment.SystemDirectory.Substring(0, 1) + " ";
                 string r = ps.GamePath;
                 r = r.Replace(":\\", ":\\\"");
@@ -897,6 +1147,29 @@ namespace Aion_Launcher
             catch { }   	
         }
 
+        private void pingStatusLabel_Click(object sender, EventArgs e)
+        {
+            if (pingStatusLabel.Text.Contains("Пинг"))
+            {
+                pingCheck();
+            }
+        }
+
+        private void pingStatusLabel_MouseEnter(object sender, EventArgs e)
+        {
+            if (pingStatusLabel.Text.Contains("Пинг"))
+            {
+                this.Cursor = System.Windows.Forms.Cursors.Hand;
+            }
+        }
+
+        private void pingStatusLabel_MouseLeave(object sender, EventArgs e)
+        {
+            if (pingStatusLabel.Text.Contains("Пинг"))
+            {
+                this.Cursor = System.Windows.Forms.Cursors.Default;
+            }
+        }
 
     }
 }

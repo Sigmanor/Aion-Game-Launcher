@@ -58,21 +58,20 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.pingStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.gButton2 = new Aion_Launcher.GButton();
             this.gButton4 = new Aion_Launcher.GButton();
             this.gButton1 = new Aion_Launcher.GButton();
             this.gButton3 = new Aion_Launcher.GButton();
-            this.GoNagibatButton = new Aion_Launcher.FButton();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.playButton = new Aion_Launcher.FButton();
             this.SettingsMenu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -204,13 +203,16 @@
             // 
             // toolStripDropDownButton2
             // 
+            this.toolStripDropDownButton2.AutoSize = false;
             this.toolStripDropDownButton2.DropDown = this.SettingsMenu;
             this.toolStripDropDownButton2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Margin = new System.Windows.Forms.Padding(0, 2, 5, 0);
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(70, 22);
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(75, 24);
             this.toolStripDropDownButton2.Text = "Меню";
+            this.toolStripDropDownButton2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // notifyIcon1
             // 
@@ -247,15 +249,14 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripDropDownButton1,
-            this.toolStripStatusLabel5,
+            this.toolStripStatusLabel8,
+            this.pingStatusLabel,
             this.toolStripStatusLabel2,
-            this.toolStripStatusLabel4,
             this.toolStripStatusLabel3,
-            this.toolStripStatusLabel6,
             this.toolStripDropDownButton2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 310);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 308);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(587, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(587, 26);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.Stretch = false;
             this.statusStrip1.TabIndex = 36;
@@ -265,11 +266,12 @@
             // 
             this.toolStripStatusLabel1.ActiveLinkColor = System.Drawing.Color.Blue;
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.toolStripStatusLabel1.Image = global::Aion_Launcher.Properties.Resources.crab;
             this.toolStripStatusLabel1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolStripStatusLabel1.LinkColor = System.Drawing.Color.Blue;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(300, 19);
-            this.toolStripStatusLabel1.Spring = true;
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(86, 21);
             this.toolStripStatusLabel1.Text = "Го крабить!";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
@@ -281,59 +283,52 @@
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.ShowDropDownArrow = false;
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(136, 22);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(136, 24);
             this.toolStripDropDownButton1.Text = "Запуск игры через:";
             this.toolStripDropDownButton1.Visible = false;
             this.toolStripDropDownButton1.Click += new System.EventHandler(this.toolStripDropDownButton1_Click);
             // 
-            // toolStripStatusLabel5
+            // toolStripStatusLabel8
             // 
-            this.toolStripStatusLabel5.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.toolStripStatusLabel5.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(14, 19);
-            this.toolStripStatusLabel5.Text = " ";
+            this.toolStripStatusLabel8.Name = "toolStripStatusLabel8";
+            this.toolStripStatusLabel8.Size = new System.Drawing.Size(171, 21);
+            this.toolStripStatusLabel8.Spring = true;
+            // 
+            // pingStatusLabel
+            // 
+            this.pingStatusLabel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.pingStatusLabel.Name = "pingStatusLabel";
+            this.pingStatusLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.pingStatusLabel.Size = new System.Drawing.Size(49, 21);
+            this.pingStatusLabel.Text = "Пинг";
+            this.pingStatusLabel.Click += new System.EventHandler(this.pingStatusLabel_Click);
+            this.pingStatusLabel.MouseEnter += new System.EventHandler(this.pingStatusLabel_MouseEnter);
+            this.pingStatusLabel.MouseLeave += new System.EventHandler(this.pingStatusLabel_MouseLeave);
             // 
             // toolStripStatusLabel2
             // 
+            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripStatusLabel2.Image = global::Aion_Launcher.Properties.Resources.loadgif;
             this.toolStripStatusLabel2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(94, 18);
+            this.toolStripStatusLabel2.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(108, 20);
             this.toolStripStatusLabel2.Text = "NCSoft Login";
             this.toolStripStatusLabel2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
-            // toolStripStatusLabel4
-            // 
-            this.toolStripStatusLabel4.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.toolStripStatusLabel4.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabel4.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(15, 19);
-            this.toolStripStatusLabel4.Text = " ";
-            this.toolStripStatusLabel4.ToolTipText = " ";
-            // 
             // toolStripStatusLabel3
             // 
+            this.toolStripStatusLabel3.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripStatusLabel3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStatusLabel3.Image")));
             this.toolStripStatusLabel3.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(64, 18);
+            this.toolStripStatusLabel3.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(78, 20);
             this.toolStripStatusLabel3.Text = "Israphel";
             this.toolStripStatusLabel3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            // 
-            // toolStripStatusLabel6
-            // 
-            this.toolStripStatusLabel6.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.toolStripStatusLabel6.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabel6.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(15, 19);
-            this.toolStripStatusLabel6.Text = " ";
-            this.toolStripStatusLabel6.ToolTipText = " ";
             // 
             // toolStripSeparator1
             // 
@@ -382,17 +377,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(591, 40);
             this.panel2.TabIndex = 34;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::Aion_Launcher.Properties.Resources.updfail;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 279);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox2.TabIndex = 26;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Visible = false;
             // 
             // gButton2
             // 
@@ -450,7 +434,18 @@
             this.gButton3.Text = "Полезности для Aion";
             this.gButton3.Click += new System.EventHandler(this.gButton3_Click);
             // 
-            // GoNagibatButton
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Aion_Launcher.Properties.Resources.updfail;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 279);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 26;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Visible = false;
+            // 
+            // playButton
             // 
             pigment1.Name = "Border";
             pigment1.Value = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(133)))), ((int)(((byte)(0)))));
@@ -466,7 +461,7 @@
             pigment6.Value = System.Drawing.Color.White;
             pigment7.Name = "Text Shadow";
             pigment7.Value = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.GoNagibatButton.Colors = new Aion_Launcher.Pigment[] {
+            this.playButton.Colors = new Aion_Launcher.Pigment[] {
         pigment1,
         pigment2,
         pigment3,
@@ -474,15 +469,16 @@
         pigment5,
         pigment6,
         pigment7};
-            this.GoNagibatButton.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GoNagibatButton.ForeColor = System.Drawing.Color.Black;
-            this.GoNagibatButton.Location = new System.Drawing.Point(477, 251);
-            this.GoNagibatButton.Name = "GoNagibatButton";
-            this.GoNagibatButton.Shadow = true;
-            this.GoNagibatButton.Size = new System.Drawing.Size(98, 48);
-            this.GoNagibatButton.TabIndex = 35;
-            this.GoNagibatButton.Text = "ИГРАТЬ";
-            this.GoNagibatButton.Click += new System.EventHandler(this.GoNagibatButton_Click);
+            this.playButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.playButton.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.playButton.ForeColor = System.Drawing.Color.Black;
+            this.playButton.Location = new System.Drawing.Point(479, 250);
+            this.playButton.Name = "playButton";
+            this.playButton.Shadow = true;
+            this.playButton.Size = new System.Drawing.Size(98, 48);
+            this.playButton.TabIndex = 35;
+            this.playButton.Text = "ИГРАТЬ";
+            this.playButton.Click += new System.EventHandler(this.GoNagibatButton_Click);
             // 
             // Form1
             // 
@@ -494,7 +490,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.GoNagibatButton);
+            this.Controls.Add(this.playButton);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.checkBox1);
@@ -537,16 +533,13 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Timer AutoUPDtimer;
         private System.Windows.Forms.Panel panel2;
-        private FButton GoNagibatButton;
+        private FButton playButton;
         private GButton gButton1;
         private GButton gButton4;
         private GButton gButton2;
         private GButton gButton3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         public System.Windows.Forms.StatusStrip statusStrip1;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
@@ -561,6 +554,8 @@
         private System.Windows.Forms.ToolStripMenuItem дополнительноToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem официальныйЛаунчерToolStripMenuItem;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.ToolStripStatusLabel pingStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
     }
 }
 
