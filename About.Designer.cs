@@ -92,9 +92,9 @@
             this.label2.Location = new System.Drawing.Point(213, 52);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 14);
+            this.label2.Size = new System.Drawing.Size(91, 14);
             this.label2.TabIndex = 7;
-            this.label2.Text = "MVS C# 2013";
+            this.label2.Text = "VS Community";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label7
@@ -118,9 +118,9 @@
             this.label3.Location = new System.Drawing.Point(145, 52);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(161, 14);
+            this.label3.Size = new System.Drawing.Size(168, 14);
             this.label3.TabIndex = 5;
-            this.label3.Text = "(built on            )";
+            this.label3.Text = "(built in             )";
             // 
             // label5
             // 
