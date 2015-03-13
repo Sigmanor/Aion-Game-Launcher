@@ -820,6 +820,7 @@ namespace Aion_Launcher
         {
             ChangeMouseState(State.MouseOver);
             base.OnMouseEnter(e);
+
         }
         protected override void OnMouseUp(MouseEventArgs e)
         {
