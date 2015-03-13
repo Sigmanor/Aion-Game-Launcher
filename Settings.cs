@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq.Expressions;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
-using Microsoft.Win32;
 
 namespace Aion_Launcher
 {
@@ -30,7 +22,6 @@ namespace Aion_Launcher
 
         private void Settings_Load(object sender, EventArgs e)
         {
-            //Properties.Settings ps = Properties.Settings.Default;
             comboBox1.SelectedIndex = ps.Capacity;
             trayCheckBox.Checked = ps.Tray;
             fastStart.Checked = ps.Priority;
@@ -41,6 +32,7 @@ namespace Aion_Launcher
             ServerComboBox.Text = ps.SCCB;
             comboBox2.SelectedIndex = ps.Monitoring;
             RestartCheckBox.Checked = ps.RestartAlert;
+            pingCheckBox.Checked = ps.Ping;
         }
 
         //private void CloseButton_Click(object sender, EventArgs e)
@@ -50,7 +42,6 @@ namespace Aion_Launcher
 
         private void SaveSettingsButton_Click(object sender, EventArgs e)
         {
-            //Properties.Settings ps = Properties.Settings.Default;
             ps.Capacity = comboBox1.SelectedIndex;
             ps.Tray = trayCheckBox.Checked;
             ps.Priority = fastStart.Checked;
@@ -60,6 +51,7 @@ namespace Aion_Launcher
             ps.SCCB = ServerComboBox.Text;
             ps.Monitoring = comboBox2.SelectedIndex;
             ps.RestartAlert = RestartCheckBox.Checked;
+            ps.Ping = pingCheckBox.Checked;
             ps.Save();
 
             PubVar.toggle = true;

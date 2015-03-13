@@ -54,6 +54,7 @@
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pingCheckBox = new System.Windows.Forms.CheckBox();
             this.RestartCheckBox = new System.Windows.Forms.CheckBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -271,6 +272,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.pingCheckBox);
             this.groupBox2.Controls.Add(this.RestartCheckBox);
             this.groupBox2.Controls.Add(this.comboBox2);
             this.groupBox2.Controls.Add(this.label4);
@@ -282,10 +284,20 @@
             this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Location = new System.Drawing.Point(5, 196);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(294, 224);
+            this.groupBox2.Size = new System.Drawing.Size(294, 246);
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Лаунчер";
+            // 
+            // pingCheckBox
+            // 
+            this.pingCheckBox.AutoSize = true;
+            this.pingCheckBox.Location = new System.Drawing.Point(20, 219);
+            this.pingCheckBox.Name = "pingCheckBox";
+            this.pingCheckBox.Size = new System.Drawing.Size(115, 17);
+            this.pingCheckBox.TabIndex = 14;
+            this.pingCheckBox.Text = "Показывать пинг";
+            this.pingCheckBox.UseVisualStyleBackColor = true;
             // 
             // RestartCheckBox
             // 
@@ -303,7 +315,8 @@
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "aionstatus.net",
-            "aion.im"});
+            "aion.im",
+            "aion.mouseclic.com"});
             this.comboBox2.Location = new System.Drawing.Point(147, 60);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(127, 21);
@@ -403,5 +416,6 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox RestartCheckBox;
+        private System.Windows.Forms.CheckBox pingCheckBox;
     }
 }
