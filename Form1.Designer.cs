@@ -66,11 +66,12 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.gButton2 = new Aion_Launcher.GButton();
             this.gButton4 = new Aion_Launcher.GButton();
             this.gButton1 = new Aion_Launcher.GButton();
             this.gButton3 = new Aion_Launcher.GButton();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.playButton = new Aion_Launcher.FButton();
             this.SettingsMenu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -301,9 +302,6 @@
             this.pingStatusLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.pingStatusLabel.Size = new System.Drawing.Size(49, 21);
             this.pingStatusLabel.Text = "Пинг";
-            this.pingStatusLabel.Click += new System.EventHandler(this.pingStatusLabel_Click);
-            this.pingStatusLabel.MouseEnter += new System.EventHandler(this.pingStatusLabel_MouseEnter);
-            this.pingStatusLabel.MouseLeave += new System.EventHandler(this.pingStatusLabel_MouseLeave);
             // 
             // toolStripStatusLabel2
             // 
@@ -378,6 +376,22 @@
             this.panel2.Size = new System.Drawing.Size(591, 40);
             this.panel2.TabIndex = 34;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Aion_Launcher.Properties.Resources.updfail;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 279);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 26;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Visible = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // gButton2
             // 
             this.gButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -434,17 +448,6 @@
             this.gButton3.Text = "Полезности для Aion";
             this.gButton3.Click += new System.EventHandler(this.gButton3_Click);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::Aion_Launcher.Properties.Resources.updfail;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 279);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox2.TabIndex = 26;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Visible = false;
-            // 
             // playButton
             // 
             pigment1.Name = "Border";
@@ -469,7 +472,7 @@
         pigment5,
         pigment6,
         pigment7};
-            this.playButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.playButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.playButton.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.playButton.ForeColor = System.Drawing.Color.Black;
             this.playButton.Location = new System.Drawing.Point(479, 250);
@@ -556,6 +559,7 @@
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.ToolStripStatusLabel pingStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
