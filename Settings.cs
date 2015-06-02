@@ -35,11 +35,6 @@ namespace Aion_Launcher
             pingCheckBox.Checked = ps.Ping;
         }
 
-        //private void CloseButton_Click(object sender, EventArgs e)
-        //{
-        //    this.Visible=false;
-        //}
-
         private void SaveSettingsButton_Click(object sender, EventArgs e)
         {
             ps.Capacity = comboBox1.SelectedIndex;
