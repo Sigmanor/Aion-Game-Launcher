@@ -68,6 +68,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.gButton2 = new Aion_Launcher.GButton();
             this.gButton4 = new Aion_Launcher.GButton();
             this.gButton1 = new Aion_Launcher.GButton();
@@ -292,7 +293,7 @@
             // toolStripStatusLabel8
             // 
             this.toolStripStatusLabel8.Name = "toolStripStatusLabel8";
-            this.toolStripStatusLabel8.Size = new System.Drawing.Size(171, 21);
+            this.toolStripStatusLabel8.Size = new System.Drawing.Size(126, 21);
             this.toolStripStatusLabel8.Spring = true;
             // 
             // pingStatusLabel
@@ -300,8 +301,8 @@
             this.pingStatusLabel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.pingStatusLabel.Name = "pingStatusLabel";
             this.pingStatusLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.pingStatusLabel.Size = new System.Drawing.Size(49, 21);
-            this.pingStatusLabel.Text = "Пинг";
+            this.pingStatusLabel.Size = new System.Drawing.Size(94, 21);
+            this.pingStatusLabel.Text = "Пинг: 0 мсек.";
             // 
             // toolStripStatusLabel2
             // 
@@ -389,8 +390,12 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 5000;
+            this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // gButton2
             // 
@@ -560,6 +565,7 @@
         private System.Windows.Forms.ToolStripStatusLabel pingStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
         private System.Windows.Forms.Timer timer1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

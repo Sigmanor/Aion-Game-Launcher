@@ -98,6 +98,7 @@ namespace Aion_Launcher
                 ps.Save();
             }
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             Thread s = new Thread(ServerStatus);
@@ -111,13 +112,13 @@ namespace Aion_Launcher
 
             if (ps.RestartAlert == true)
             {
-                RestartAlert();
+                Thread r = new Thread(RestartAlert);
+                r.Start();
             }
 
             if (ps.Ping == true)
             {
-                Thread p = new Thread(pingThread);
-                p.Start();  
+                backgroundWorker1.RunWorkerAsync();
                 timer1.Enabled = true;
                 pingStatusLabel.Visible = true;
             }
@@ -355,20 +356,9 @@ namespace Aion_Launcher
 
         #region Поток проверки пинга
 
-        public void pingThread()
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            try
-            {
-                MethodInvoker ping = () => pingStatusLabel.Text = "Пинг: " + new Ping().Send("64.25.35.103").RoundtripTime.ToString() + " мсек.";
-                statusStrip1.BeginInvoke(ping);
-            }
-            catch (WebException)
-            {
-
-                MethodInvoker ping = () => pingStatusLabel.Text = "Ошибка";
-                statusStrip1.BeginInvoke(ping);            
-            }
-
+            pingStatusLabel.Text = "Пинг: " + new Ping().Send("64.25.35.103").RoundtripTime.ToString() + " мсек.";
         }
 
         #endregion
@@ -806,9 +796,8 @@ namespace Aion_Launcher
                     }
 
                     if (ps.Ping == true)
-                    {   
-                        Thread p = new Thread(pingThread);
-                        p.Start();
+                    {
+                        backgroundWorker1.RunWorkerAsync();
                         timer1.Enabled = true;
                         pingStatusLabel.Visible = true;
                     }
@@ -817,9 +806,6 @@ namespace Aion_Launcher
                     {
                         timer1.Enabled = false;
                         pingStatusLabel.Visible = false;
-                        Thread p = new Thread(pingThread);
-                        p.Abort();
-
                     }  
                 }
             }
@@ -1058,9 +1044,16 @@ namespace Aion_Launcher
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Thread p = new Thread(pingThread);
-            p.Start();        
+            try
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+            catch (InvalidOperationException)
+            {
+                return;
+            }
         }
+
 
     }
 }
