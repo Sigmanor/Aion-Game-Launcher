@@ -99,22 +99,46 @@ namespace Aion_Launcher
             }
         }
 
+        #region Проверка соединения
+        public static bool CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                using (var stream = client.OpenRead("http://www.google.com"))
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        #endregion
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            Thread s = new Thread(ServerStatus);
-            s.Start();
-
-            if (ps.AutoUPD == true)
+            if (CheckForInternetConnection() == true)
             {
-                Thread a = new Thread(AutoUPD);
-                a.Start();
+                Thread s = new Thread(ServerStatus);
+                s.Start();
+
+                if (ps.AutoUPD == true)
+                {
+                    Thread a = new Thread(AutoUPD);
+                    a.Start();
+                }
+
+                if (ps.RestartAlert == true)
+                {
+                    Thread r = new Thread(RestartAlert);
+                    r.Start();
+                }
+
+                webBrowser1.Navigate(new Uri("http://web-launcher.ncsoft.com/aion/en/installed_hq.php#"));
             }
 
-            if (ps.RestartAlert == true)
-            {
-                Thread r = new Thread(RestartAlert);
-                r.Start();
-            }
 
             if (ps.Ping == true)
             {
@@ -358,7 +382,14 @@ namespace Aion_Launcher
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            pingStatusLabel.Text = "Пинг: " + new Ping().Send("64.25.35.103").RoundtripTime.ToString() + " мсек.";
+            try
+            {
+                pingStatusLabel.Text = "Пинг: " + new Ping().Send("64.25.35.103").RoundtripTime.ToString() + " мсек.";
+            }
+            catch (PingException)
+            {
+                return;
+            }
         }
 
         #endregion
@@ -543,17 +574,18 @@ namespace Aion_Launcher
                     pictureBox2.BeginInvoke(gc);
                 }
             }
-            catch /*(WebException)*/
+            catch
             {
-                /*MethodInvoker err1 = () => toolStripStatusLabel3.Image = Properties.Resources.bullet_purple;
-                pictureBox2.BeginInvoke(err1);
+                //MethodInvoker err1 = () => toolStripStatusLabel3.Image = Properties.Resources.bullet_purple;
+                //pictureBox2.BeginInvoke(err1);
 
-                MethodInvoker err2 = () => toolStripStatusLabel2.Image = Properties.Resources.bullet_purple;
-                pictureBox2.BeginInvoke(err2);*/
-                //MessageBox.Show("Exception");
+                //MethodInvoker err2 = () => toolStripStatusLabel2.Image = Properties.Resources.bullet_purple;
+                //pictureBox2.BeginInvoke(err2);
+                //MessageBox.Show("Web Exception");
             }
         }
         #endregion
+
 
 
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1019,27 +1051,30 @@ namespace Aion_Launcher
         }
         
         void WebBrowser1DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {     
-            try
-            {
-
-                if (webBrowser1.DocumentText.Contains("Переход на веб-страницу отменен"))
-                {
-                    pictureBox1.Visible = true;
-                }
-
-                if (webBrowser1.DocumentText.Contains("Account"))
-                {
-
-                    if (webBrowser1.Url.ToString().IndexOf("http://web-launcher.ncsoft.com/aion/en/installed_hq.php#") == 0)
+        {
+            //if (CheckForInternetConnection() == true)
+            //{
+            //    try
+            //    {
+                    if (webBrowser1.DocumentText.Contains("Переход на веб-страницу отменен"))
                     {
-                        webBrowser1.Visible = true;
-                        pictureBox1.Visible = false;
+                        pictureBox1.Visible = true;
                     }
-                }
 
-            }
-            catch { }   	
+                    if (webBrowser1.DocumentText.Contains("Account"))
+                    {
+
+                        if (webBrowser1.Url.ToString().IndexOf("http://web-launcher.ncsoft.com/aion/en/installed_hq.php#") == 0)
+                        {
+                            webBrowser1.Visible = true;
+                            pictureBox1.Visible = false;
+                        }
+                    }
+            //    }
+            //    catch
+            //    {
+            //    }
+            //}
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -1053,6 +1088,7 @@ namespace Aion_Launcher
                 return;
             }
         }
+
 
 
     }

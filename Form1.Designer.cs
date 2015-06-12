@@ -66,13 +66,13 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.gButton2 = new Aion_Launcher.GButton();
             this.gButton4 = new Aion_Launcher.GButton();
             this.gButton1 = new Aion_Launcher.GButton();
             this.gButton3 = new Aion_Launcher.GButton();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.playButton = new Aion_Launcher.FButton();
             this.SettingsMenu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -343,7 +343,7 @@
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(590, 240);
             this.webBrowser1.TabIndex = 37;
-            this.webBrowser1.Url = new System.Uri("http://web-launcher.ncsoft.com/aion/en/installed_hq.php#", System.UriKind.Absolute);
+            this.webBrowser1.Url = new System.Uri("", System.UriKind.Relative);
             this.webBrowser1.Visible = false;
             this.webBrowser1.WebBrowserShortcutsEnabled = false;
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowser1DocumentCompleted);
@@ -376,26 +376,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(591, 40);
             this.panel2.TabIndex = 34;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::Aion_Launcher.Properties.Resources.updfail;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 279);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox2.TabIndex = 26;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Visible = false;
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 3000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // gButton2
             // 
@@ -452,6 +432,26 @@
             this.gButton3.TabIndex = 37;
             this.gButton3.Text = "Полезности для Aion";
             this.gButton3.Click += new System.EventHandler(this.gButton3_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Aion_Launcher.Properties.Resources.updfail;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 279);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 26;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Visible = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // playButton
             // 
