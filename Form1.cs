@@ -265,9 +265,16 @@ namespace Aion_Launcher
                     pictureBox2.BeginInvoke(hj);   
                 }
 
-                else
+                else 
                 {
-                    return;
+                    MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
+                    statusStrip1.BeginInvoke(bl);
+                    MethodInvoker gocrab = () => toolStripStatusLabel1.Text = "Го крабить!";
+                    statusStrip1.Invoke(gocrab);
+
+                    Bitmap crabimg = Properties.Resources.crab;
+                    MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
+                    pictureBox2.BeginInvoke(gc);
                 }
 
                 } catch { }
@@ -359,19 +366,27 @@ namespace Aion_Launcher
 
                 if (ps.RestartAlert == true) /* Restart Check */
                 {
-                    RestartAlert();
+                    Thread r = new Thread(RestartAlert);
+                    r.Start();
                 }
 
-                else
+                if (ps.RestartAlert == false)
                 {
-                    MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-                    statusStrip1.BeginInvoke(bl);
-                    MethodInvoker gocrab = () => toolStripStatusLabel1.Text = "Го крабить!";
-                    statusStrip1.Invoke(gocrab);
+                    try
+                    {
+                        MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
+                        statusStrip1.BeginInvoke(bl);
+                        MethodInvoker gocrab = () => toolStripStatusLabel1.Text = "Го крабить!";
+                        statusStrip1.Invoke(gocrab);
 
-                    Bitmap crabimg = Properties.Resources.crab;
-                    MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
-                    pictureBox2.BeginInvoke(gc);
+                        Bitmap crabimg = Properties.Resources.crab;
+                        MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
+                        pictureBox2.BeginInvoke(gc);
+                    }
+                    catch
+                    {                      
+                        return;
+                    }
                 }
 
             }
@@ -387,6 +402,10 @@ namespace Aion_Launcher
                 pingStatusLabel.Text = "Пинг: " + new Ping().Send("64.25.35.103").RoundtripTime.ToString() + " мсек.";
             }
             catch (PingException)
+            {
+                return;
+            }
+            catch (System.ComponentModel.Win32Exception)
             {
                 return;
             }
