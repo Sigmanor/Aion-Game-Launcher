@@ -4,3 +4,5 @@ before_install:
   - sudo apt-get install nunit-console
 before_script:
   - nuget restore Aion Launcher.sln
+after_script:
+  - nunit-console Tests/bin/Release/Tests.dll
