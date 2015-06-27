@@ -1,4 +1,12 @@
 language: csharp
-sudo: false
+install:
+  - sudo apt-get install mono-devel mono-gmcs
+before_script:
+  - chmod +x build.sh
 script:
-  - ./build.sh --quiet verify
+  - ./build.sh -v
+notifications:
+  webhooks:
+    on_success: change
+    on_failure: always
+    on_start: false
