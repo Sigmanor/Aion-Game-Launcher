@@ -1,8 +1,6 @@
-## Travis CI Integration
-
-language: c
-
-install:
-  - sudo apt-get install mono-devel mono-gmcs nunit-console
-script:
-  - xbuild Aion Launcher.sln
+language: csharp
+solution: Aion Launcher.sln
+before_install:
+  - sudo apt-get install nunit-console
+before_script:
+  - nuget restore Aion Launcher.sln
