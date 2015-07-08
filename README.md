@@ -29,5 +29,5 @@ The code is very shi~ and sometimes (or perhaps completely) is Delphi thinking. 
 
 ToDO
 ==================
-- [x] Optimization program code.
+- [x] <del>Optimization program code.<del>
 - [ ] Add english and then more translations.
