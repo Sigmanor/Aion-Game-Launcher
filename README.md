@@ -3,7 +3,7 @@ Description
 
 Alternative launcher for the Aion. Created special for the **Russian-speaking** community in the US servers.
 
-![](https://raw.githubusercontent.com/Sigmanor/Aion-Game-Launcher/master/screenshot.png)  
+![](https://raw.githubusercontent.com/Sigmanor/Aion-Game-Launcher/dev/screenshot.png)  
 
 Features
 ==================
@@ -24,10 +24,10 @@ The latest beta version from github repository available **<a href="http://sigma
 
 Build
 ==================
-Just run the .sln file in VS (built in 2013 version).
+Just run the .sln file in VS (built in 2015 version).
 The code is very shi~ and sometimes (or perhaps completely) is Delphi thinking. There are no comments. No following the OOP rules. Learn the code at your own risk.
 
 ToDO
 ==================
 - [x] <del>Optimization program code.<del>
-- [ ] Add english and then more translations.
+- [x] <del>Add english and then more translations.<del>
