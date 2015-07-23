@@ -995,7 +995,7 @@ namespace Aion_Launcher
         {
             AllowTransparent();
             BackColor = Color.FromArgb(41, 41, 41);
-            ForeColor = Color.FromArgb(100, 100, 100);
+            ForeColor = Color.FromArgb(255, 255, 255);
 
             P1 = new Pen(Color.FromArgb(25, 25, 25));
             P2 = new Pen(Color.FromArgb(11, Color.White));
