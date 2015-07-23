@@ -7,7 +7,7 @@ namespace Aion_Launcher
 {
     public partial class Version_Info : Form
     {
-
+        Properties.Settings ps = Properties.Settings.Default;
         public Version_Info()
         {
             InitializeComponent();
@@ -21,7 +21,15 @@ namespace Aion_Launcher
 
         private void Version_Info_Load(object sender, EventArgs e)
         {
-            webBrowser1.DocumentText = Properties.Resources.history;
+            if (ps.Language == "ru-RU")
+            {
+
+                webBrowser1.DocumentText = Properties.Resources.history;
+            }
+            else
+            {
+                webBrowser1.DocumentText = Properties.Resources.historyen;
+            }
         }
 
 
