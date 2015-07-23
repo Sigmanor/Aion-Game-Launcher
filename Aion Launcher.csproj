@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -48,6 +48,7 @@
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,6 +61,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Aion Icon.ico</ApplicationIcon>
@@ -108,6 +110,7 @@
     <Reference Include="System.Core">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq">
       <Private>False</Private>
     </Reference>
@@ -140,6 +143,13 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChangeLanguage.cs" />
+    <Compile Include="LanguageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LanguageForm.Designer.cs">
+      <DependentUpon>LanguageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="License.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,8 +175,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Themes.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Themes.cs" />
+    <Compile Include="translate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>translate.resx</DependentUpon>
+    </Compile>
+    <Compile Include="translate.ru-RU.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>translate.ru-RU.resx</DependentUpon>
     </Compile>
     <Compile Include="Version_Info.cs">
       <SubType>Form</SubType>
@@ -178,11 +196,26 @@
       <DependentUpon>About.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="About.ru-RU.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.ru-RU.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LanguageForm.resx">
+      <DependentUpon>LanguageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="License.resx">
       <DependentUpon>License.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="License.ru-RU.resx">
+      <DependentUpon>License.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -192,7 +225,22 @@
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Settings.ru-RU.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="translate.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>translate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="translate.ru-RU.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>translate.ru-RU.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Version_Info.resx">
+      <DependentUpon>Version_Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Version_Info.ru-RU.resx">
       <DependentUpon>Version_Info.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Aion Launcher_TemporaryKey.pfx" />
@@ -212,6 +260,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Aion Icon.ico" />
+    <None Include="Resources\eo.png" />
+    <None Include="Resources\ec.png" />
+    <None Include="Resources\eopen.png" />
+    <None Include="Resources\eclose.png" />
+    <None Include="Resources\eye_open.png" />
+    <None Include="Resources\eye-open.png" />
+    <None Include="Resources\eye-close.png" />
+    <None Include="Resources\tick_button.png" />
+    <None Include="Resources\controller.png" />
+    <None Include="Resources\hand_fuck.png" />
+    <None Include="Resources\construction.png" />
+    <None Include="Resources\roadworks.png" />
+    <None Include="Resources\cross.png" />
+    <None Include="Resources\bullet_yellow.png" />
+    <None Include="Resources\bullet_black.png" />
+    <None Include="Resources\dance.gif" />
+    <None Include="Resources\item.gif" />
+    <None Include="Resources\shugo.png" />
+    <None Include="Resources\ru.dll" />
+    <None Include="Resources\langw8.gif" />
+    <None Include="Resources\historyen.html" />
+    <None Include="bin\Debug\ru-RU\Aion Game Launcher.resources.dll" />
     <None Include="Resources\history.html" />
     <None Include="Resources\load_anim.gif" />
     <None Include="Resources\bullet_purple.png" />
