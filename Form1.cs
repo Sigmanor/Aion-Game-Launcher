@@ -5,41 +5,61 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Reflection;
+using System.Resources;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Runtime.Serialization.Json;
+using System.Globalization;
+using Aion_Launcher.Properties;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace Aion_Launcher
 {
     public partial class Form1 : Form
     {
-        public bool l = false;
         int i;
         Properties.Settings ps = Properties.Settings.Default;
         string[] arg;
+
+        AutoResetEvent resetEvent = new AutoResetEvent(false);
+
         public Form1(string[] args)
         {
-            if (ps.License == 0)
+            if (!string.IsNullOrEmpty(ps.Language))
             {
-                InitializeComponent();
-                License l = new License();
-                l.ShowDialog();
-                arg = args;
-                LoginTextBox.ForeColor = Color.Gray;
-                PasswordTextBox.ForeColor = Color.Gray;
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(ps.Language);
+                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(ps.Language);
             }
 
-            else if (ps.License == 1)
+            InitializeComponent();
+
+            arg = args;
+            loginTextBox.ForeColor = Color.Gray;
+            passwordTextBox.ForeColor = Color.Gray;
+
+            if (ps.LangCheck == false)
             {
-                InitializeComponent();
-                arg = args;
-                LoginTextBox.ForeColor = Color.Gray;
-                PasswordTextBox.ForeColor = Color.Gray;
+                LanguageForm l = new LanguageForm();
+                l.ShowDialog();
             }
+
+            if (ps.License == 0)
+            {
+                License l = new License();
+                l.ShowDialog();
+            }
+
+
             statusStrip1.Padding = new Padding(statusStrip1.Padding.Left,
             statusStrip1.Padding.Top, statusStrip1.Padding.Left, statusStrip1.Padding.Bottom);
         }
 
+
+        #region RemoteFileExists
         private bool RemoteFileExists(string url)
         {
             try
@@ -54,47 +74,49 @@ namespace Aion_Launcher
                 return false;
             }
         }
+        #endregion
+
 
         private void PasswordTextBox_Enter(object sender, EventArgs e)
         {
-            Font font = new Font(PasswordTextBox.Font, FontStyle.Regular);
-            PasswordTextBox.Font = font;
-            PasswordTextBox.ForeColor = Color.Black;
+            Font font = new Font(passwordTextBox.Font, FontStyle.Regular);
+            passwordTextBox.Font = font;
+            passwordTextBox.ForeColor = Color.Black;
 
-            if (PasswordTextBox.Text == "Пароль")
+            if (passwordTextBox.Text == translate.password)
             {
-                PasswordTextBox.Clear();
-                PasswordTextBox.UseSystemPasswordChar = true;
+                passwordTextBox.Clear();
+                passwordTextBox.UseSystemPasswordChar = true;
             }
         }
 
         private void LoginTextBox_Enter(object sender, EventArgs e)
         {
-            Font font = new Font(LoginTextBox.Font, FontStyle.Regular);
-            LoginTextBox.Font = font;
-            LoginTextBox.ForeColor = Color.Black;
+            Font font = new Font(loginTextBox.Font, FontStyle.Regular);
+            loginTextBox.Font = font;
+            loginTextBox.ForeColor = Color.Black;
 
-            if (LoginTextBox.Text == "Логин")
-                LoginTextBox.Clear();
+            if (loginTextBox.Text == translate.email)
+                loginTextBox.Clear();
         }
       
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked == true)
+            if (rememberCheckBox.Checked == true)
             {
-                if (PasswordTextBox.Text != "Пароль" && LoginTextBox.Text != "Логин" && PasswordTextBox.Text != "" && LoginTextBox.Text != "")
+                if (passwordTextBox.Text != translate.password && loginTextBox.Text != translate.email && passwordTextBox.Text != "" && loginTextBox.Text != "")
                 {
-                    ps.Pass = PasswordTextBox.Text;
-                    ps.Log = LoginTextBox.Text;
-                    ps.Checked = checkBox1.Checked;
+                    ps.Pass = passwordTextBox.Text;
+                    ps.Log = loginTextBox.Text;
+                    ps.Checked = rememberCheckBox.Checked;
                     ps.Save();
                 }
             }
-            if (checkBox1.Checked == false)
+            if (rememberCheckBox.Checked == false)
             {
-                ps.Log = "Логин";
-                ps.Pass = "Пароль";
-                ps.Checked = checkBox1.Checked;
+                ps.Log = "";
+                ps.Pass = "";
+                ps.Checked = rememberCheckBox.Checked;
                 ps.Save();
             }
         }
@@ -119,31 +141,27 @@ namespace Aion_Launcher
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CultureInfo cultureInfo = new CultureInfo(ps.Language);
+            ChangeLanguage.Instance.localizeForm(this, cultureInfo);
+
+            Thread s = new Thread(ServerStatus);
+            s.Start();
+
+            Thread ar = new Thread(autoUpd_restart);
+            ar.Start();
+
             if (CheckForInternetConnection() == true)
             {
-                Thread s = new Thread(ServerStatus);
-                s.Start();
-
-                if (ps.AutoUPD == true)
-                {
-                    Thread a = new Thread(AutoUPD);
-                    a.Start();
-                }
-
-                if (ps.RestartAlert == true)
-                {
-                    Thread r = new Thread(RestartAlert);
-                    r.Start();
-                }
+                //Thread ar = new Thread(autoUpd_restart);
+                //ar.Start();
 
                 webBrowser1.Navigate(new Uri("http://web-launcher.ncsoft.com/aion/en/installed_hq.php#"));
             }
 
-
             if (ps.Ping == true)
             {
-                backgroundWorker1.RunWorkerAsync();
-                timer1.Enabled = true;
+                SendPing();
+                pingTimer.Enabled = true;
                 pingStatusLabel.Visible = true;
             }
 
@@ -154,9 +172,23 @@ namespace Aion_Launcher
 
             ServerStatusCheck();
 
-            LoginTextBox.Text = ps.Log;
-            PasswordTextBox.Text = ps.Pass;
-            checkBox1.Checked = ps.Checked;
+            rememberCheckBox.Checked = ps.Checked;
+
+            if (ps.Log == "" & ps.Pass == "")
+            {
+                eyeButton.Enabled = false;
+                loginTextBox.Tag = translate.email;
+                loginTextBox.Text = loginTextBox.Tag.ToString();
+
+                passwordTextBox.Tag = translate.password;
+                passwordTextBox.Text = passwordTextBox.Tag.ToString();
+            }
+
+            if (ps.Log != "" & ps.Pass != "")
+            {
+                loginTextBox.Text = ps.Log;
+                passwordTextBox.Text = ps.Pass;
+            }
 
             /* Получить путь к игре */
             if (ps.GamePath == "")
@@ -179,22 +211,22 @@ namespace Aion_Launcher
                     ps.Save();
                     registryKey2.Close();
                 }
-            } 
+            }
             /* Получить путь к игре */
 
-            if (LoginTextBox.Text == "Логин" | PasswordTextBox.Text == "Пароль")
+            if (loginTextBox.Text == translate.email | passwordTextBox.Text == translate.password)
             {
-                LoginTextBox.ForeColor = Color.Gray;
-                PasswordTextBox.ForeColor = Color.Gray;
-                PasswordTextBox.UseSystemPasswordChar = false;
+                loginTextBox.ForeColor = Color.Gray;
+                passwordTextBox.ForeColor = Color.Gray;
+                passwordTextBox.UseSystemPasswordChar = false;
             }
-            else
+            if (loginTextBox.Text != translate.email | passwordTextBox.Text != translate.password)
             {
-                Font font = new Font(LoginTextBox.Font, FontStyle.Regular);
-                LoginTextBox.Font = font;
-                PasswordTextBox.Font = font;
-                LoginTextBox.ForeColor = Color.Black;
-                PasswordTextBox.ForeColor = Color.Black;
+                Font font = new Font(loginTextBox.Font, FontStyle.Regular);
+                loginTextBox.Font = font;
+                passwordTextBox.Font = font;
+                loginTextBox.ForeColor = Color.Black;
+                passwordTextBox.ForeColor = Color.Black;
             }
 
             if (arg.Length == 0) /* Аргумент = 0 */
@@ -202,10 +234,10 @@ namespace Aion_Launcher
                 if (ps.Priority == true)
                 {
                     this.WindowState = FormWindowState.Minimized;
-                    toolStripStatusLabel1.Visible = false;
+                    statusLabel.Visible = false;
                     toolStripDropDownButton1.Visible = true;
                     i = 3;
-                    toolStripDropDownButton1.Text = "Запуск игры через: " + i.ToString();
+                    toolStripDropDownButton1.Text = translate.runAfter + i.ToString();
                     PriorityTimer.Interval = 1000;
                     PriorityTimer.Enabled = true;
                     PriorityTimer.Start();
@@ -213,7 +245,7 @@ namespace Aion_Launcher
             }
 
             else if (arg[0] == "upd") /* Аргумент = upd */
-            {              
+            {
                 string f = Path.GetDirectoryName(Application.ExecutablePath) + @"\Updater.exe";
                 if (File.Exists(f))
                 {
@@ -222,7 +254,7 @@ namespace Aion_Launcher
 
                 Version_Info v = new Version_Info();
                 v.ShowDialog();
-            }			
+            }
         }
 
         public void ServerStatusCheck()
@@ -232,68 +264,71 @@ namespace Aion_Launcher
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            pictureBox1.Focus(); 
+            pictureBox1.Focus();
         }
 
+
+        /*ПОТОКИ*/
 
         #region Поток проверки рестарта
-        public void RestartAlert()
-        {
-            try {
-            HttpWebRequest req; 
-            HttpWebResponse resp;
-            StreamReader sr;
-            string C;
-            string RS;
+        //public void RestartAlert()
+        //{          
+        //    try {
+        //    HttpWebRequest req; 
+        //    HttpWebResponse resp;
+        //    StreamReader sr;
+        //    string C;
+        //    string RS;
 
-                req = (HttpWebRequest)WebRequest.Create("http://24timezones.com/usa_time/tx_galveston/texas_city.htm");
-                resp = (HttpWebResponse)req.GetResponse();
-                sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("UTF-8"));
-                C = sr.ReadToEnd();
-                sr.Close();
+        //        req = (HttpWebRequest)WebRequest.Create("http://24timezones.com/usa_time/tx_galveston/texas_city.htm");
+        //        resp = (HttpWebResponse)req.GetResponse();
+        //        sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("UTF-8"));
+        //        C = sr.ReadToEnd();
+        //        sr.Close();
 
-                RS = "Wednesday";
+        //        RS = "Sunday";
 
-                if (C.IndexOf(RS) > -1)
-                {
-                    MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-                    statusStrip1.BeginInvoke(bl);
-                    MethodInvoker restnow = () => toolStripStatusLabel1.Text = "Сегодня рестарт!";
-                    statusStrip1.Invoke(restnow);
-                    Bitmap restimg = Properties.Resources.restart;
-                    MethodInvoker hj = () => toolStripStatusLabel1.Image = restimg;
-                    pictureBox2.BeginInvoke(hj);   
-                }
+        //        if (C.IndexOf(RS) > -1)
+        //        {
+        //            MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
+        //            statusStrip1.BeginInvoke(bl);
+        //            MethodInvoker restnow = () => toolStripStatusLabel1.Text = translate.serverRestart;
+        //            statusStrip1.Invoke(restnow);
+        //            Bitmap restimg = Properties.Resources.restart;
+        //            MethodInvoker hj = () => toolStripStatusLabel1.Image = restimg;
+        //            pictureBox2.BeginInvoke(hj);   
+        //        }
 
-                else 
-                {
-                    MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-                    statusStrip1.BeginInvoke(bl);
-                    MethodInvoker gocrab = () => toolStripStatusLabel1.Text = "Го крабить!";
-                    statusStrip1.Invoke(gocrab);
+        //        else
+        //        {
+        //            //MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
+        //            //statusStrip1.BeginInvoke(bl);
+        //            //MethodInvoker gocrab = () => toolStripStatusLabel1.Text = translate.ready;
+        //            //statusStrip1.Invoke(gocrab);
 
-                    Bitmap crabimg = Properties.Resources.crab;
-                    MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
-                    pictureBox2.BeginInvoke(gc);
-                }
+        //            //Bitmap crabimg = Properties.Resources.crab;
+        //            //MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
+        //            //pictureBox2.BeginInvoke(gc);
+        //        }
 
-                } catch { }
-        }
+        //        } catch { }
+            
+        //}
         #endregion
 
         #region Поток проверки обновлений
 
         public void UpdateCheck()
         {
-            MethodInvoker link = () => toolStripStatusLabel1.IsLink = false;
+            MethodInvoker link = () => statusLabel.IsLink = false;
             statusStrip1.BeginInvoke(link);
-            MethodInvoker cl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Red;
+            MethodInvoker cl = () => statusLabel.ForeColor = System.Drawing.Color.Red;
             statusStrip1.BeginInvoke(cl);
-            MethodInvoker tx = () => toolStripStatusLabel1.Text = "Проверка обновления...";
+            MethodInvoker tx = () => statusLabel.Text = translate.updCheck;
             statusStrip1.BeginInvoke(tx);
             Bitmap looa = Properties.Resources.loader;
-            MethodInvoker diin = () => toolStripStatusLabel1.Image = looa;
-            pictureBox2.BeginInvoke(diin);
+            MethodInvoker diin = () => statusLabel.Image = looa;
+            statusStrip1.BeginInvoke(diin);
 
             try
             {
@@ -308,149 +343,137 @@ namespace Aion_Launcher
 
                 if (con != ver)
                 {
-                    Bitmap up = Properties.Resources.upd;
-                    MethodInvoker upimg = () => toolStripStatusLabel1.Image = up;
-                    pictureBox2.BeginInvoke(upimg);
+                    if (InvokeRequired)
+                    {
+                        MethodInvoker upimg = () => statusLabel.Image = Properties.Resources.upd;
+                        statusStrip1.BeginInvoke(upimg);
 
-                    MethodInvoker ne = () => toolStripStatusLabel1.Text = "Доступна новая версия!";
-                    statusStrip1.BeginInvoke(ne);
-                    MethodInvoker fo = () => toolStripStatusLabel1.Font = new Font(toolStripStatusLabel1.Text, 8, FontStyle.Regular | FontStyle.Underline);
-                    statusStrip1.BeginInvoke(fo);
-                    MethodInvoker ho = () => toolStripStatusLabel1.ForeColor = SystemColors.HotTrack;
-                    statusStrip1.BeginInvoke(ho);
-                    MethodInvoker ha = () => toolStripStatusLabel1.IsLink = true;
-                    statusStrip1.BeginInvoke(ha);
+                        MethodInvoker ne = () => statusLabel.Text = translate.newVersion;
+                        statusStrip1.BeginInvoke(ne);
+
+                        MethodInvoker fo = () => statusLabel.Font = new Font(statusLabel.Text, 8, FontStyle.Regular | FontStyle.Underline);
+                        statusStrip1.BeginInvoke(fo);
+
+                        MethodInvoker ho = () => statusLabel.ForeColor = SystemColors.HotTrack;
+                        statusStrip1.BeginInvoke(ho);
+
+                        MethodInvoker ha = () => statusLabel.IsLink = true;
+                        statusStrip1.BeginInvoke(ha);
+                    }
                 }
-                else 
+                else
                 {
-                    Bitmap noup = Properties.Resources.noupd;
-                    MethodInvoker tlimg = () => toolStripStatusLabel1.Image = noup;
-                    pictureBox2.BeginInvoke(tlimg);
-                    MethodInvoker co = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.SeaGreen;
-                    statusStrip1.BeginInvoke(co);
-                    MethodInvoker ls = () => toolStripStatusLabel1.Text = "Установлена последняя версия!";
-                    statusStrip1.BeginInvoke(ls);
-                    System.Threading.Thread.Sleep(3000);
-
-                    if (ps.RestartAlert == true) /* Restart Check */
+                    if (InvokeRequired)
                     {
-                        RestartAlert();
-                    }
+                        MethodInvoker tlimg = () => statusLabel.Image = Properties.Resources.noupd;
+                        statusStrip1.BeginInvoke(tlimg);
 
-                    else
-                    {
-                        MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-                        statusStrip1.BeginInvoke(bl);
-                        MethodInvoker gocrab = () => toolStripStatusLabel1.Text = "Го крабить!";
-                        statusStrip1.Invoke(gocrab);
-                        Bitmap crabimg = Properties.Resources.crab;
-                        MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
-                        pictureBox2.BeginInvoke(gc);
+                        MethodInvoker co = () => statusLabel.ForeColor = System.Drawing.Color.SeaGreen;
+                        statusStrip1.BeginInvoke(co);
+
+                        MethodInvoker ls = () => statusLabel.Text = translate.noUpd;
+                        statusStrip1.BeginInvoke(ls);
+
+                        System.Threading.Thread.Sleep(3000);
+
+                        if (ps.RestartAlert == true) /* Restart Check */
+                        {
+                            Thread ar = new Thread(autoUpd_restart);
+                            ar.Start();
+                        }
+
+                        else
+                        {
+                            MethodInvoker bl = () => statusLabel.ForeColor = System.Drawing.Color.Black;
+                            statusStrip1.BeginInvoke(bl);
+                            MethodInvoker gocrab = () => statusLabel.Text = translate.ready;
+                            statusStrip1.Invoke(gocrab);
+                            Bitmap crabimg = Properties.Resources.controller;
+                            MethodInvoker gc = () => statusLabel.Image = crabimg;
+                            statusStrip1.BeginInvoke(gc);
+                        }
                     }
-                  
                 }
 
             }
 
             catch (WebException)
             {
-                Bitmap ufail = Properties.Resources.updfail;
-                MethodInvoker uimg = () => toolStripStatusLabel1.Image = ufail;
-                pictureBox2.BeginInvoke(uimg);
-                MethodInvoker ik = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Red;
-                statusStrip1.BeginInvoke(ik);
-                MethodInvoker ls = () => toolStripStatusLabel1.Text = "Сервер обновления не доступен!";
-                statusStrip1.BeginInvoke(ls);
-
-                System.Threading.Thread.Sleep(3000);
-
-                if (ps.RestartAlert == true) /* Restart Check */
+                if (InvokeRequired)
                 {
-                    Thread r = new Thread(RestartAlert);
-                    r.Start();
-                }
+                    Bitmap ufail = Properties.Resources.updfail;
+                    MethodInvoker uimg = () => statusLabel.Image = ufail;
+                    statusStrip1.BeginInvoke(uimg);
+                    MethodInvoker ik = () => statusLabel.ForeColor = System.Drawing.Color.Red;
+                    statusStrip1.BeginInvoke(ik);
+                    MethodInvoker ls = () => statusLabel.Text = translate.updServerError;
+                    statusStrip1.BeginInvoke(ls);
 
-                if (ps.RestartAlert == false)
-                {
-                    try
+                    System.Threading.Thread.Sleep(3000);
+
+                    if (ps.RestartAlert == true) /* Restart Check */
                     {
-                        MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
+                        Thread ar = new Thread(autoUpd_restart);
+                        ar.Start();
+                    }
+
+                    if (ps.RestartAlert == false)
+                    {
+                        MethodInvoker bl = () => statusLabel.ForeColor = System.Drawing.Color.Black;
                         statusStrip1.BeginInvoke(bl);
-                        MethodInvoker gocrab = () => toolStripStatusLabel1.Text = "Го крабить!";
+                        MethodInvoker gocrab = () => statusLabel.Text = translate.ready;
                         statusStrip1.Invoke(gocrab);
 
-                        Bitmap crabimg = Properties.Resources.crab;
-                        MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                    catch
-                    {                      
-                        return;
+                        Bitmap crabimg = Properties.Resources.controller;
+                        MethodInvoker gc = () => statusLabel.Image = crabimg;
+                        statusStrip1.BeginInvoke(gc);
                     }
                 }
-
             }
+
         }
             #endregion
 
-        #region Поток проверки пинга
-
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            try
-            {
-                pingStatusLabel.Text = "Пинг: " + new Ping().Send("64.25.35.103").RoundtripTime.ToString() + " мсек.";
-            }
-            catch (PingException)
-            {
-                return;
-            }
-            catch (System.ComponentModel.Win32Exception)
-            {
-                return;
-            }
-        }
-
-        #endregion
-
         #region Поток автоматической проверки обновлений
-        public void AutoUPD()
-        {
-            try
-            {
-                WebClient client = new WebClient();
-                Stream stream = client.OpenRead("http://sigmanor.tk/soft/Aion-Game-Launcher/version");
-                StreamReader reader = new StreamReader(stream);
-                String content = reader.ReadToEnd();
-                String version = Application.ProductVersion;
+        //public void AutoUPD()
+        //{
 
-                int con = Convert.ToInt32(content.Replace(".", ""));
-                int ver = Convert.ToInt32(version.Replace(".", ""));
+        //    try
+        //    {
+        //        WebClient client = new WebClient();
+        //        Stream stream = client.OpenRead("http://sigmanor.tk/soft/Aion-Game-Launcher/version");
+        //        StreamReader reader = new StreamReader(stream);
+        //        String content = reader.ReadToEnd();
+        //        String version = Application.ProductVersion;
 
-                if (con != ver)
-                {
-                    Bitmap crabimg = Properties.Resources.upd;
-                    MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
-                    pictureBox2.BeginInvoke(gc);
+        //        int con = Convert.ToInt32(content.Replace(".", ""));
+        //        int ver = Convert.ToInt32(version.Replace(".", ""));
 
-                    MethodInvoker w = () => toolStripStatusLabel1.Text = "Доступна новая версия!";
-                    statusStrip1.BeginInvoke(w);
+        //        if (con != ver)
+        //        {
+        //            Thread.Sleep(500);
+        //            Bitmap crabimg = Properties.Resources.upd;
+        //            MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
+        //            pictureBox2.BeginInvoke(gc);
 
-                    MethodInvoker r = () => toolStripStatusLabel1.Font = new Font(toolStripStatusLabel1.Text, 8, FontStyle.Regular | FontStyle.Underline);
-                    statusStrip1.BeginInvoke(r);
+        //            MethodInvoker w = () => toolStripStatusLabel1.Text = translate.newVersion;
+        //            statusStrip1.BeginInvoke(w);
 
-                    MethodInvoker t = () => toolStripStatusLabel1.ForeColor = SystemColors.HotTrack;
-                    statusStrip1.BeginInvoke(t);
+        //            MethodInvoker r = () => toolStripStatusLabel1.Font = new Font(toolStripStatusLabel1.Text, 8, FontStyle.Regular | FontStyle.Underline);
+        //            statusStrip1.BeginInvoke(r);
 
-                    MethodInvoker ha = () => toolStripStatusLabel1.IsLink = true;
-                    statusStrip1.BeginInvoke(ha);
-                }
-            }
-            catch
-            {
-            }
+        //            MethodInvoker t = () => toolStripStatusLabel1.ForeColor = SystemColors.HotTrack;
+        //            statusStrip1.BeginInvoke(t);
 
-        }
+        //            MethodInvoker ha = () => toolStripStatusLabel1.IsLink = true;
+        //            statusStrip1.BeginInvoke(ha);
+        //        }
+        //    }
+        //    catch
+        //    {
+        //    }
+
+        //}
         #endregion
 
         #region Поток проверки статуса серверов
@@ -480,12 +503,6 @@ namespace Aion_Launcher
                     site = "http://aion.mouseclic.com/tool/status/";
                 }
 
-                //if (ps.Monitoring == 2)
-                //{
-                //    site = "http://rainy.ws/server-status/";
-                //}
-
-
                 req = (HttpWebRequest)WebRequest.Create(site);
                 resp = (HttpWebResponse)req.GetResponse();
                 sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("windows-1251"));
@@ -512,8 +529,6 @@ namespace Aion_Launcher
 
                 if (ps.Monitoring == 2)
                 {
-                    //C = C.Replace("\n", string.Empty);
-                    //C = C.Replace(" ", string.Empty);
                     IS = "online.png\" /> Israphel";
                     KR = "online.png\" /> Kahrun";
                     SL = "online.png\" /> Siel";
@@ -523,89 +538,250 @@ namespace Aion_Launcher
 
                 Bitmap on = Properties.Resources.bullet_green;
                 Bitmap off = Properties.Resources.bullet_red;
-
-                if (ps.SCCB == "Israphel")
+                if (InvokeRequired)
                 {
-                    if (C.IndexOf(IS) > -1)
+                    if (ps.SCCB == "Israphel")
                     {
-                        MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
-                        pictureBox2.BeginInvoke(gc);
+                        if (C.IndexOf(IS) > -1)
+                        {
+                            MethodInvoker online = () => toolStripStatusLabel3.Image = on;
+                            statusStrip1.BeginInvoke(online);
+                        }
+                        else
+                        {
+                            MethodInvoker offline = () => toolStripStatusLabel3.Image = off;
+                            statusStrip1.BeginInvoke(offline);
+                        }
+                    }
+
+
+                    if (ps.SCCB == "Kahrun")
+                    {
+                        if (C.IndexOf(KR) > -1)
+                        {
+                            MethodInvoker online = () => toolStripStatusLabel3.Image = on;
+                            statusStrip1.BeginInvoke(online);
+                        }
+                        else
+                        {
+                            MethodInvoker offline = () => toolStripStatusLabel3.Image = off;
+                            statusStrip1.BeginInvoke(offline);
+                        }
+                    }
+
+                    if (ps.SCCB == "Siel")
+                    {
+                        if (C.IndexOf(SL) > -1)
+                        {
+                            MethodInvoker online = () => toolStripStatusLabel3.Image = on;
+                            statusStrip1.BeginInvoke(online);
+                        }
+                        else
+                        {
+                            MethodInvoker offline = () => toolStripStatusLabel3.Image = off;
+                            statusStrip1.BeginInvoke(offline);
+                        }
+                    }
+
+                    if (ps.SCCB == "Tiamat")
+                    {
+                        if (C.IndexOf(TM) > -1)
+                        {
+                            MethodInvoker online = () => toolStripStatusLabel3.Image = on;
+                            statusStrip1.BeginInvoke(online);
+                        }
+                        else
+                        {
+                            MethodInvoker offline = () => toolStripStatusLabel3.Image = off;
+                            statusStrip1.BeginInvoke(offline);
+                        }
+                    }
+
+                    /* NC Login */
+                    if (C.IndexOf(LG) > -1)
+                    {
+                        MethodInvoker online = () => toolStripStatusLabel2.Image = on;
+                        statusStrip1.BeginInvoke(online);
                     }
                     else
                     {
-                        MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
-                        pictureBox2.BeginInvoke(gc);
+                        MethodInvoker offline = () => toolStripStatusLabel2.Image = off;
+                        statusStrip1.BeginInvoke(offline);
                     }
-                }
-
-
-                if (ps.SCCB == "Kahrun")
-                {
-                    if (C.IndexOf(KR) > -1)
-                    {
-                        MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                    else
-                    {
-                        MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                }
-
-                if (ps.SCCB == "Siel")
-                {
-                    if (C.IndexOf(SL) > -1)
-                    {
-                        MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                    else
-                    {
-                        MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                }
-
-                if (ps.SCCB == "Tiamat")
-                {
-                    if (C.IndexOf(TM) > -1)
-                    {
-                        MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                    else
-                    {
-                        MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
-                        pictureBox2.BeginInvoke(gc);
-                    }
-                }
-
-                /* NC Login */
-                if (C.IndexOf(LG) > -1)
-                {
-                    MethodInvoker gc = () => toolStripStatusLabel2.Image = on;
-                    pictureBox2.BeginInvoke(gc);
-                }
-                else
-                {
-                    MethodInvoker gc = () => toolStripStatusLabel2.Image = off;
-                    pictureBox2.BeginInvoke(gc);
                 }
             }
-            catch
+            catch (WebException)
             {
-                //MethodInvoker err1 = () => toolStripStatusLabel3.Image = Properties.Resources.bullet_purple;
-                //pictureBox2.BeginInvoke(err1);
+                if (InvokeRequired)
+                {
+                    MethodInvoker err1 = () => toolStripStatusLabel3.Image = Properties.Resources.bullet_black;
+                    statusStrip1.BeginInvoke(err1);
 
-                //MethodInvoker err2 = () => toolStripStatusLabel2.Image = Properties.Resources.bullet_purple;
-                //pictureBox2.BeginInvoke(err2);
-                //MessageBox.Show("Web Exception");
+                    MethodInvoker err2 = () => toolStripStatusLabel2.Image = Properties.Resources.bullet_black;
+                    statusStrip1.BeginInvoke(err2);
+                }
             }
         }
         #endregion
 
+        #region Поток авто.обновления/рестарт
 
+        public void autoUpd_restart()
+        {
+            try
+            {
+
+                WebClient client = new WebClient();
+                Stream stream = client.OpenRead("http://sigmanor.tk/soft/Aion-Game-Launcher/version");
+                StreamReader reader = new StreamReader(stream);
+                String content = reader.ReadToEnd();
+                String version = Application.ProductVersion;
+
+                HttpWebRequest req;
+                HttpWebResponse resp;
+                StreamReader sr;
+
+                int con = Convert.ToInt32(content.Replace(".", ""));
+                int ver = Convert.ToInt32(version.Replace(".", ""));
+
+                string C;
+                string RS = "Wednesday";
+
+                req = (HttpWebRequest)WebRequest.Create("http://24timezones.com/usa_time/tx_galveston/texas_city.htm");
+                resp = (HttpWebResponse)req.GetResponse();
+                sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("UTF-8"));
+                C = sr.ReadToEnd();
+                sr.Close();
+
+
+                if (ps.RestartAlert == true & C.IndexOf(RS) > -1)
+                {
+                    if (InvokeRequired)
+                    {
+                        MethodInvoker islink = () => statusLabel.IsLink = false;
+                        statusStrip1.BeginInvoke(islink);
+
+                        MethodInvoker font = () => statusLabel.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+                        statusStrip1.Invoke(font);
+
+                        MethodInvoker color = () => statusLabel.ForeColor = System.Drawing.Color.Black;
+                        statusStrip1.BeginInvoke(color);
+
+                        MethodInvoker text = () => statusLabel.Text = translate.serverRestart;
+                        statusStrip1.Invoke(text);
+
+                        MethodInvoker image = () => statusLabel.Image = Properties.Resources.construction;
+                        statusStrip1.BeginInvoke(image);
+                    }
+                }
+                else
+                {
+                    if (InvokeRequired)
+                    {
+                        MethodInvoker islink = () => statusLabel.IsLink = false;
+                        statusStrip1.BeginInvoke(islink);
+
+                        MethodInvoker font = () => statusLabel.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+                        statusStrip1.Invoke(font);
+
+                        MethodInvoker color = () => statusLabel.ForeColor = System.Drawing.Color.Black;
+                        statusStrip1.BeginInvoke(color);
+
+                        MethodInvoker text = () => statusLabel.Text = translate.ready;
+                        statusStrip1.Invoke(text);
+
+                        MethodInvoker image = () => statusLabel.Image = Properties.Resources.controller;
+                        statusStrip1.BeginInvoke(image);
+                    }
+                }
+
+
+                if (ps.AutoUPD == true & con != ver)
+                {
+                    if (InvokeRequired)
+                    {
+                        MethodInvoker image = () => statusLabel.Image = Properties.Resources.upd;
+                        statusStrip1.BeginInvoke(image);
+
+                        MethodInvoker text = () => statusLabel.Text = translate.newVersion;
+                        statusStrip1.BeginInvoke(text);
+
+                        MethodInvoker font = () => statusLabel.Font = new Font(statusLabel.Text, 8, FontStyle.Regular | FontStyle.Underline);
+                        statusStrip1.BeginInvoke(font);
+
+                        MethodInvoker color = () => statusLabel.ForeColor = SystemColors.HotTrack;
+                        statusStrip1.BeginInvoke(color);
+
+                        MethodInvoker islink = () => statusLabel.IsLink = true;
+                        statusStrip1.BeginInvoke(islink);
+                    }
+                }
+
+
+            }
+
+            catch (WebException)
+            {
+                if (InvokeRequired)
+                {
+                    MethodInvoker color = () => statusLabel.ForeColor = System.Drawing.Color.Black;
+                    statusStrip1.BeginInvoke(color);
+
+                    MethodInvoker text = () => statusLabel.Text = translate.ready;
+                    statusStrip1.Invoke(text);
+
+                    MethodInvoker image = () => statusLabel.Image = Properties.Resources.controller;
+                    statusStrip1.BeginInvoke(image);
+                }
+            }
+
+        }
+
+        #endregion
+
+        #region Асинхронная проверка пинга
+
+        private void SendPing()
+        {
+            System.Net.NetworkInformation.Ping pingSender = new System.Net.NetworkInformation.Ping();
+            pingSender.PingCompleted += new PingCompletedEventHandler(pingSender_Complete);
+            byte[] packetData = Encoding.ASCII.GetBytes("................................");
+            PingOptions packetOptions = new PingOptions(50, true);
+            pingSender.SendAsync("64.25.35.103", 5000, packetData, packetOptions, resetEvent);
+        }
+
+        private void pingSender_Complete(object sender, PingCompletedEventArgs e)
+        {
+            PingReply pingResponse = e.Reply;
+            ShowPingResults(pingResponse);
+        }
+
+        public void ShowPingResults(PingReply pingResponse)
+        {
+            pingStatusLabel.Text = translate.pingString + pingResponse.RoundtripTime.ToString() + translate.msString;
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            //if (CheckForInternetConnection() == true)
+            //{
+            //    try
+            //    {
+            //        SendPing();
+            //        //pingStatusLabel.Text = pingStringFix + new Ping().Send("64.25.35.103").RoundtripTime.ToString() + msStringFix;
+            //    }
+            //    catch (PingException)
+            //    {
+            //        return;
+            //    }
+            //    catch (System.ComponentModel.Win32Exception)
+            //    {
+            //        return;
+            //    }
+            //}
+        }
+
+        #endregion
 
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -627,239 +803,86 @@ namespace Aion_Launcher
 
         private void PriorityTimer_Tick(object sender, EventArgs e)
         {
-            toolStripDropDownButton1.Text = "Запуск игры через: " + (--i).ToString();
+            toolStripDropDownButton1.Text = translate.runAfter + (--i).ToString();
             if (i < 0)
             { 
                 PriorityTimer.Stop();
+                playButton_Click(this, new EventArgs());
+                statusLabel.Visible = true;
                 toolStripDropDownButton1.Visible = false;
-                GoNagibatButton_Click(this, new EventArgs());
             }
         }
 
-        #region commented out
-        //#region Поток автоматической проверки обновлений
-        //public void AutoUPD()
-        //    {      
-        //            try
-        //            {
-        //                WebClient client = new WebClient();
-        //                Stream stream = client.OpenRead("http://sigmanor.tk/soft/Aion-Game-Launcher/version");
-        //                StreamReader reader = new StreamReader(stream);
-        //                String content = reader.ReadToEnd();
-        //                String version = Application.ProductVersion;
-
-        //                int con = Convert.ToInt32(content.Replace(".", ""));
-        //                int ver = Convert.ToInt32(version.Replace(".", ""));
-
-        //                if (con != ver)
-        //                {
-        //                    if (ps.AutoUPD == true)
-        //                    {
-        //                        Bitmap crabimg = Properties.Resources.upd;
-        //                        MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
-        //                        pictureBox2.BeginInvoke(gc);
-
-        //                        MethodInvoker w = () => toolStripStatusLabel1.Text = "Доступна новая версия!";
-        //                        label6.BeginInvoke(w);
-
-        //                        MethodInvoker r = () => toolStripStatusLabel1.Font = new Font(label6.Text, 8, FontStyle.Regular | FontStyle.Underline);
-        //                        label6.BeginInvoke(r);
-
-        //                        MethodInvoker t = () => toolStripStatusLabel1.ForeColor = SystemColors.HotTrack;
-        //                        label6.BeginInvoke(t);
-
-        //                        MethodInvoker ha = () => toolStripStatusLabel1.IsLink = true;
-        //                        label6.BeginInvoke(ha);
-        //                    }
-        //                }
-        //            }
-        //            catch (WebException)
-        //            {
-        //                //Bitmap ufail = Properties.Resources.updfail;
-        //                //MethodInvoker uimg = () => toolStripStatusLabel1.Image = ufail;
-        //                //pictureBox2.BeginInvoke(uimg);
-
-        //                //MethodInvoker cl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Red;
-        //                //label6.BeginInvoke(cl);
-        //                //MethodInvoker ls = () => toolStripStatusLabel1.Text = "Ошибка соединения!";
-        //                //label6.BeginInvoke(ls);
-        //            }
-        //    }
-        //    #endregion
-
-        //#region Поток проверки статуса серверов
-        //    public void ServerStatus()
-        //    {
-        //        HttpWebRequest req;
-        //        HttpWebResponse resp;
-        //        StreamReader sr;
-        //        string C;
-        //        string IS = "", KR = "", SL = "", TM = "", LG = "";
-        //        string site = "";
-
-        //        try
-        //        {
-        //            if (ps.Monitoring == 0) { site = "http://aionstatus.net/"; }
-
-        //            if (ps.Monitoring == 1) { site = "http://aion.im/status/status.php"; }
-
-        //            if (ps.Monitoring == 2) { site = "http://aion.mouseclic.com/tool/status/"; }              
-
-        //            //if (ps.Monitoring == 2)
-        //            //{
-        //            //    site = "http://rainy.ws/server-status/";
-        //            //}
-
-
-        //            req = (HttpWebRequest)WebRequest.Create(site);
-        //            resp = (HttpWebResponse)req.GetResponse();
-        //            sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("windows-1251"));
-        //            C = sr.ReadToEnd();
-        //            sr.Close();
-
-        //            if (ps.Monitoring == 0)
-        //            {
-        //                IS = "Online</font></td><td><a href=\"fav.php?favorite=Israphel";
-        //                KR = "Online</font></td><td><a href=\"fav.php?favorite=Kahrun";
-        //                SL = "Online</font></td><td><a href=\"fav.php?favorite=Siel";
-        //                TM = "Online</font></td><td><a href=\"fav.php?favorite=Tiamat";
-        //                LG = "Online</font></td><td><a href=\"fav.php?favorite=NA_Login";
-        //            }
-
-        //            if (ps.Monitoring == 1)
-        //            {
-        //                IS = "class=\"lang-na\"></span>Israphel<span class=\"status-1\">";
-        //                KR = "class=\"lang-na\"></span>Kahrun<span class=\"status-1\">";
-        //                SL = "class=\"lang-na\"></span>Siel<span class=\"status-1\">";
-        //                TM = "class=\"lang-na\"></span>Tiamat<span class=\"status-1\">";
-        //                LG = "class=\"lang-na\"></span>NCSoft Login<span class=\"status-1\">";
-        //            }
-
-        //            if (ps.Monitoring == 2)
-        //            {
-        //                //C = C.Replace("\n", string.Empty);
-        //                //C = C.Replace(" ", string.Empty);
-        //                IS = "online.png\" /> Israphel";
-        //                KR = "online.png\" /> Kahrun";
-        //                SL = "online.png\" /> Siel";
-        //                TM = "online.png\" /> Tiamat";
-        //                LG = "online.png\" /> Login(NA)";
-        //            }
-
-        //            Bitmap on = Properties.Resources.bullet_green;
-        //            Bitmap off = Properties.Resources.bullet_red;
-
-        //            if (ps.SCCB == "Israphel")
-        //            {
-        //                if (C.IndexOf(IS) > -1)
-        //                {
-        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
-        //                    pictureBox2.BeginInvoke(gc);
-        //                }
-        //                else
-        //                {
-        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
-        //                    pictureBox2.BeginInvoke(gc);
-        //                }
-        //            }
-
-
-        //            if (ps.SCCB == "Kahrun")
-        //            {
-        //                if (C.IndexOf(KR) > -1)
-        //                {
-        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
-        //                    pictureBox2.BeginInvoke(gc);
-        //                }
-        //                else
-        //                {
-        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
-        //                    pictureBox2.BeginInvoke(gc);
-        //                }
-        //            }
-
-        //            if (ps.SCCB == "Siel")
-        //            {
-        //                if (C.IndexOf(SL) > -1)
-        //                {
-        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
-        //                    pictureBox2.BeginInvoke(gc);
-        //                }
-        //                else
-        //                {
-        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
-        //                    pictureBox2.BeginInvoke(gc);
-        //                }
-        //            }
-
-        //            if (ps.SCCB == "Tiamat")
-        //            {
-        //                if (C.IndexOf(TM) > -1)
-        //                {
-        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = on;
-        //                    pictureBox2.BeginInvoke(gc);
-        //                }
-        //                else
-        //                {
-        //                    MethodInvoker gc = () => toolStripStatusLabel3.Image = off;
-        //                    pictureBox2.BeginInvoke(gc);
-        //                }
-        //            }
-					
-        //            /* NC Login */
-        //             if (C.IndexOf(LG) > -1)
-        //            {
-        //                MethodInvoker gc = () => toolStripStatusLabel2.Image = on;
-        //                pictureBox2.BeginInvoke(gc);
-        //            }
-        //            else
-        //            { 
-        //                MethodInvoker gc = () => toolStripStatusLabel2.Image = off;
-        //                pictureBox2.BeginInvoke(gc);
-        //            }
-        //        }
-        //        catch /*(WebException)*/
-        //        {
-        //            /*MethodInvoker err1 = () => toolStripStatusLabel3.Image = Properties.Resources.bullet_purple;
-        //            pictureBox2.BeginInvoke(err1);
-
-        //            MethodInvoker err2 = () => toolStripStatusLabel2.Image = Properties.Resources.bullet_purple;
-        //            pictureBox2.BeginInvoke(err2);*/
-        //            //MessageBox.Show("Exception");
-        //        }
-        //    }
-        //     #endregion
-        #endregion
-
         private void Form1_Activated(object sender, EventArgs e)
+        {
+            if (Aion_Launcher.Settings.PubVar.toggle == true)
             {
-                if (Aion_Launcher.Settings.PubVar.toggle == true)
-                {                
-                    Aion_Launcher.Settings.PubVar.toggle = false;
-                    toolStripStatusLabel1.Visible = true;
-                    ServerStatusCheck();
-                    Thread s = new Thread(ServerStatus);
-                    s.Start();
-                    if (ps.Priority == false)
+                if (Aion_Launcher.Settings.PubVar.langChange != ps.Language)
+                {
+                    CultureInfo cultureInfo = new CultureInfo(ps.Language);
+                    ChangeLanguage.Instance.localizeForm(this, cultureInfo);
+                    //pingStringFix = translate.pingString;
+                    //msStringFix = translate.msString;
+                    try
                     {
-                        PriorityTimer.Stop();
-                        toolStripDropDownButton1.Visible = false;
+                        SendPing();
+                        //backgroundWorker1.RunWorkerAsync();
                     }
-
-                    if (ps.Ping == true)
+                    catch
                     {
-                        backgroundWorker1.RunWorkerAsync();
-                        timer1.Enabled = true;
+                    }
+                    if (ps.Log == "" & ps.Pass == "")
+                    {
+                        loginTextBox.Tag = translate.email;
+                        loginTextBox.Text = loginTextBox.Tag.ToString();
+
+                        passwordTextBox.Tag = translate.password;
+                        passwordTextBox.Text = passwordTextBox.Tag.ToString();
+                    }
+                    this.Refresh();
+                }
+
+                if (CheckForInternetConnection() == true)
+                {
+                    Thread ar = new Thread(autoUpd_restart);
+                    ar.Start();
+                }
+
+                ServerStatusCheck();
+                Thread s = new Thread(ServerStatus);
+                s.Start();
+
+                if (ps.Priority == false)
+                {
+                    PriorityTimer.Stop();
+                    statusLabel.Visible = true;
+                    toolStripDropDownButton1.Visible = false;
+                }
+
+                if (ps.Ping == true)
+                {
+                    try
+                    {
+                        //backgroundWorker1.RunWorkerAsync();
+                        SendPing();
+                        pingTimer.Enabled = true;
                         pingStatusLabel.Visible = true;
                     }
-
-                    if (ps.Ping == false)
+                    catch
                     {
-                        timer1.Enabled = false;
-                        pingStatusLabel.Visible = false;
-                    }  
+                    }
                 }
+
+                if (ps.Ping == false)
+                {
+                    pingTimer.Enabled = false;
+                    pingStatusLabel.Visible = false;
+                }
+              
             }
+           
+            Aion_Launcher.Settings.PubVar.toggle = false;
+        }
 
             private void AutoUPDtimer_Tick(object sender, EventArgs e)
             {
@@ -890,9 +913,9 @@ namespace Aion_Launcher
             {
                 WebClient webClient = new WebClient();
 
-                if (toolStripStatusLabel1.Text == "Доступна новая версия!")
+                if (statusLabel.Text == translate.newVersion)
                 {
-                    DialogResult result = MessageBox.Show("Сейчас будет скачано и установлено обновление", "Обновление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    DialogResult result = MessageBox.Show(translate.updMsgBoxText, translate.updMsgBoxTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
                     if (result == DialogResult.OK)
                     {
@@ -900,11 +923,11 @@ namespace Aion_Launcher
                         if (RemoteFileExists("http://sigmanor.tk/soft/Aion-Game-Launcher/AionGameLauncher.exe"))
                         {
                             Bitmap la = Properties.Resources.load_anim;
-                            toolStripStatusLabel1.Image = la;
-                            toolStripStatusLabel1.Text = "Обновление...";
-                            toolStripStatusLabel1.IsLink = false;
-                            toolStripStatusLabel1.Font = new Font(toolStripStatusLabel1.Text, 8, FontStyle.Regular);
-                            toolStripStatusLabel1.ForeColor = Color.Black;
+                            statusLabel.Image = la;
+                            statusLabel.Text = translate.processUpdate;
+                            statusLabel.IsLink = false;
+                            statusLabel.Font = new Font(statusLabel.Text, 8, FontStyle.Regular);
+                            statusLabel.ForeColor = Color.Black;
 
                             webClient.DownloadFileCompleted += (s, bg) =>
                             {
@@ -934,7 +957,7 @@ namespace Aion_Launcher
 
                         else
                         {
-                            MessageBox.Show("Обновление не удалось\nПопробуйте еще раз позже", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(translate.updFailedText, translate.updFailedTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }   
 
                     }
@@ -954,21 +977,22 @@ namespace Aion_Launcher
             private void gButton3_Click(object sender, EventArgs e)
             {
                 Process.Start("http://aion.im");
+              
             }
 
             private void gButton4_Click(object sender, EventArgs e)
             {
-                Process.Start("https://docs.google.com/spreadsheet/ccc?key=0AtDAFcPW1M8fdGc2UWJUVHJpelNhZlVncXdhNnlnQnc&usp=drive_web#gid=115");
+                Process.Start("https://docs.google.com/spreadsheet/ccc?key=0AtDAFcPW1M8fdGc2UWJUVHJpelNhZlVncXdhNnlnQnc&usp=drive_web#gid=115");           
             }
 
-            private void GoNagibatButton_Click(object sender, EventArgs e)
+            private void playButton_Click(object sender, EventArgs e)
             {
                 string sd = "/" + System.Environment.SystemDirectory.Substring(0, 1) + " ";
                 string r = ps.GamePath;
                 r = r.Replace(":\\", ":\\\"");
                 string bin = "";
 
-                if (PasswordTextBox.Text == "Пароль" | LoginTextBox.Text == "Логин")
+                if (passwordTextBox.Text == translate.password | loginTextBox.Text == translate.email)
                 {
                     if (ps.Capacity == 0)
                     {
@@ -979,11 +1003,11 @@ namespace Aion_Launcher
                     {
                         bin = "bin64";
                     }
-                    PasswordTextBox.Text = "";
-                    LoginTextBox.Text = "";
+                    passwordTextBox.Text = "";
+                    loginTextBox.Text = "";
                 }
 
-                else if (PasswordTextBox.Text != "Пароль" | LoginTextBox.Text != "Логин")
+                else if (passwordTextBox.Text != translate.password | loginTextBox.Text != translate.email)
                 {
                     if (ps.Capacity == 0)
                     {
@@ -1000,11 +1024,11 @@ namespace Aion_Launcher
                 {
                     FileName = "cmd.exe",
                     WindowStyle = ProcessWindowStyle.Hidden,
-                    Arguments = sd + " start " + r + "\\" + bin + "\\AION.bin\" -ip:64.25.35.103 -port:2106 -cc:1 -noauthgg -charnamemenu -lbox -f2p -loginex -pwd16 -nosatab -lang:enu -account:" + LoginTextBox.Text + " -password:" + PasswordTextBox.Text + " " + ps.Extra
+                    Arguments = sd + " start " + r + "\\" + bin + "\\AION.bin\" -ip:64.25.35.103 -port:2106 -cc:1 -noauthgg -charnamemenu -lbox -f2p -loginex -pwd16 -nosatab -lang:enu -account:" + loginTextBox.Text + " -password:" + passwordTextBox.Text + " " + ps.Extra
                 };
-                Process.Start(startInfo);      
+                Process.Start(startInfo);
 
-                if (ps.Tray == false) 
+                if (ps.Tray == false)
                 {
                     Application.Exit();
                 }
@@ -1058,7 +1082,7 @@ namespace Aion_Launcher
 
                 if ((!File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) && (!File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
                 {
-                    MessageBox.Show("Лаунчер не установлен", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("The launcher is not installed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             		       
@@ -1071,10 +1095,6 @@ namespace Aion_Launcher
         
         void WebBrowser1DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            //if (CheckForInternetConnection() == true)
-            //{
-            //    try
-            //    {
                     if (webBrowser1.DocumentText.Contains("Переход на веб-страницу отменен"))
                     {
                         pictureBox1.Visible = true;
@@ -1089,27 +1109,65 @@ namespace Aion_Launcher
                             pictureBox1.Visible = false;
                         }
                     }
-            //    }
-            //    catch
-            //    {
-            //    }
-            //}
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            try
+            SendPing();
+        }
+
+        private void eyeButton_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics objGraphics = null;
+            objGraphics = this.CreateGraphics();
+            objGraphics.Clear(SystemColors.Control);
+            objGraphics.DrawRectangle(Pens.DarkGray,
+                 eyeButton.Left - 0, eyeButton.Top - 1,
+                  eyeButton.Width + 0, eyeButton.Height + 1);
+            objGraphics.Dispose();
+        }
+
+        private void eyeButton_MouseDown(object sender, MouseEventArgs e)
+        {
+           
+        }
+
+        private void eyeButton_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (passwordTextBox.UseSystemPasswordChar == false)
             {
-                backgroundWorker1.RunWorkerAsync();
+                passwordTextBox.UseSystemPasswordChar = true;
+                eyeButton.BackColor = Color.White;
             }
-            catch (InvalidOperationException)
+
+            else
             {
-                return;
+                passwordTextBox.UseSystemPasswordChar = false;
+                eyeButton.BackColor = Color.LightGray;
             }
         }
 
+        private void passwordTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (passwordTextBox.Text != translate.password)
+            {
+                eyeButton.Enabled = true;
+            }
 
+            if (string.IsNullOrEmpty(passwordTextBox.Text))
+            {
+                eyeButton.BackColor = Color.White;
+                eyeButton.Enabled = false;
+                passwordTextBox.UseSystemPasswordChar = true;
+            }
+        }
 
-    }
+        private void passwordTextBox_Leave(object sender, EventArgs e)
+        {
+
+        }
+     
+
+    } 
 }
 
