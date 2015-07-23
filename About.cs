@@ -61,5 +61,13 @@ namespace Aion_Launcher
 			img.RotateFlip(RotateFlipType.Rotate90FlipNone);
 			pictureBox1.Image = img;
         }
+
+        private void About_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }
