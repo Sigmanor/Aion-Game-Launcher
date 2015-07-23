@@ -5,6 +5,8 @@ namespace Aion_Launcher
 {
     public partial class License : Form
     {
+        Properties.Settings prop = Properties.Settings.Default;
+
         public License()
         {
             InitializeComponent();
@@ -38,7 +40,6 @@ namespace Aion_Launcher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Properties.Settings prop = Properties.Settings.Default;
             prop.License = 1;
             prop.Save();
             this.Hide();
@@ -46,7 +47,6 @@ namespace Aion_Launcher
 
         private void License_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings prop = Properties.Settings.Default;
             if (prop.License == 0)
             {
                 e.Cancel = true;
