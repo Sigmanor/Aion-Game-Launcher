@@ -5,17 +5,10 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
-using System.Reflection;
-using System.Resources;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Runtime.Serialization.Json;
 using System.Globalization;
-using Aion_Launcher.Properties;
-using System.Collections.Generic;
-using System.Collections;
 
 namespace Aion_Launcher
 {
@@ -26,6 +19,10 @@ namespace Aion_Launcher
         string[] arg;
 
         AutoResetEvent resetEvent = new AutoResetEvent(false);
+
+        public int comboindex = 0;
+
+        IniFile ini = new IniFile();
 
         public Form1(string[] args)
         {
@@ -38,7 +35,7 @@ namespace Aion_Launcher
             InitializeComponent();
 
             arg = args;
-            loginTextBox.ForeColor = Color.Gray;
+            emailComboBox.ForeColor = Color.Gray;
             passwordTextBox.ForeColor = Color.Gray;
 
             if (ps.LangCheck == false)
@@ -99,26 +96,90 @@ namespace Aion_Launcher
             if (loginTextBox.Text == translate.email)
                 loginTextBox.Clear();
         }
-      
+
+
+        #region multiaccounts
+        public void multiAccounts()
+        {
+            if (!File.Exists(ini.Path))
+            {
+                ps.account = -1;
+                ps.Save();
+
+                ini.Write("login0", "1", "Login");
+                ini.Write("password0", "", "Password");
+
+                ini.Write("login1", "2", "Login");
+                ini.Write("password1", "", "Password");
+
+                ini.Write("login2", "3", "Login");
+                ini.Write("password2", "", "Password");
+
+                ini.Write("login3", "4", "Login");
+                ini.Write("password3", "", "Password");
+
+                ini.Write("login4", "5", "Login");
+                ini.Write("password4", "", "Password");
+
+                ini.Write("login5", "6", "Login");
+                ini.Write("password5", "", "Password");
+
+                ini.Write("login6", "7", "Login");
+                ini.Write("password6", "", "Password");
+
+                ini.Write("login7", "8", "Login");
+                ini.Write("password7", "", "Password");
+
+                ini.Write("login8", "9", "Login");
+                ini.Write("password8", "", "Password");
+
+                ini.Write("login9", "10", "Login");
+                ini.Write("password9", "", "Password");
+            }
+
+            emailComboBox.Items.Add(ini.Read("login0", "Login"));
+            emailComboBox.Items.Add(ini.Read("login1", "Login"));
+            emailComboBox.Items.Add(ini.Read("login2", "Login"));
+            emailComboBox.Items.Add(ini.Read("login3", "Login"));
+            emailComboBox.Items.Add(ini.Read("login4", "Login"));
+            emailComboBox.Items.Add(ini.Read("login5", "Login"));
+            emailComboBox.Items.Add(ini.Read("login6", "Login"));
+            emailComboBox.Items.Add(ini.Read("login7", "Login"));
+            emailComboBox.Items.Add(ini.Read("login8", "Login"));
+            emailComboBox.Items.Add(ini.Read("login9", "Login"));
+        }
+        #endregion
+
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (rememberCheckBox.Checked == true)
             {
-                if (passwordTextBox.Text != translate.password && loginTextBox.Text != translate.email && passwordTextBox.Text != "" && loginTextBox.Text != "")
+                if (passwordTextBox.Text != translate.password && emailComboBox.Text != translate.email /*&& passwordTextBox.Text != "" && emailComboBox.Text != ""*/)
                 {
-                    ps.Pass = passwordTextBox.Text;
-                    ps.Log = loginTextBox.Text;
+                    ini.Write("login" + comboindex, emailComboBox.Text, "Login");
+
+                    ini.Write("password" + comboindex, passwordTextBox.Text, "Password");
+
+                    emailComboBox.Items.Clear();
+
+                    multiAccounts();
+
+                    ps.account = comboindex;
                     ps.Checked = rememberCheckBox.Checked;
                     ps.Save();
+
+                    Thread m = new Thread(multiAccountsThread);
+                    m.Start();
                 }
             }
             if (rememberCheckBox.Checked == false)
             {
-                ps.Log = "";
-                ps.Pass = "";
-                ps.Checked = rememberCheckBox.Checked;
-                ps.Save();
+                //ps.Log = "";
+                //ps.Pass = "";
+                //ps.Checked = rememberCheckBox.Checked;
+                //ps.Save();
             }
+
         }
 
         #region Проверка соединения
@@ -141,6 +202,8 @@ namespace Aion_Launcher
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            multiAccounts();
+
             CultureInfo cultureInfo = new CultureInfo(ps.Language);
             ChangeLanguage.Instance.localizeForm(this, cultureInfo);
 
@@ -152,9 +215,6 @@ namespace Aion_Launcher
 
             if (CheckForInternetConnection() == true)
             {
-                //Thread ar = new Thread(autoUpd_restart);
-                //ar.Start();
-
                 webBrowser1.Navigate(new Uri("http://web-launcher.ncsoft.com/aion/en/installed_hq.php#"));
             }
 
@@ -172,13 +232,11 @@ namespace Aion_Launcher
 
             ServerStatusCheck();
 
-            rememberCheckBox.Checked = ps.Checked;
-
-            if (ps.Log == "" & ps.Pass == "")
+            if (ps.account == -1)
             {
                 eyeButton.Enabled = false;
-                loginTextBox.Tag = translate.email;
-                loginTextBox.Text = loginTextBox.Tag.ToString();
+                emailComboBox.Tag = translate.email;
+                emailComboBox.Text = emailComboBox.Tag.ToString();
 
                 passwordTextBox.Tag = translate.password;
                 passwordTextBox.Text = passwordTextBox.Tag.ToString();
@@ -186,8 +244,28 @@ namespace Aion_Launcher
 
             if (ps.Log != "" & ps.Pass != "")
             {
-                loginTextBox.Text = ps.Log;
-                passwordTextBox.Text = ps.Pass;
+                ps.account = 0;
+
+                ini.Write("login" + ps.account, ps.Log, "Login");
+                ini.Write("password" + ps.account, ps.Pass, "Password");
+
+                emailComboBox.Items.Clear();
+
+                multiAccounts();
+
+                ps.Log = "";
+                ps.Pass = "";
+
+                ps.Save();
+            }
+
+            if (ps.account != -1)
+            {
+                emailComboBox.SelectedIndex = ps.account;
+                passwordTextBox.Text = ini.Read("password" + ps.account, "Password");
+
+                Size size = new Size(22, 19);
+                eyeButton.Size = size;
             }
 
             /* Получить путь к игре */
@@ -214,18 +292,26 @@ namespace Aion_Launcher
             }
             /* Получить путь к игре */
 
-            if (loginTextBox.Text == translate.email | passwordTextBox.Text == translate.password)
+            if (emailComboBox.Text == translate.email | passwordTextBox.Text == translate.password | emailComboBox.Text == "" | passwordTextBox.Text == "")
             {
-                loginTextBox.ForeColor = Color.Gray;
+                emailComboBox.Tag = translate.email;
+                emailComboBox.Text = emailComboBox.Tag.ToString();
+
+                passwordTextBox.Tag = translate.password;
+                passwordTextBox.Text = passwordTextBox.Tag.ToString();
+
+
+                emailComboBox.ForeColor = Color.Gray;
                 passwordTextBox.ForeColor = Color.Gray;
                 passwordTextBox.UseSystemPasswordChar = false;
             }
-            if (loginTextBox.Text != translate.email | passwordTextBox.Text != translate.password)
+
+            if (emailComboBox.Text != translate.email | passwordTextBox.Text != translate.password)
             {
-                Font font = new Font(loginTextBox.Font, FontStyle.Regular);
-                loginTextBox.Font = font;
+                Font font = new Font(emailComboBox.Font, FontStyle.Regular);
+                emailComboBox.Font = font;
                 passwordTextBox.Font = font;
-                loginTextBox.ForeColor = Color.Black;
+                emailComboBox.ForeColor = Color.Black;
                 passwordTextBox.ForeColor = Color.Black;
             }
 
@@ -255,11 +341,12 @@ namespace Aion_Launcher
                 Version_Info v = new Version_Info();
                 v.ShowDialog();
             }
+            emailComboBox.SelectionLength = 0;
         }
 
         public void ServerStatusCheck()
         {
-        	toolStripStatusLabel3.Text = ps.SCCB;
+            toolStripStatusLabel3.Text = ps.SCCB;
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -269,52 +356,6 @@ namespace Aion_Launcher
 
 
         /*ПОТОКИ*/
-
-        #region Поток проверки рестарта
-        //public void RestartAlert()
-        //{          
-        //    try {
-        //    HttpWebRequest req; 
-        //    HttpWebResponse resp;
-        //    StreamReader sr;
-        //    string C;
-        //    string RS;
-
-        //        req = (HttpWebRequest)WebRequest.Create("http://24timezones.com/usa_time/tx_galveston/texas_city.htm");
-        //        resp = (HttpWebResponse)req.GetResponse();
-        //        sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("UTF-8"));
-        //        C = sr.ReadToEnd();
-        //        sr.Close();
-
-        //        RS = "Sunday";
-
-        //        if (C.IndexOf(RS) > -1)
-        //        {
-        //            MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-        //            statusStrip1.BeginInvoke(bl);
-        //            MethodInvoker restnow = () => toolStripStatusLabel1.Text = translate.serverRestart;
-        //            statusStrip1.Invoke(restnow);
-        //            Bitmap restimg = Properties.Resources.restart;
-        //            MethodInvoker hj = () => toolStripStatusLabel1.Image = restimg;
-        //            pictureBox2.BeginInvoke(hj);   
-        //        }
-
-        //        else
-        //        {
-        //            //MethodInvoker bl = () => toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-        //            //statusStrip1.BeginInvoke(bl);
-        //            //MethodInvoker gocrab = () => toolStripStatusLabel1.Text = translate.ready;
-        //            //statusStrip1.Invoke(gocrab);
-
-        //            //Bitmap crabimg = Properties.Resources.crab;
-        //            //MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
-        //            //pictureBox2.BeginInvoke(gc);
-        //        }
-
-        //        } catch { }
-            
-        //}
-        #endregion
 
         #region Поток проверки обновлений
 
@@ -333,7 +374,7 @@ namespace Aion_Launcher
             try
             {
                 WebClient client = new WebClient();
-                Stream stream = client.OpenRead("http://sigmanor.tk/soft/Aion-Game-Launcher/version");
+                Stream stream = client.OpenRead("https://raw.githubusercontent.com/Sigmanor/sigmanor.github.io/master/soft/Aion-Game-Launcher/version");
                 StreamReader reader = new StreamReader(stream);
                 String content = reader.ReadToEnd();
                 String version = Application.ProductVersion;
@@ -386,10 +427,11 @@ namespace Aion_Launcher
                         {
                             MethodInvoker bl = () => statusLabel.ForeColor = System.Drawing.Color.Black;
                             statusStrip1.BeginInvoke(bl);
+
                             MethodInvoker gocrab = () => statusLabel.Text = translate.ready;
                             statusStrip1.Invoke(gocrab);
-                            Bitmap crabimg = Properties.Resources.controller;
-                            MethodInvoker gc = () => statusLabel.Image = crabimg;
+
+                            MethodInvoker gc = () => statusLabel.Image = Properties.Resources.controller;
                             statusStrip1.BeginInvoke(gc);
                         }
                     }
@@ -432,48 +474,6 @@ namespace Aion_Launcher
             }
 
         }
-            #endregion
-
-        #region Поток автоматической проверки обновлений
-        //public void AutoUPD()
-        //{
-
-        //    try
-        //    {
-        //        WebClient client = new WebClient();
-        //        Stream stream = client.OpenRead("http://sigmanor.tk/soft/Aion-Game-Launcher/version");
-        //        StreamReader reader = new StreamReader(stream);
-        //        String content = reader.ReadToEnd();
-        //        String version = Application.ProductVersion;
-
-        //        int con = Convert.ToInt32(content.Replace(".", ""));
-        //        int ver = Convert.ToInt32(version.Replace(".", ""));
-
-        //        if (con != ver)
-        //        {
-        //            Thread.Sleep(500);
-        //            Bitmap crabimg = Properties.Resources.upd;
-        //            MethodInvoker gc = () => toolStripStatusLabel1.Image = crabimg;
-        //            pictureBox2.BeginInvoke(gc);
-
-        //            MethodInvoker w = () => toolStripStatusLabel1.Text = translate.newVersion;
-        //            statusStrip1.BeginInvoke(w);
-
-        //            MethodInvoker r = () => toolStripStatusLabel1.Font = new Font(toolStripStatusLabel1.Text, 8, FontStyle.Regular | FontStyle.Underline);
-        //            statusStrip1.BeginInvoke(r);
-
-        //            MethodInvoker t = () => toolStripStatusLabel1.ForeColor = SystemColors.HotTrack;
-        //            statusStrip1.BeginInvoke(t);
-
-        //            MethodInvoker ha = () => toolStripStatusLabel1.IsLink = true;
-        //            statusStrip1.BeginInvoke(ha);
-        //        }
-        //    }
-        //    catch
-        //    {
-        //    }
-
-        //}
         #endregion
 
         #region Поток проверки статуса серверов
@@ -632,7 +632,7 @@ namespace Aion_Launcher
             {
 
                 WebClient client = new WebClient();
-                Stream stream = client.OpenRead("http://sigmanor.tk/soft/Aion-Game-Launcher/version");
+                Stream stream = client.OpenRead("https://raw.githubusercontent.com/Sigmanor/sigmanor.github.io/master/soft/Aion-Game-Launcher/version");
                 StreamReader reader = new StreamReader(stream);
                 String content = reader.ReadToEnd();
                 String version = Application.ProductVersion;
@@ -783,6 +783,33 @@ namespace Aion_Launcher
 
         #endregion
 
+        #region Мультиаккаунты
+
+        private void multiAccountsThread()
+        {
+            MethodInvoker islink = () => statusLabel.IsLink = false;
+            statusStrip1.BeginInvoke(islink);
+            MethodInvoker font = () => statusLabel.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            statusStrip1.Invoke(font);
+            MethodInvoker color = () => statusLabel.ForeColor = Color.Black;
+            statusStrip1.BeginInvoke(color);
+            MethodInvoker text = () => statusLabel.Text = translate.savingText;
+            statusStrip1.Invoke(text);
+            MethodInvoker image = () => statusLabel.Image = Properties.Resources.save;
+            statusStrip1.BeginInvoke(image);
+
+            Thread.Sleep(2000);
+
+            Thread ar = new Thread(autoUpd_restart);
+            ar.Start();
+
+            MethodInvoker cb = () => rememberCheckBox.Checked = false;
+            statusStrip1.BeginInvoke(cb);
+        }
+
+        #endregion
+
+
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Settings Settings = new Settings();
@@ -798,14 +825,14 @@ namespace Aion_Launcher
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit(); 
+            Application.Exit();
         }
 
         private void PriorityTimer_Tick(object sender, EventArgs e)
         {
             toolStripDropDownButton1.Text = translate.runAfter + (--i).ToString();
             if (i < 0)
-            { 
+            {
                 PriorityTimer.Stop();
                 playButton_Click(this, new EventArgs());
                 statusLabel.Visible = true;
@@ -821,20 +848,18 @@ namespace Aion_Launcher
                 {
                     CultureInfo cultureInfo = new CultureInfo(ps.Language);
                     ChangeLanguage.Instance.localizeForm(this, cultureInfo);
-                    //pingStringFix = translate.pingString;
-                    //msStringFix = translate.msString;
                     try
                     {
                         SendPing();
-                        //backgroundWorker1.RunWorkerAsync();
                     }
                     catch
                     {
                     }
-                    if (ps.Log == "" & ps.Pass == "")
+                    //if (ps.Log == "" & ps.Pass == "")
+                    if (ps.account == -1)
                     {
-                        loginTextBox.Tag = translate.email;
-                        loginTextBox.Text = loginTextBox.Tag.ToString();
+                        emailComboBox.Tag = translate.email;
+                        emailComboBox.Text = emailComboBox.Tag.ToString();
 
                         passwordTextBox.Tag = translate.password;
                         passwordTextBox.Text = passwordTextBox.Tag.ToString();
@@ -863,7 +888,6 @@ namespace Aion_Launcher
                 {
                     try
                     {
-                        //backgroundWorker1.RunWorkerAsync();
                         SendPing();
                         pingTimer.Enabled = true;
                         pingStatusLabel.Visible = true;
@@ -878,237 +902,237 @@ namespace Aion_Launcher
                     pingTimer.Enabled = false;
                     pingStatusLabel.Visible = false;
                 }
-              
+
             }
-           
+
             Aion_Launcher.Settings.PubVar.toggle = false;
         }
 
-            private void AutoUPDtimer_Tick(object sender, EventArgs e)
+        private void AutoUPDtimer_Tick(object sender, EventArgs e)
+        {
+            Thread s = new Thread(ServerStatus);
+            s.Start();
+        }
+
+        private void toolStripDropDownButton1_Click(object sender, EventArgs e)
+        {
+            if (PriorityTimer.Enabled == true)
             {
-                Thread s = new Thread(ServerStatus);
-                s.Start();
+                PriorityTimer.Stop();
+
+                Bitmap t = Properties.Resources.timerplay;
+                toolStripDropDownButton1.Image = t;
             }
 
-            private void toolStripDropDownButton1_Click(object sender, EventArgs e)
+            else if (PriorityTimer.Enabled == false)
             {
-                if (PriorityTimer.Enabled == true)
-                {
-                    PriorityTimer.Stop();
+                PriorityTimer.Start();
 
-                    Bitmap t = Properties.Resources.timerplay;
-                    toolStripDropDownButton1.Image = t;
-                }
-
-                else if (PriorityTimer.Enabled == false)
-                {
-                    PriorityTimer.Start();
-
-                    Bitmap t = Properties.Resources.timerstop;
-                    toolStripDropDownButton1.Image = t;
-                }     
+                Bitmap t = Properties.Resources.timerstop;
+                toolStripDropDownButton1.Image = t;
             }
+        }
 
-            private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+            WebClient webClient = new WebClient();
+
+            if (statusLabel.Text == translate.newVersion)
             {
-                WebClient webClient = new WebClient();
+                DialogResult result = MessageBox.Show(translate.updMsgBoxText, translate.updMsgBoxTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
-                if (statusLabel.Text == translate.newVersion)
+                if (result == DialogResult.OK)
                 {
-                    DialogResult result = MessageBox.Show(translate.updMsgBoxText, translate.updMsgBoxTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
-                    if (result == DialogResult.OK)
+                    if (RemoteFileExists("https://github.com/Sigmanor/sigmanor.github.io/tree/master/soft/Aion-Game-Launcher/AionGameLauncher.exe"))
                     {
+                        Bitmap la = Properties.Resources.load_anim;
+                        statusLabel.Image = la;
+                        statusLabel.Text = translate.processUpdate;
+                        statusLabel.IsLink = false;
+                        statusLabel.Font = new Font(statusLabel.Text, 8, FontStyle.Regular);
+                        statusLabel.ForeColor = Color.Black;
 
-                        if (RemoteFileExists("http://sigmanor.tk/soft/Aion-Game-Launcher/AionGameLauncher.exe"))
+                        webClient.DownloadFileCompleted += (s, bg) =>
                         {
-                            Bitmap la = Properties.Resources.load_anim;
-                            statusLabel.Image = la;
-                            statusLabel.Text = translate.processUpdate;
-                            statusLabel.IsLink = false;
-                            statusLabel.Font = new Font(statusLabel.Text, 8, FontStyle.Regular);
-                            statusLabel.ForeColor = Color.Black;
-
-                            webClient.DownloadFileCompleted += (s, bg) =>
+                            string N = "agl_update.bat";
+                            using (StreamWriter sw = new StreamWriter(N))
                             {
-                                string N = "agl_update.bat";
-                                using (StreamWriter sw = new StreamWriter(N))
-                                {
-                                    sw.WriteLine(":first");
-                                    sw.WriteLine("del \"Aion Game Launcher.exe\"");
-                                    sw.WriteLine("if exist \"Aion Game Launcher.exe\" goto :first");
-                                    sw.WriteLine("rename \"aiongamelauncher.update\" \"Aion Game Launcher.exe\"");
-                                    sw.WriteLine("start \"\" \"Aion Game Launcher.exe\" upd");
-                                    sw.WriteLine("del /q /f \"%~f0\" >nul 2>&1 & exit /b 0");
-                                    sw.Close();
-                                }
+                                sw.WriteLine(":first");
+                                sw.WriteLine("del \"Aion Game Launcher.exe\"");
+                                sw.WriteLine("if exist \"Aion Game Launcher.exe\" goto :first");
+                                sw.WriteLine("rename \"aiongamelauncher.update\" \"Aion Game Launcher.exe\"");
+                                sw.WriteLine("start \"\" \"Aion Game Launcher.exe\" upd");
+                                sw.WriteLine("del /q /f \"%~f0\" >nul 2>&1 & exit /b 0");
+                                sw.Close();
+                            }
 
-                                ProcessStartInfo startInfo = new ProcessStartInfo();       
-                                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                                startInfo.FileName = N;
-                                
-                                Process.Start(startInfo);     
-                           
-                                Application.Exit();
-                            };
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+                            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                            startInfo.FileName = N;
 
-                            webClient.DownloadFileAsync(new Uri("http://sigmanor.tk/soft/Aion-Game-Launcher/AionGameLauncher.exe"), "aiongamelauncher.update");
-                        }
+                            Process.Start(startInfo);
 
-                        else
-                        {
-                            MessageBox.Show(translate.updFailedText, translate.updFailedTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }   
+                            Application.Exit();
+                        };
 
+                        webClient.DownloadFileAsync(new Uri("https://github.com/Sigmanor/sigmanor.github.io/tree/master/soft/Aion-Game-Launcher/AionGameLauncher.exe"), "aiongamelauncher.update");
                     }
-                }
-            }
 
-            private void gButton2_Click(object sender, EventArgs e)
-            {
-                Process.Start("http://vk.com/aion_community");
-            }
-
-            private void gButton1_Click(object sender, EventArgs e)
-            {
-                Process.Start("http://na.aiononline.com/");
-            }
-
-            private void gButton3_Click(object sender, EventArgs e)
-            {
-                Process.Start("http://aion.im");
-              
-            }
-
-            private void gButton4_Click(object sender, EventArgs e)
-            {
-                Process.Start("https://docs.google.com/spreadsheet/ccc?key=0AtDAFcPW1M8fdGc2UWJUVHJpelNhZlVncXdhNnlnQnc&usp=drive_web#gid=115");           
-            }
-
-            private void playButton_Click(object sender, EventArgs e)
-            {
-                string sd = "/" + System.Environment.SystemDirectory.Substring(0, 1) + " ";
-                string r = ps.GamePath;
-                r = r.Replace(":\\", ":\\\"");
-                string bin = "";
-
-                if (passwordTextBox.Text == translate.password | loginTextBox.Text == translate.email)
-                {
-                    if (ps.Capacity == 0)
+                    else
                     {
-                        bin = "bin32";
+                        MessageBox.Show(translate.updFailedText, translate.updFailedTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
-                    if (ps.Capacity == 1)
-                    {
-                        bin = "bin64";
-                    }
-                    passwordTextBox.Text = "";
-                    loginTextBox.Text = "";
-                }
-
-                else if (passwordTextBox.Text != translate.password | loginTextBox.Text != translate.email)
-                {
-                    if (ps.Capacity == 0)
-                    {
-                        bin = "bin32";
-                    }
-
-                    if (ps.Capacity == 1)
-                    {
-                        bin = "bin64";
-                    }
-                }
-
-                var startInfo = new ProcessStartInfo
-                {
-                    FileName = "cmd.exe",
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    Arguments = sd + " start " + r + "\\" + bin + "\\AION.bin\" -ip:64.25.35.103 -port:2106 -cc:1 -noauthgg -charnamemenu -lbox -f2p -loginex -pwd16 -nosatab -lang:enu -account:" + loginTextBox.Text + " -password:" + passwordTextBox.Text + " " + ps.Extra
-                };
-                Process.Start(startInfo);
-
-                if (ps.Tray == false)
-                {
-                    Application.Exit();
-                }
-
-                if (ps.Tray == true)
-                {
-                    this.Hide();
-                    notifyIcon1.Visible = true;
-                    notifyIcon1.ShowBalloonTip(30000);
                 }
             }
+        }
 
-            private void обновленияToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void gButton2_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://vk.com/aion_community");
+        }
+
+        private void gButton1_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://na.aiononline.com/");
+        }
+
+        private void gButton3_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://aion.im");
+
+        }
+
+        private void gButton4_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://docs.google.com/spreadsheet/ccc?key=0AtDAFcPW1M8fdGc2UWJUVHJpelNhZlVncXdhNnlnQnc&usp=drive_web#gid=115");
+        }
+
+        private void playButton_Click(object sender, EventArgs e)
+        {
+            string sd = "/" + System.Environment.SystemDirectory.Substring(0, 1) + " ";
+            string r = ps.GamePath;
+            r = r.Replace(":\\", ":\\\"");
+            string bin = "";
+
+            if (passwordTextBox.Text == translate.password | emailComboBox.Text == translate.email)
             {
-                Thread u = new Thread(UpdateCheck);
-                u.Start();
+                if (ps.Capacity == 0)
+                {
+                    bin = "bin32";
+                }
+
+                if (ps.Capacity == 1)
+                {
+                    bin = "bin64";
+                }
+                passwordTextBox.Text = "";
+                emailComboBox.Text = "";
             }
 
-            private void aboutToolStripMenuItem_Click_1(object sender, EventArgs e)
+            else if (passwordTextBox.Text != translate.password | emailComboBox.Text != translate.email)
             {
-                About A = new About();
-                A.ShowDialog();
+                if (ps.Capacity == 0)
+                {
+                    bin = "bin32";
+                }
+
+                if (ps.Capacity == 1)
+                {
+                    bin = "bin64";
+                }
             }
 
-            private void документацияToolStripMenuItem_Click(object sender, EventArgs e)
+            var startInfo = new ProcessStartInfo
             {
-                Process.Start("http://sigmanor.tk/aion-game-launcher/manual");
-            }
+                FileName = "cmd.exe",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                Arguments = sd + " start " + r + "\\" + bin + "\\AION.bin\" -ip:64.25.35.103 -port:2106 -cc:1 -noauthgg -charnamemenu -lbox -f2p -loginex -pwd16 -nosatab -lang:enu -account:" + emailComboBox.Text + " -password:" + passwordTextBox.Text + " " + ps.Extra
+            };
+            Process.Start(startInfo);
 
-            private void официальныйЛаунчерToolStripMenuItem_Click_1(object sender, EventArgs e)
+            if (ps.Tray == false)
             {
-                string p = "";
-
-                if (File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe"))
-                {
-                    p = " (x86)";
-                }
-
-                if (File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe"))
-                {
-                    p = "";
-                }
-
-                if ((File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) || (File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
-                {
-                    Process pr = new Process();
-                    pr.StartInfo.FileName = @"C:\Program Files" + p + @"\NCWest\NCLauncher\NCLauncher.exe";
-                    pr.StartInfo.Arguments = @"/LauncherID:""NCWest"" /CompanyID:""12"" /GameID:""AION"" /LUpdateAddr:""updater.nclauncher.ncsoft.com""";
-                    pr.Start();
-                }
-
-                if ((!File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) && (!File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
-                {
-                    MessageBox.Show("The launcher is not installed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                Application.Exit();
             }
-            		       
-        
+
+            if (ps.Tray == true)
+            {
+                this.Hide();
+                notifyIcon1.Visible = true;
+                notifyIcon1.ShowBalloonTip(30000);
+            }
+        }
+
+        private void обновленияToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            Thread u = new Thread(UpdateCheck);
+            u.Start();
+        }
+
+        private void aboutToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            About A = new About();
+            A.ShowDialog();
+        }
+
+        private void документацияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://sigmanor.tk/aion-game-launcher/manual");
+        }
+
+        private void официальныйЛаунчерToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            string p = "";
+
+            if (File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe"))
+            {
+                p = " (x86)";
+            }
+
+            if (File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe"))
+            {
+                p = "";
+            }
+
+            if ((File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) || (File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
+            {
+                Process pr = new Process();
+                pr.StartInfo.FileName = @"C:\Program Files" + p + @"\NCWest\NCLauncher\NCLauncher.exe";
+                pr.StartInfo.Arguments = @"/LauncherID:""NCWest"" /CompanyID:""12"" /GameID:""AION"" /LUpdateAddr:""updater.nclauncher.ncsoft.com""";
+                pr.Start();
+            }
+
+            if ((!File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) && (!File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
+            {
+                MessageBox.Show("The launcher is not installed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         void WebBrowser1NewWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
-        	 e.Cancel = true;
-        	 Process.Start(webBrowser1.StatusText);             
+            e.Cancel = true;
+            Process.Start(webBrowser1.StatusText);
         }
-        
+
         void WebBrowser1DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-                    if (webBrowser1.DocumentText.Contains("Переход на веб-страницу отменен"))
-                    {
-                        pictureBox1.Visible = true;
-                    }
+            if (webBrowser1.DocumentText.Contains("Переход на веб-страницу отменен"))
+            {
+                pictureBox1.Visible = true;
+            }
 
-                    if (webBrowser1.DocumentText.Contains("Account"))
-                    {
+            if (webBrowser1.DocumentText.Contains("Account"))
+            {
 
-                        if (webBrowser1.Url.ToString().IndexOf("http://web-launcher.ncsoft.com/aion/en/installed_hq.php#") == 0)
-                        {
-                            webBrowser1.Visible = true;
-                            pictureBox1.Visible = false;
-                        }
-                    }
+                if (webBrowser1.Url.ToString().IndexOf("http://web-launcher.ncsoft.com/aion/en/installed_hq.php#") == 0)
+                {
+                    webBrowser1.Visible = true;
+                    pictureBox1.Visible = false;
+                }
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -1129,7 +1153,7 @@ namespace Aion_Launcher
 
         private void eyeButton_MouseDown(object sender, MouseEventArgs e)
         {
-           
+
         }
 
         private void eyeButton_MouseUp(object sender, MouseEventArgs e)
@@ -1152,13 +1176,27 @@ namespace Aion_Launcher
             if (passwordTextBox.Text != translate.password)
             {
                 eyeButton.Enabled = true;
+                passwordTextBox.UseSystemPasswordChar = true;
+                eyeButton.BackColor = Color.White;
+
+
             }
+
+
 
             if (string.IsNullOrEmpty(passwordTextBox.Text))
             {
                 eyeButton.BackColor = Color.White;
                 eyeButton.Enabled = false;
                 passwordTextBox.UseSystemPasswordChar = true;
+
+                Graphics objGraphics = null;
+                objGraphics = this.CreateGraphics();
+                objGraphics.Clear(SystemColors.Control);
+                objGraphics.DrawRectangle(Pens.DarkGray,
+                     eyeButton.Left - 0, eyeButton.Top - 1,
+                      eyeButton.Width + 0, eyeButton.Height + 1);
+                objGraphics.Dispose();
             }
         }
 
@@ -1166,8 +1204,60 @@ namespace Aion_Launcher
         {
 
         }
-     
 
-    } 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboindex = emailComboBox.SelectedIndex;
+            passwordTextBox.Text = ini.Read("password" + comboindex, "Password");
+            passwordTextBox.ForeColor = Color.Black;
+            rememberCheckBox.Checked = false;
+
+            if (passwordTextBox.Text != translate.password && emailComboBox.Text != translate.email && passwordTextBox.Text != "" && emailComboBox.Text != "")
+            {
+                ps.account = comboindex;
+                ps.Save();
+            }
+
+        }
+
+        private void comboBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void emailComboBox_Enter(object sender, EventArgs e)
+        {
+            Font font = new Font(emailComboBox.Font, FontStyle.Regular);
+            emailComboBox.Font = font;
+            emailComboBox.ForeColor = Color.Black;
+
+            if (emailComboBox.Text == translate.email)
+            {
+                emailComboBox.Text = "";
+            }
+        }
+
+        private void emailComboBox_DropDown(object sender, EventArgs e)
+        {
+            if (emailComboBox.Text == translate.email)
+            {
+                emailComboBox.Text = "";
+            }
+
+        }
+
+        private void emailComboBox_MouseEnter(object sender, EventArgs e)
+        {
+            if (emailComboBox.Text.Length > 24)
+            {
+                toolTip1.Show(emailComboBox.Text, emailComboBox);
+            }
+        }
+
+        private void emailComboBox_Leave(object sender, EventArgs e)
+        {
+            toolTip1.Hide(emailComboBox);
+        }
+    }
 }
 
