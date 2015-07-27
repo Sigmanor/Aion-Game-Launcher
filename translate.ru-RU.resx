@@ -150,6 +150,9 @@
   <data name="runAfter" xml:space="preserve">
     <value>Запуск через: </value>
   </data>
+  <data name="savingText" xml:space="preserve">
+    <value>Сохранение...</value>
+  </data>
   <data name="serverRestart" xml:space="preserve">
     <value>Сегодня рестарт!</value>
   </data>

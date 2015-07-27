@@ -150,6 +150,9 @@
   <data name="runAfter" xml:space="preserve">
     <value>Running after: </value>
   </data>
+  <data name="savingText" xml:space="preserve">
+    <value>Saving...</value>
+  </data>
   <data name="serverRestart" xml:space="preserve">
     <value>Today Server Maintenance!</value>
   </data>
