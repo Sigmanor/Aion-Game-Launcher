@@ -144,6 +144,7 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="ChangeLanguage.cs" />
+    <Compile Include="IniFile.cs" />
     <Compile Include="LanguageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -243,7 +244,6 @@
     <EmbeddedResource Include="Version_Info.ru-RU.resx">
       <DependentUpon>Version_Info.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Aion Launcher_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -260,43 +260,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Aion Icon.ico" />
-    <None Include="Resources\eo.png" />
-    <None Include="Resources\ec.png" />
-    <None Include="Resources\eopen.png" />
-    <None Include="Resources\eclose.png" />
-    <None Include="Resources\eye_open.png" />
-    <None Include="Resources\eye-open.png" />
-    <None Include="Resources\eye-close.png" />
-    <None Include="Resources\tick_button.png" />
-    <None Include="Resources\controller.png" />
-    <None Include="Resources\hand_fuck.png" />
-    <None Include="Resources\construction.png" />
-    <None Include="Resources\roadworks.png" />
-    <None Include="Resources\cross.png" />
-    <None Include="Resources\bullet_yellow.png" />
-    <None Include="Resources\bullet_black.png" />
-    <None Include="Resources\dance.gif" />
-    <None Include="Resources\item.gif" />
-    <None Include="Resources\shugo.png" />
     <None Include="Resources\ru.dll" />
-    <None Include="Resources\langw8.gif" />
     <None Include="Resources\historyen.html" />
     <None Include="bin\Debug\ru-RU\Aion Game Launcher.resources.dll" />
     <None Include="Resources\history.html" />
-    <None Include="Resources\load_anim.gif" />
-    <None Include="Resources\bullet_purple.png" />
-    <None Include="Resources\ai_main2.jpg" />
-    <None Include="Resources\error.png" />
-    <None Include="Resources\error_checking.png" />
-    <None Include="Resources\error_delete.png" />
-    <None Include="Resources\error_go.png" />
-    <None Include="Resources\bullet_green.png" />
-    <None Include="Resources\bullet_red.png" />
-    <None Include="Resources\loader.gif" />
-    <None Include="Resources\crab.png" />
-    <None Include="Resources\timerstop.png" />
-    <None Include="Resources\timerplay.png" />
-    <None Include="Resources\panels.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

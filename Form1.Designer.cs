@@ -62,6 +62,8 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.playButton = new System.Windows.Forms.Button();
             this.eyeButton = new System.Windows.Forms.PictureBox();
+            this.emailComboBox = new System.Windows.Forms.ComboBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.webSiteButton = new Aion_Launcher.GButton();
             this.vkButton = new Aion_Launcher.GButton();
             this.scheduleButton = new Aion_Launcher.GButton();
@@ -327,6 +329,19 @@
             this.eyeButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.eyeButton_MouseDown);
             this.eyeButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.eyeButton_MouseUp);
             // 
+            // emailComboBox
+            // 
+            resources.ApplyResources(this.emailComboBox, "emailComboBox");
+            this.emailComboBox.FormattingEnabled = true;
+            this.emailComboBox.Name = "emailComboBox";
+            this.emailComboBox.Tag = "Email";
+            this.emailComboBox.DropDown += new System.EventHandler(this.emailComboBox_DropDown);
+            this.emailComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.emailComboBox.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
+            this.emailComboBox.Enter += new System.EventHandler(this.emailComboBox_Enter);
+            this.emailComboBox.Leave += new System.EventHandler(this.emailComboBox_Leave);
+            this.emailComboBox.MouseEnter += new System.EventHandler(this.emailComboBox_MouseEnter);
+            // 
             // webSiteButton
             // 
             this.webSiteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -335,7 +350,7 @@
             this.webSiteButton.ForeColor = System.Drawing.Color.White;
             this.webSiteButton.Image = null;
             this.webSiteButton.Name = "webSiteButton";
-            this.webSiteButton.Click += new System.EventHandler(this.gButton2_Click);
+            this.webSiteButton.Click += new System.EventHandler(this.gButton1_Click);
             // 
             // vkButton
             // 
@@ -372,6 +387,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Controls.Add(this.emailComboBox);
             this.Controls.Add(this.eyeButton);
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.pictureBox1);
@@ -438,6 +454,8 @@
         private GButton webSiteButton;
         private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.PictureBox eyeButton;
+        private System.Windows.Forms.ComboBox emailComboBox;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

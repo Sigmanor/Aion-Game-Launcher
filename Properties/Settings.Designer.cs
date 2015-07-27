@@ -214,5 +214,17 @@ namespace Aion_Launcher.Properties {
                 this["LangCheck"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int account {
+            get {
+                return ((int)(this["account"]));
+            }
+            set {
+                this["account"] = value;
+            }
+        }
     }
 }
