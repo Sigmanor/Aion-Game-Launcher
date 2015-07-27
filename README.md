@@ -20,7 +20,7 @@ The latest version always available **<a href="http://sigmanor.tk/aion-game-laun
 
 Beta
 ==================
-The latest beta version from github repository available **<a href="http://sigmanor.tk/soft/Aion-Game-Launcher/beta/" target="_blank">here</a>**.
+The latest beta version from dev brach available **<a href="http://sigmanor.github.io/soft/Aion-Game-Launcher/AionGameLauncher%28beta%29.7z" target="_blank">here</a>**.
 
 Build
 ==================
