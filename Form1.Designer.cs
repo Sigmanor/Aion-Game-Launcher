@@ -319,7 +319,7 @@
             // 
             // eyeButton
             // 
-            this.eyeButton.BackColor = System.Drawing.SystemColors.Window;
+            this.eyeButton.BackColor = System.Drawing.Color.White;
             this.eyeButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.eyeButton.Image = global::Aion_Launcher.Properties.Resources.eo;
             resources.ApplyResources(this.eyeButton, "eyeButton");
@@ -405,6 +405,7 @@
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.Click += new System.EventHandler(this.Form1_Click);
             this.SettingsMenu.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

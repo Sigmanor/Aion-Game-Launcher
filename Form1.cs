@@ -341,7 +341,7 @@ namespace Aion_Launcher
                 Version_Info v = new Version_Info();
                 v.ShowDialog();
             }
-            emailComboBox.SelectionLength = 0;
+            //statusStrip1.Focus();
         }
 
         public void ServerStatusCheck()
@@ -351,7 +351,7 @@ namespace Aion_Launcher
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            pictureBox1.Focus();
+            statusStrip1.Focus();
         }
 
 
@@ -798,7 +798,7 @@ namespace Aion_Launcher
             MethodInvoker image = () => statusLabel.Image = Properties.Resources.save;
             statusStrip1.BeginInvoke(image);
 
-            Thread.Sleep(2000);
+            Thread.Sleep(1500);
 
             Thread ar = new Thread(autoUpd_restart);
             ar.Start();
@@ -1176,13 +1176,7 @@ namespace Aion_Launcher
             if (passwordTextBox.Text != translate.password)
             {
                 eyeButton.Enabled = true;
-                passwordTextBox.UseSystemPasswordChar = true;
-                eyeButton.BackColor = Color.White;
-
-
             }
-
-
 
             if (string.IsNullOrEmpty(passwordTextBox.Text))
             {
@@ -1210,14 +1204,20 @@ namespace Aion_Launcher
             comboindex = emailComboBox.SelectedIndex;
             passwordTextBox.Text = ini.Read("password" + comboindex, "Password");
             passwordTextBox.ForeColor = Color.Black;
-            rememberCheckBox.Checked = false;
+            //rememberCheckBox.Checked = false;
 
-            if (passwordTextBox.Text != translate.password && emailComboBox.Text != translate.email && passwordTextBox.Text != "" && emailComboBox.Text != "")
+            //if (passwordTextBox.Text != translate.password && emailComboBox.Text != translate.email && passwordTextBox.Text != "" && emailComboBox.Text != "")
+            //{
+            ps.account = comboindex;
+            ps.Save();
+            //}
+
+
+            if (eyeButton.BackColor == Color.White/*passwordTextBox.Text != translate.password && emailComboBox.Text != translate.email && */)
             {
-                ps.account = comboindex;
-                ps.Save();
+                //MessageBox.Show("color");
+                passwordTextBox.UseSystemPasswordChar = true;
             }
-
         }
 
         private void comboBox1_TextChanged(object sender, EventArgs e)
@@ -1257,6 +1257,11 @@ namespace Aion_Launcher
         private void emailComboBox_Leave(object sender, EventArgs e)
         {
             toolTip1.Hide(emailComboBox);
+        }
+
+        private void Form1_Click(object sender, EventArgs e)
+        {
+            statusStrip1.Focus();
         }
     }
 }
