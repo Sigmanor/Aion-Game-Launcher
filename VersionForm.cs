@@ -5,10 +5,10 @@ using System.Windows.Forms;
 
 namespace Aion_Launcher
 {
-    public partial class Version_Info : Form
+    public partial class VersionForm : Form
     {
         Properties.Settings ps = Properties.Settings.Default;
-        public Version_Info()
+        public VersionForm()
         {
             InitializeComponent();
         }
