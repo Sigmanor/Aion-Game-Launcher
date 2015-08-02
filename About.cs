@@ -15,18 +15,7 @@ namespace Aion_Launcher
         private void About_Load(object sender, EventArgs e)
         {
         	Version vrs = new Version(Application.ProductVersion);
-            VersionLabel.Text = string.Format("v{0}.{1}", vrs.Major, vrs.Minor/*, vrs.Build*/);
-        }
-
-        private void VersionLabel_Click(object sender, EventArgs e)
-        {
-            Version_Info v = new Version_Info();
-            v.ShowDialog();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://www.visualstudio.com/products/visual-studio-community-vs");
+            VersionLabel.Text = string.Format("{0}.{1}", vrs.Major, vrs.Minor/*, vrs.Build*/);
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -36,7 +25,7 @@ namespace Aion_Launcher
 
         private void label5_Click(object sender, EventArgs e)
         {
-            Process.Start("http://sigmanor.tk/aion-game-launcher/");         
+            Process.Start("http://sigmanor.pp.ua/aion-game-launcher/");         
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -68,6 +57,27 @@ namespace Aion_Launcher
             {
                 this.Close();
             }
+        }
+
+        private void label6_Click_1(object sender, EventArgs e)
+        {
+            VersionForm v = new VersionForm();
+            v.ShowDialog();
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://wyday.com/vistamenu/");
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/Sigmanor/Aion-Game-Launcher");
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {    
+            Process.Start("http://www.codeproject.com/Articles/20917/Creating-a-Custom-Settings-Provider");
         }
     }
 }

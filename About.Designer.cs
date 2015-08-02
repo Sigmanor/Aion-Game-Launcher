@@ -31,174 +31,228 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.VersionLabel = new System.Windows.Forms.Label();
             this.CopyRightLabel = new System.Windows.Forms.Label();
             this.ProductNameLabel = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.OkBtn = new Aion_Launcher.GButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = global::Aion_Launcher.Properties.Resources.ai_eye2;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox1, resources.GetString("pictureBox1.ToolTip"));
             this.pictureBox1.Click += new System.EventHandler(this.PictureBox1Click);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.VersionLabel);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.CopyRightLabel);
-            this.panel1.Controls.Add(this.ProductNameLabel);
-            this.panel1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label2.Name = "label2";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label7.ForeColor = System.Drawing.Color.SteelBlue;
             this.label7.Name = "label7";
+            this.toolTip1.SetToolTip(this.label7, resources.GetString("label7.ToolTip"));
             this.label7.Click += new System.EventHandler(this.label7_Click);
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Name = "label3";
             // 
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label5.ForeColor = System.Drawing.Color.SteelBlue;
             this.label5.Name = "label5";
+            this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label6.ForeColor = System.Drawing.Color.Transparent;
             this.label6.Name = "label6";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
+            this.toolTip1.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
+            this.label6.Click += new System.EventHandler(this.label6_Click_1);
             // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
+            this.label4.ForeColor = System.Drawing.Color.Transparent;
             this.label4.Name = "label4";
+            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
             // 
             // VersionLabel
             // 
             resources.ApplyResources(this.VersionLabel, "VersionLabel");
-            this.VersionLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.VersionLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.VersionLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.VersionLabel.ForeColor = System.Drawing.Color.Transparent;
             this.VersionLabel.Name = "VersionLabel";
-            this.VersionLabel.Click += new System.EventHandler(this.VersionLabel_Click);
+            this.toolTip1.SetToolTip(this.VersionLabel, resources.GetString("VersionLabel.ToolTip"));
             // 
             // CopyRightLabel
             // 
             resources.ApplyResources(this.CopyRightLabel, "CopyRightLabel");
             this.CopyRightLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.CopyRightLabel.ForeColor = System.Drawing.Color.Transparent;
             this.CopyRightLabel.Name = "CopyRightLabel";
+            this.toolTip1.SetToolTip(this.CopyRightLabel, resources.GetString("CopyRightLabel.ToolTip"));
             // 
             // ProductNameLabel
             // 
             resources.ApplyResources(this.ProductNameLabel, "ProductNameLabel");
+            this.ProductNameLabel.ForeColor = System.Drawing.Color.Transparent;
             this.ProductNameLabel.Name = "ProductNameLabel";
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            this.toolTip1.SetToolTip(this.ProductNameLabel, resources.GetString("ProductNameLabel.ToolTip"));
             // 
             // timer1
             // 
             this.timer1.Interval = 120;
             this.timer1.Tick += new System.EventHandler(this.Timer1Tick);
             // 
-            // OkBtn
+            // label1
             // 
-            this.OkBtn.BackColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.OkBtn, "OkBtn");
-            this.OkBtn.ForeColor = System.Drawing.Color.White;
-            this.OkBtn.Image = null;
-            this.OkBtn.Name = "OkBtn";
-            this.OkBtn.TabStop = false;
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.ForeColor = System.Drawing.Color.Transparent;
+            this.label1.Name = "label1";
+            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.ForeColor = System.Drawing.Color.Transparent;
+            this.label8.Name = "label8";
+            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.ForeColor = System.Drawing.Color.Transparent;
+            this.label9.Name = "label9";
+            this.toolTip1.SetToolTip(this.label9, resources.GetString("label9.ToolTip"));
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label10.ForeColor = System.Drawing.Color.SteelBlue;
+            this.label10.Name = "label10";
+            this.toolTip1.SetToolTip(this.label10, resources.GetString("label10.ToolTip"));
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.ForeColor = System.Drawing.Color.Transparent;
+            this.label11.Name = "label11";
+            this.toolTip1.SetToolTip(this.label11, resources.GetString("label11.ToolTip"));
+            // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label12.ForeColor = System.Drawing.Color.SteelBlue;
+            this.label12.Name = "label12";
+            this.toolTip1.SetToolTip(this.label12, resources.GetString("label12.ToolTip"));
+            this.label12.Click += new System.EventHandler(this.label12_Click);
+            // 
+            // label13
+            // 
+            resources.ApplyResources(this.label13, "label13");
+            this.label13.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label13.ForeColor = System.Drawing.Color.Transparent;
+            this.label13.Name = "label13";
+            this.toolTip1.SetToolTip(this.label13, resources.GetString("label13.ToolTip"));
+            this.label13.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // label14
+            // 
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.ForeColor = System.Drawing.Color.Transparent;
+            this.label14.Name = "label14";
+            this.toolTip1.SetToolTip(this.label14, resources.GetString("label14.ToolTip"));
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.AutoEllipsis = true;
+            this.label15.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label15.ForeColor = System.Drawing.Color.SteelBlue;
+            this.label15.Name = "label15";
+            this.toolTip1.SetToolTip(this.label15, resources.GetString("label15.ToolTip"));
+            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // About
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.Controls.Add(this.VersionLabel);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.OkBtn);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.ProductNameLabel);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.CopyRightLabel);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "About";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.About_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.About_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label label3;
 
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label VersionLabel;
         private System.Windows.Forms.Label ProductNameLabel;
         private System.Windows.Forms.Label CopyRightLabel;
-        private GButton OkBtn;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
