@@ -37,7 +37,7 @@
             // 
             this.langComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.langComboBox.FormattingEnabled = true;
-            this.langComboBox.Location = new System.Drawing.Point(12, 12);
+            this.langComboBox.Location = new System.Drawing.Point(22, 21);
             this.langComboBox.Name = "langComboBox";
             this.langComboBox.Size = new System.Drawing.Size(136, 21);
             this.langComboBox.TabIndex = 1;
@@ -45,7 +45,7 @@
             // nextButton
             // 
             this.nextButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.nextButton.Location = new System.Drawing.Point(97, 41);
+            this.nextButton.Location = new System.Drawing.Point(107, 50);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(51, 23);
             this.nextButton.TabIndex = 2;
@@ -58,7 +58,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(159, 71);
+            this.ClientSize = new System.Drawing.Size(180, 89);
             this.Controls.Add(this.nextButton);
             this.Controls.Add(this.langComboBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
