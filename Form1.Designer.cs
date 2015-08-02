@@ -54,25 +54,37 @@
             this.pingStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pingTimer = new System.Windows.Forms.Timer(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.playButton = new System.Windows.Forms.Button();
-            this.eyeButton = new System.Windows.Forms.PictureBox();
-            this.emailComboBox = new System.Windows.Forms.ComboBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.webSiteButton = new Aion_Launcher.GButton();
             this.vkButton = new Aion_Launcher.GButton();
             this.scheduleButton = new Aion_Launcher.GButton();
             this.usefulButton = new Aion_Launcher.GButton();
+            this.pingTimer = new System.Windows.Forms.Timer(this.components);
+            this.playButton = new System.Windows.Forms.Button();
+            this.eyeButton = new System.Windows.Forms.PictureBox();
+            this.emailComboBox = new System.Windows.Forms.ComboBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.contextMenu1 = new System.Windows.Forms.ContextMenu();
+            this.settingsMenuItem = new System.Windows.Forms.MenuItem();
+            this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.menuItem5 = new System.Windows.Forms.MenuItem();
+            this.menuItem6 = new System.Windows.Forms.MenuItem();
+            this.documentationMenuItem = new System.Windows.Forms.MenuItem();
+            this.updatesMenuItem = new System.Windows.Forms.MenuItem();
+            this.aboutMenuItem = new System.Windows.Forms.MenuItem();
+            this.menuItem2 = new System.Windows.Forms.MenuItem();
+            this.exitMenuItem = new System.Windows.Forms.MenuItem();
+            this.vistaMenu1 = new wyDay.Controls.VistaMenu(this.components);
             this.SettingsMenu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eyeButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vistaMenu1)).BeginInit();
             this.SuspendLayout();
             // 
             // loginTextBox
@@ -82,7 +94,6 @@
             this.loginTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Tag = "Email";
-            this.loginTextBox.Enter += new System.EventHandler(this.LoginTextBox_Enter);
             // 
             // passwordTextBox
             // 
@@ -114,7 +125,7 @@
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.SettingsMenu.Name = "contextMenuStrip1";
-            this.SettingsMenu.OwnerItem = this.menuDropDownButton;
+            this.SettingsMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             // 
             // settingsToolStripMenuItem
             // 
@@ -177,6 +188,7 @@
             // 
             resources.ApplyResources(this.menuDropDownButton, "menuDropDownButton");
             this.menuDropDownButton.DropDown = this.SettingsMenu;
+            this.menuDropDownButton.Image = global::Aion_Launcher.Properties.Resources.draw_points;
             this.menuDropDownButton.Margin = new System.Windows.Forms.Padding(0, 2, 5, 0);
             this.menuDropDownButton.Name = "menuDropDownButton";
             // 
@@ -206,7 +218,8 @@
             this.pingStatusLabel,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3,
-            this.menuDropDownButton});
+            this.menuDropDownButton,
+            this.toolStripStatusLabel1});
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.Stretch = false;
@@ -259,6 +272,18 @@
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
             this.toolStripStatusLabel3.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.ActiveLinkColor = System.Drawing.Color.Black;
+            this.toolStripStatusLabel1.Image = global::Aion_Launcher.Properties.Resources.draw_points;
+            this.toolStripStatusLabel1.IsLink = true;
+            this.toolStripStatusLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.toolStripStatusLabel1.LinkColor = System.Drawing.Color.Black;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click_1);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -294,53 +319,6 @@
             this.panel2.Controls.Add(this.usefulButton);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
-            // 
-            // pingTimer
-            // 
-            this.pingTimer.Interval = 3000;
-            this.pingTimer.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            // 
-            // playButton
-            // 
-            this.playButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(7)))));
-            this.playButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.playButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(125)))), ((int)(((byte)(0)))));
-            this.playButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(175)))), ((int)(((byte)(64)))));
-            this.playButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(161)))), ((int)(((byte)(29)))));
-            resources.ApplyResources(this.playButton, "playButton");
-            this.playButton.ForeColor = System.Drawing.Color.White;
-            this.playButton.Name = "playButton";
-            this.playButton.UseVisualStyleBackColor = false;
-            this.playButton.Click += new System.EventHandler(this.playButton_Click);
-            // 
-            // eyeButton
-            // 
-            this.eyeButton.BackColor = System.Drawing.Color.White;
-            this.eyeButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.eyeButton.Image = global::Aion_Launcher.Properties.Resources.eo;
-            resources.ApplyResources(this.eyeButton, "eyeButton");
-            this.eyeButton.Name = "eyeButton";
-            this.eyeButton.TabStop = false;
-            this.eyeButton.Paint += new System.Windows.Forms.PaintEventHandler(this.eyeButton_Paint);
-            this.eyeButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.eyeButton_MouseDown);
-            this.eyeButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.eyeButton_MouseUp);
-            // 
-            // emailComboBox
-            // 
-            resources.ApplyResources(this.emailComboBox, "emailComboBox");
-            this.emailComboBox.FormattingEnabled = true;
-            this.emailComboBox.Name = "emailComboBox";
-            this.emailComboBox.Tag = "Email";
-            this.emailComboBox.DropDown += new System.EventHandler(this.emailComboBox_DropDown);
-            this.emailComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            this.emailComboBox.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
-            this.emailComboBox.Enter += new System.EventHandler(this.emailComboBox_Enter);
-            this.emailComboBox.Leave += new System.EventHandler(this.emailComboBox_Leave);
-            this.emailComboBox.MouseEnter += new System.EventHandler(this.emailComboBox_MouseEnter);
             // 
             // webSiteButton
             // 
@@ -382,6 +360,128 @@
             this.usefulButton.Name = "usefulButton";
             this.usefulButton.Click += new System.EventHandler(this.gButton3_Click);
             // 
+            // pingTimer
+            // 
+            this.pingTimer.Interval = 3000;
+            this.pingTimer.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // playButton
+            // 
+            this.playButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(7)))));
+            this.playButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.playButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(125)))), ((int)(((byte)(0)))));
+            this.playButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(175)))), ((int)(((byte)(64)))));
+            this.playButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(161)))), ((int)(((byte)(29)))));
+            resources.ApplyResources(this.playButton, "playButton");
+            this.playButton.ForeColor = System.Drawing.Color.White;
+            this.playButton.Name = "playButton";
+            this.playButton.UseVisualStyleBackColor = false;
+            this.playButton.Click += new System.EventHandler(this.playButton_Click);
+            // 
+            // eyeButton
+            // 
+            this.eyeButton.BackColor = System.Drawing.Color.White;
+            this.eyeButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.eyeButton.Image = global::Aion_Launcher.Properties.Resources.eo;
+            resources.ApplyResources(this.eyeButton, "eyeButton");
+            this.eyeButton.Name = "eyeButton";
+            this.eyeButton.TabStop = false;
+            this.eyeButton.Paint += new System.Windows.Forms.PaintEventHandler(this.eyeButton_Paint);
+            this.eyeButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.eyeButton_MouseDown);
+            this.eyeButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.eyeButton_MouseUp);
+            // 
+            // emailComboBox
+            // 
+            resources.ApplyResources(this.emailComboBox, "emailComboBox");
+            this.emailComboBox.FormattingEnabled = true;
+            this.emailComboBox.Name = "emailComboBox";
+            this.emailComboBox.Tag = "Email";
+            this.emailComboBox.DropDown += new System.EventHandler(this.emailComboBox_DropDown);
+            this.emailComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.emailComboBox.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
+            this.emailComboBox.Enter += new System.EventHandler(this.emailComboBox_Enter);
+            this.emailComboBox.Leave += new System.EventHandler(this.emailComboBox_Leave);
+            this.emailComboBox.MouseEnter += new System.EventHandler(this.emailComboBox_MouseEnter);
+            // 
+            // contextMenu1
+            // 
+            this.contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.settingsMenuItem,
+            this.menuItem4,
+            this.menuItem6,
+            this.menuItem2,
+            this.exitMenuItem});
+            this.contextMenu1.Collapse += new System.EventHandler(this.contextMenu1_Collapse);
+            // 
+            // settingsMenuItem
+            // 
+            this.vistaMenu1.SetImage(this.settingsMenuItem, global::Aion_Launcher.Properties.Resources.setting_tools);
+            this.settingsMenuItem.Index = 0;
+            resources.ApplyResources(this.settingsMenuItem, "settingsMenuItem");
+            this.settingsMenuItem.Click += new System.EventHandler(this.menuItem3_Click);
+            // 
+            // menuItem4
+            // 
+            this.vistaMenu1.SetImage(this.menuItem4, global::Aion_Launcher.Properties.Resources.application_view_icons);
+            this.menuItem4.Index = 1;
+            this.menuItem4.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem5});
+            resources.ApplyResources(this.menuItem4, "menuItem4");
+            // 
+            // menuItem5
+            // 
+            this.vistaMenu1.SetImage(this.menuItem5, ((System.Drawing.Image)(resources.GetObject("menuItem5.Image"))));
+            this.menuItem5.Index = 0;
+            resources.ApplyResources(this.menuItem5, "menuItem5");
+            this.menuItem5.Click += new System.EventHandler(this.menuItem5_Click);
+            // 
+            // menuItem6
+            // 
+            this.vistaMenu1.SetImage(this.menuItem6, global::Aion_Launcher.Properties.Resources.help);
+            this.menuItem6.Index = 2;
+            this.menuItem6.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.documentationMenuItem,
+            this.updatesMenuItem,
+            this.aboutMenuItem});
+            resources.ApplyResources(this.menuItem6, "menuItem6");
+            // 
+            // documentationMenuItem
+            // 
+            this.vistaMenu1.SetImage(this.documentationMenuItem, global::Aion_Launcher.Properties.Resources.document_image_ver);
+            this.documentationMenuItem.Index = 0;
+            resources.ApplyResources(this.documentationMenuItem, "documentationMenuItem");
+            this.documentationMenuItem.Click += new System.EventHandler(this.documentationMenuItem_Click);
+            // 
+            // updatesMenuItem
+            // 
+            this.vistaMenu1.SetImage(this.updatesMenuItem, global::Aion_Launcher.Properties.Resources.inbox_download);
+            this.updatesMenuItem.Index = 1;
+            resources.ApplyResources(this.updatesMenuItem, "updatesMenuItem");
+            this.updatesMenuItem.Click += new System.EventHandler(this.updatesMenuItem_Click);
+            // 
+            // aboutMenuItem
+            // 
+            this.vistaMenu1.SetImage(this.aboutMenuItem, global::Aion_Launcher.Properties.Resources.info_rhombus);
+            this.aboutMenuItem.Index = 2;
+            resources.ApplyResources(this.aboutMenuItem, "aboutMenuItem");
+            this.aboutMenuItem.Click += new System.EventHandler(this.aboutMenuItem_Click);
+            // 
+            // menuItem2
+            // 
+            this.menuItem2.Index = 3;
+            resources.ApplyResources(this.menuItem2, "menuItem2");
+            // 
+            // exitMenuItem
+            // 
+            this.vistaMenu1.SetImage(this.exitMenuItem, global::Aion_Launcher.Properties.Resources.door_out);
+            this.exitMenuItem.Index = 4;
+            resources.ApplyResources(this.exitMenuItem, "exitMenuItem");
+            this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
+            // 
+            // vistaMenu1
+            // 
+            this.vistaMenu1.ContainerControl = this;
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -400,18 +500,21 @@
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.Click += new System.EventHandler(this.Form1_Click);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.SettingsMenu.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.eyeButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vistaMenu1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -451,12 +554,23 @@
         private System.Windows.Forms.ToolStripStatusLabel pingStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
         private System.Windows.Forms.Timer pingTimer;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private GButton webSiteButton;
         private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.PictureBox eyeButton;
         private System.Windows.Forms.ComboBox emailComboBox;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.MenuItem settingsMenuItem;
+        private System.Windows.Forms.MenuItem menuItem2;
+        private System.Windows.Forms.MenuItem exitMenuItem;
+        private System.Windows.Forms.MenuItem menuItem4;
+        private System.Windows.Forms.MenuItem menuItem5;
+        private System.Windows.Forms.MenuItem menuItem6;
+        private System.Windows.Forms.MenuItem documentationMenuItem;
+        private System.Windows.Forms.MenuItem updatesMenuItem;
+        private System.Windows.Forms.MenuItem aboutMenuItem;
+        private wyDay.Controls.VistaMenu vistaMenu1;
+        private System.Windows.Forms.ContextMenu contextMenu1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

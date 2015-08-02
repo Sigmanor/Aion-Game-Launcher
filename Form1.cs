@@ -26,13 +26,13 @@ namespace Aion_Launcher
 
         public Form1(string[] args)
         {
+            InitializeComponent();
+
             if (!string.IsNullOrEmpty(ps.Language))
             {
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(ps.Language);
                 Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(ps.Language);
             }
-
-            InitializeComponent();
 
             arg = args;
             emailComboBox.ForeColor = Color.Gray;
@@ -53,6 +53,11 @@ namespace Aion_Launcher
 
             statusStrip1.Padding = new Padding(statusStrip1.Padding.Left,
             statusStrip1.Padding.Top, statusStrip1.Padding.Left, statusStrip1.Padding.Bottom);
+        }
+
+        private System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -87,68 +92,27 @@ namespace Aion_Launcher
             }
         }
 
-        private void LoginTextBox_Enter(object sender, EventArgs e)
-        {
-            Font font = new Font(loginTextBox.Font, FontStyle.Regular);
-            loginTextBox.Font = font;
-            loginTextBox.ForeColor = Color.Black;
 
-            if (loginTextBox.Text == translate.email)
-                loginTextBox.Clear();
-        }
-
-
-        #region multiaccounts
+        #region multiAccounts
         public void multiAccounts()
         {
             if (!File.Exists(ini.Path))
             {
                 ps.account = -1;
+                ps.accountCount = 0;
                 ps.Save();
-
-                ini.Write("login0", "1", "Login");
-                ini.Write("password0", "", "Password");
-
-                ini.Write("login1", "2", "Login");
-                ini.Write("password1", "", "Password");
-
-                ini.Write("login2", "3", "Login");
-                ini.Write("password2", "", "Password");
-
-                ini.Write("login3", "4", "Login");
-                ini.Write("password3", "", "Password");
-
-                ini.Write("login4", "5", "Login");
-                ini.Write("password4", "", "Password");
-
-                ini.Write("login5", "6", "Login");
-                ini.Write("password5", "", "Password");
-
-                ini.Write("login6", "7", "Login");
-                ini.Write("password6", "", "Password");
-
-                ini.Write("login7", "8", "Login");
-                ini.Write("password7", "", "Password");
-
-                ini.Write("login8", "9", "Login");
-                ini.Write("password8", "", "Password");
-
-                ini.Write("login9", "10", "Login");
-                ini.Write("password9", "", "Password");
             }
 
-            emailComboBox.Items.Add(ini.Read("login0", "Login"));
-            emailComboBox.Items.Add(ini.Read("login1", "Login"));
-            emailComboBox.Items.Add(ini.Read("login2", "Login"));
-            emailComboBox.Items.Add(ini.Read("login3", "Login"));
-            emailComboBox.Items.Add(ini.Read("login4", "Login"));
-            emailComboBox.Items.Add(ini.Read("login5", "Login"));
-            emailComboBox.Items.Add(ini.Read("login6", "Login"));
-            emailComboBox.Items.Add(ini.Read("login7", "Login"));
-            emailComboBox.Items.Add(ini.Read("login8", "Login"));
-            emailComboBox.Items.Add(ini.Read("login9", "Login"));
+            int g = -1;        
+
+            while (g != ps.accountCount)
+            {
+                g++;
+                emailComboBox.Items.Add(ini.Read("login" + g, "Login"));
+            }
         }
         #endregion
+
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -156,6 +120,12 @@ namespace Aion_Launcher
             {
                 if (passwordTextBox.Text != translate.password && emailComboBox.Text != translate.email /*&& passwordTextBox.Text != "" && emailComboBox.Text != ""*/)
                 {
+                    if (!ini.KeyExists("login" + comboindex.ToString(), "Login") && !string.IsNullOrEmpty(emailComboBox.Text))
+                    {
+                        ps.accountCount = emailComboBox.Items.Count;
+                        ps.Save();
+                    }
+
                     ini.Write("login" + comboindex, emailComboBox.Text, "Login");
 
                     ini.Write("password" + comboindex, passwordTextBox.Text, "Password");
@@ -165,19 +135,12 @@ namespace Aion_Launcher
                     multiAccounts();
 
                     ps.account = comboindex;
-                    ps.Checked = rememberCheckBox.Checked;
+                    rememberCheckBox.Enabled = false;
                     ps.Save();
 
                     Thread m = new Thread(multiAccountsThread);
                     m.Start();
                 }
-            }
-            if (rememberCheckBox.Checked == false)
-            {
-                //ps.Log = "";
-                //ps.Pass = "";
-                //ps.Checked = rememberCheckBox.Checked;
-                //ps.Save();
             }
 
         }
@@ -203,6 +166,16 @@ namespace Aion_Launcher
         private void Form1_Load(object sender, EventArgs e)
         {
             multiAccounts();
+
+            //var count = emailComboBox.Items.Count;
+
+            //MessageBox.Show(count.ToString());
+
+            //ContextMenu menu = new ContextMenu();
+            //menu.MenuItems.Add("Hello");
+            //menu.MenuItems.Add("-"); // yes, this makes a separator !!!
+            //menu.MenuItems.Add("World");
+            //ContextMenu = menu;
 
             CultureInfo cultureInfo = new CultureInfo(ps.Language);
             ChangeLanguage.Instance.localizeForm(this, cultureInfo);
@@ -242,22 +215,22 @@ namespace Aion_Launcher
                 passwordTextBox.Text = passwordTextBox.Tag.ToString();
             }
 
-            if (ps.Log != "" & ps.Pass != "")
-            {
-                ps.account = 0;
+            //if (ps.Log != "" & ps.Pass != "")
+            //{
+            //    ps.account = 0;
 
-                ini.Write("login" + ps.account, ps.Log, "Login");
-                ini.Write("password" + ps.account, ps.Pass, "Password");
+            //    ini.Write("login" + ps.account, ps.Log, "Login");
+            //    ini.Write("password" + ps.account, ps.Pass, "Password");
 
-                emailComboBox.Items.Clear();
+            //    emailComboBox.Items.Clear();
 
-                multiAccounts();
+            //    multiAccounts();
 
-                ps.Log = "";
-                ps.Pass = "";
+            //    ps.Log = "";
+            //    ps.Pass = "";
 
-                ps.Save();
-            }
+            //    ps.Save();
+            //}
 
             if (ps.account != -1)
             {
@@ -338,10 +311,9 @@ namespace Aion_Launcher
                     File.Delete(f);
                 }
 
-                Version_Info v = new Version_Info();
+                VersionForm v = new VersionForm();
                 v.ShowDialog();
             }
-            //statusStrip1.Focus();
         }
 
         public void ServerStatusCheck()
@@ -491,26 +463,7 @@ namespace Aion_Launcher
                 if (ps.Monitoring == 0)
                 {
                     site = "http://aionstatus.net/";
-                }
 
-                if (ps.Monitoring == 1)
-                {
-                    site = "http://aion.im/status/status.php";
-                }
-
-                if (ps.Monitoring == 2)
-                {
-                    site = "http://aion.mouseclic.com/tool/status/";
-                }
-
-                req = (HttpWebRequest)WebRequest.Create(site);
-                resp = (HttpWebResponse)req.GetResponse();
-                sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("windows-1251"));
-                C = sr.ReadToEnd();
-                sr.Close();
-
-                if (ps.Monitoring == 0)
-                {
                     IS = "Online</font></td><td><a href=\"fav.php?favorite=Israphel";
                     KR = "Online</font></td><td><a href=\"fav.php?favorite=Kahrun";
                     SL = "Online</font></td><td><a href=\"fav.php?favorite=Siel";
@@ -520,6 +473,8 @@ namespace Aion_Launcher
 
                 if (ps.Monitoring == 1)
                 {
+                    site = "http://aion.im/status/status.php";
+
                     IS = "class=\"lang-na\"></span>Israphel<span class=\"status-1\">";
                     KR = "class=\"lang-na\"></span>Kahrun<span class=\"status-1\">";
                     SL = "class=\"lang-na\"></span>Siel<span class=\"status-1\">";
@@ -529,6 +484,8 @@ namespace Aion_Launcher
 
                 if (ps.Monitoring == 2)
                 {
+                    site = "http://aion.mouseclic.com/tool/status/";
+
                     IS = "online.png\" /> Israphel";
                     KR = "online.png\" /> Kahrun";
                     SL = "online.png\" /> Siel";
@@ -536,8 +493,15 @@ namespace Aion_Launcher
                     LG = "online.png\" /> Login(NA)";
                 }
 
+                req = (HttpWebRequest)WebRequest.Create(site);
+                resp = (HttpWebResponse)req.GetResponse();
+                sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("windows-1251"));
+                C = sr.ReadToEnd();
+                sr.Close();
+
                 Bitmap on = Properties.Resources.bullet_green;
                 Bitmap off = Properties.Resources.bullet_red;
+
                 if (InvokeRequired)
                 {
                     if (ps.SCCB == "Israphel")
@@ -761,50 +725,40 @@ namespace Aion_Launcher
             pingStatusLabel.Text = translate.pingString + pingResponse.RoundtripTime.ToString() + translate.msString;
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            //if (CheckForInternetConnection() == true)
-            //{
-            //    try
-            //    {
-            //        SendPing();
-            //        //pingStatusLabel.Text = pingStringFix + new Ping().Send("64.25.35.103").RoundtripTime.ToString() + msStringFix;
-            //    }
-            //    catch (PingException)
-            //    {
-            //        return;
-            //    }
-            //    catch (System.ComponentModel.Win32Exception)
-            //    {
-            //        return;
-            //    }
-            //}
-        }
-
         #endregion
 
         #region Мультиаккаунты
 
         private void multiAccountsThread()
         {
-            MethodInvoker islink = () => statusLabel.IsLink = false;
-            statusStrip1.BeginInvoke(islink);
-            MethodInvoker font = () => statusLabel.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-            statusStrip1.Invoke(font);
-            MethodInvoker color = () => statusLabel.ForeColor = Color.Black;
-            statusStrip1.BeginInvoke(color);
-            MethodInvoker text = () => statusLabel.Text = translate.savingText;
-            statusStrip1.Invoke(text);
-            MethodInvoker image = () => statusLabel.Image = Properties.Resources.save;
-            statusStrip1.BeginInvoke(image);
+            try
+            {
+                MethodInvoker islink = () => statusLabel.IsLink = false;
+                statusStrip1.BeginInvoke(islink);
+                MethodInvoker font = () => statusLabel.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+                statusStrip1.Invoke(font);
+                MethodInvoker color = () => statusLabel.ForeColor = Color.Black;
+                statusStrip1.BeginInvoke(color);
+                MethodInvoker text = () => statusLabel.Text = translate.savingText;
+                statusStrip1.Invoke(text);
+                MethodInvoker image = () => statusLabel.Image = Properties.Resources.save;
+                statusStrip1.BeginInvoke(image);
 
-            Thread.Sleep(1500);
+                Thread.Sleep(1500);
 
-            Thread ar = new Thread(autoUpd_restart);
-            ar.Start();
+                Thread ar = new Thread(autoUpd_restart);
+                ar.Start();
 
-            MethodInvoker cb = () => rememberCheckBox.Checked = false;
-            statusStrip1.BeginInvoke(cb);
+                MethodInvoker check = () => rememberCheckBox.Checked = false;
+                statusStrip1.BeginInvoke(check);
+
+                MethodInvoker visible = () => rememberCheckBox.Enabled = true;
+                statusStrip1.BeginInvoke(visible);
+            }
+            catch 
+            {
+
+            }         
         }
 
         #endregion
@@ -842,21 +796,16 @@ namespace Aion_Launcher
 
         private void Form1_Activated(object sender, EventArgs e)
         {
-            if (Aion_Launcher.Settings.PubVar.toggle == true)
+            if (Settings.PubVar.toggle == true)
             {
-                if (Aion_Launcher.Settings.PubVar.langChange != ps.Language)
+                if (Settings.PubVar.langChange != ps.Language)
                 {
                     CultureInfo cultureInfo = new CultureInfo(ps.Language);
                     ChangeLanguage.Instance.localizeForm(this, cultureInfo);
-                    try
-                    {
-                        SendPing();
-                    }
-                    catch
-                    {
-                    }
-                    //if (ps.Log == "" & ps.Pass == "")
-                    if (ps.account == -1)
+
+                    try { SendPing(); } catch { }
+
+                    if (emailComboBox.Text == emailComboBox.Tag.ToString() && passwordTextBox.Text == passwordTextBox.Tag.ToString())
                     {
                         emailComboBox.Tag = translate.email;
                         emailComboBox.Text = emailComboBox.Tag.ToString();
@@ -864,7 +813,9 @@ namespace Aion_Launcher
                         passwordTextBox.Tag = translate.password;
                         passwordTextBox.Text = passwordTextBox.Tag.ToString();
                     }
+
                     this.Refresh();
+
                 }
 
                 if (CheckForInternetConnection() == true)
@@ -905,7 +856,7 @@ namespace Aion_Launcher
 
             }
 
-            Aion_Launcher.Settings.PubVar.toggle = false;
+            Settings.PubVar.toggle = false;
         }
 
         private void AutoUPDtimer_Tick(object sender, EventArgs e)
@@ -946,8 +897,7 @@ namespace Aion_Launcher
 
                     if (RemoteFileExists("https://github.com/Sigmanor/sigmanor.github.io/tree/master/soft/Aion-Game-Launcher/AionGameLauncher.exe"))
                     {
-                        Bitmap la = Properties.Resources.load_anim;
-                        statusLabel.Image = la;
+                        statusLabel.Image = Properties.Resources.load_anim;
                         statusLabel.Text = translate.processUpdate;
                         statusLabel.IsLink = false;
                         statusLabel.Font = new Font(statusLabel.Text, 8, FontStyle.Regular);
@@ -1079,7 +1029,7 @@ namespace Aion_Launcher
 
         private void документацияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("http://sigmanor.tk/aion-game-launcher/manual");
+            Process.Start("http://sigmanor.pp.ua/aion-game-launcher/manual");
         }
 
         private void официальныйЛаунчерToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -1178,6 +1128,11 @@ namespace Aion_Launcher
                 eyeButton.Enabled = true;
             }
 
+            if (passwordTextBox.Text == translate.password)
+            {
+                eyeButton.Enabled = false;
+            }
+
             if (string.IsNullOrEmpty(passwordTextBox.Text))
             {
                 eyeButton.BackColor = Color.White;
@@ -1201,22 +1156,19 @@ namespace Aion_Launcher
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboindex = emailComboBox.SelectedIndex;
-            passwordTextBox.Text = ini.Read("password" + comboindex, "Password");
-            passwordTextBox.ForeColor = Color.Black;
-            //rememberCheckBox.Checked = false;
-
-            //if (passwordTextBox.Text != translate.password && emailComboBox.Text != translate.email && passwordTextBox.Text != "" && emailComboBox.Text != "")
-            //{
-            ps.account = comboindex;
-            ps.Save();
-            //}
-
-
-            if (eyeButton.BackColor == Color.White/*passwordTextBox.Text != translate.password && emailComboBox.Text != translate.email && */)
+            if (passwordTextBox.Text != translate.password)
             {
-                //MessageBox.Show("color");
-                passwordTextBox.UseSystemPasswordChar = true;
+                comboindex = emailComboBox.SelectedIndex;
+                passwordTextBox.Text = ini.Read("password" + comboindex, "Password");
+                passwordTextBox.ForeColor = Color.Black;
+
+                ps.account = comboindex;
+                ps.Save();
+
+                if (eyeButton.BackColor == Color.White)
+                {
+                    passwordTextBox.UseSystemPasswordChar = true;
+                }
             }
         }
 
@@ -1263,6 +1215,84 @@ namespace Aion_Launcher
         {
             statusStrip1.Focus();
         }
+
+        private void exitMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void contextMenu1_Collapse(object sender, EventArgs e)
+        {
+            statusStrip1.ContextMenu = null;
+        }
+
+        private void toolStripStatusLabel1_Click_1(object sender, EventArgs e)
+        {
+            statusStrip1.ContextMenu = contextMenu1;
+
+            contextMenu1.Show(statusStrip1, new Point(510, 25));
+
+        }
+
+        private void menuItem3_Click(object sender, EventArgs e)
+        {
+            Settings Settings = new Settings();
+            Settings.ShowDialog();
+        }
+
+        private void menuItem5_Click(object sender, EventArgs e)
+        {
+            string p = "";
+
+            if (File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe"))
+            {
+                p = " (x86)";
+            }
+
+            if (File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe"))
+            {
+                p = "";
+            }
+
+            if ((File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) || (File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
+            {
+                Process pr = new Process();
+                pr.StartInfo.FileName = @"C:\Program Files" + p + @"\NCWest\NCLauncher\NCLauncher.exe";
+                pr.StartInfo.Arguments = @"/LauncherID:""NCWest"" /CompanyID:""12"" /GameID:""AION"" /LUpdateAddr:""updater.nclauncher.ncsoft.com""";
+                pr.Start();
+            }
+
+            if ((!File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) && (!File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
+            {
+                MessageBox.Show("The launcher is not installed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void aboutMenuItem_Click(object sender, EventArgs e)
+        {
+            About A = new About();
+            A.ShowDialog();
+        }
+
+        private void updatesMenuItem_Click(object sender, EventArgs e)
+        {
+            Thread u = new Thread(UpdateCheck);
+            u.Start();
+        }
+
+        private void documentationMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://sigmanor.pp.ua/aion-game-launcher/manual");
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                documentationMenuItem_Click(this, new EventArgs());
+            }
+        }
+
     }
 }
 

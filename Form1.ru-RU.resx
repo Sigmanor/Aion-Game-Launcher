@@ -313,20 +313,11 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Выход</value>
   </data>
-  <data name="menuDropDownButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACrSURBVDhPY6AaiI2N9YqIiPgfFhr6H0THxMTEQaUYQGxk
-        uejoaFOoFAKEh4f/P3jo6P/bd+7+371nP1ghVAqvHBxkZGT+37B56/9FS5b937hl23+QJqgUXjk4iIgI
-        /7991+7/Zy9c+r8DSEdGImzBJwcHdnZ2eWB/hoWBneji4lIHlWIAsZHlTExMYqFSKIAfiI2RsDAQwwCI
-        jSzHDcRUBqPROCyikTzAwAAARILs7QpCopUAAAAASUVORK5CYII=
-</value>
+  <data name="SettingsMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 98</value>
   </data>
   <data name="menuDropDownButton.Text" xml:space="preserve">
     <value>Меню</value>
-  </data>
-  <data name="SettingsMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 98</value>
   </data>
   <data name="notifyIcon1.BalloonTipText" xml:space="preserve">
     <value>Приложение свернуто в трей</value>
@@ -6560,7 +6551,7 @@
     <value>Запуск игры через:</value>
   </data>
   <data name="toolStripStatusLabel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 21</value>
+    <value>157, 21</value>
   </data>
   <data name="pingStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 21</value>
@@ -6579,6 +6570,12 @@
         7b7YaVPEamPOgOqtYd3SSeFYmul0rlcpnpyXgu4K0t6mq/wD5CiGgAIAIfkECQoAAAAsAAAAABAAEAAA
         AiyEj2nC7b7akSuKyXDE11ZvdWLmiQB1kiOZdifYailHvzBko5Kpq+HzUAgRBQA7AAAAAAAAAAAA
 </value>
+  </data>
+  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 21</value>
+  </data>
+  <data name="toolStripStatusLabel1.Text" xml:space="preserve">
+    <value>Меню</value>
   </data>
   <data name="webSiteButton.Text" xml:space="preserve">
     <value>Официальный Сайт</value>
@@ -12811,5 +12808,40 @@
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
+  </data>
+  <data name="settingsMenuItem.Text" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="menuItem5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABEklEQVQ4T52TT08CMRDF+4k5CWqUZHcN
+        q0YOGj8OF78Ie2gP9LQ9lUPTZJw/TKkLqOElv/TNm+FdAEP6fHmFP5jx4TnRwddmA5dEu0lZoRRcIy2+
+        uoB0UkC+pta5nHwpqA9qLu00LwXvqx4+EFU9Tz1B+lHw1nawbjr2pHXbcia+Q9+yr1UKUs7w/LiEHkk5
+        QUb6hyVnKSV+xWe+zZiRLwUx7uHp7p6J+4hzlPlWZnrZa364KwVhDNDMF8wYRqa5mTNj0B3N+HK+gIB5
+        KfA7L0e49N7DDtFCmo/7KkNKgbMOLOEsQq94x/MBK0jm8DP2WEAMw/B/tvRupUD/Dyfgd62efvfTEt1x
+        wW/Co5keTzHGmG+i0vhz8FpWywAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="menuItem5.Text" xml:space="preserve">
+    <value>Официальный лаунчер</value>
+  </data>
+  <data name="menuItem4.Text" xml:space="preserve">
+    <value>Дополнительно</value>
+  </data>
+  <data name="documentationMenuItem.Text" xml:space="preserve">
+    <value>Документация</value>
+  </data>
+  <data name="updatesMenuItem.Text" xml:space="preserve">
+    <value>Проверить обновления</value>
+  </data>
+  <data name="aboutMenuItem.Text" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="menuItem6.Text" xml:space="preserve">
+    <value>Помощь</value>
+  </data>
+  <data name="exitMenuItem.Text" xml:space="preserve">
+    <value>Выход</value>
   </data>
 </root>
