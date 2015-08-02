@@ -157,6 +157,10 @@
     <Compile Include="License.Designer.cs">
       <DependentUpon>License.cs</DependentUpon>
     </Compile>
+    <Compile Include="OwnerDrawnMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PortableSettingsProvider.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -187,12 +191,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>translate.ru-RU.resx</DependentUpon>
     </Compile>
-    <Compile Include="Version_Info.cs">
+    <Compile Include="VersionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Version_Info.Designer.cs">
-      <DependentUpon>Version_Info.cs</DependentUpon>
+    <Compile Include="VersionForm.Designer.cs">
+      <DependentUpon>VersionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="VistaMenu.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -238,11 +243,11 @@
       <LastGenOutput>translate.ru-RU.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Version_Info.resx">
-      <DependentUpon>Version_Info.cs</DependentUpon>
+    <EmbeddedResource Include="VersionForm.resx">
+      <DependentUpon>VersionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Version_Info.ru-RU.resx">
-      <DependentUpon>Version_Info.cs</DependentUpon>
+    <EmbeddedResource Include="VersionForm.ru-RU.resx">
+      <DependentUpon>VersionForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
