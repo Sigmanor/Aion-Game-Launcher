@@ -58,9 +58,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.seperator1 = new Aion_Launcher.Seperator();
             this.mainGroupBox.SuspendLayout();
             this.extendedGroupBox.SuspendLayout();
@@ -279,10 +276,6 @@
             this.panel1.Controls.Add(this.mainGroupBox);
             this.panel1.Name = "panel1";
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            // 
             // seperator1
             // 
             this.seperator1.BackColor = System.Drawing.Color.Transparent;
@@ -293,7 +286,7 @@
             resources.ApplyResources(this.seperator1, "seperator1");
             this.seperator1.Name = "seperator1";
             // 
-            // Settings
+            // SettingsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -305,9 +298,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Settings";
+            this.Name = "SettingsForm";
             this.ShowInTaskbar = false;
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.Settings_Load);
             this.Shown += new System.EventHandler(this.Settings_Shown);
             this.mainGroupBox.ResumeLayout(false);
@@ -318,9 +310,6 @@
             this.ResumeLayout(false);
 
         }
-        private System.ComponentModel.BackgroundWorker backgroundWorker3;
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
 
         #endregion
 

@@ -10,7 +10,8 @@ namespace Aion_Launcher
 {
     public partial class Settings : Form
     {
-        string path = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath.ToString();
+        //string path = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath.ToString();
+
         Properties.Settings ps = Properties.Settings.Default;
 
         public class PubVar
@@ -42,7 +43,6 @@ namespace Aion_Launcher
 
             protected override void OnPaint(PaintEventArgs e)
             {
-                //get the text size in groupbox
                 Size tSize = TextRenderer.MeasureText(this.Text, this.Font);
 
                 Rectangle borderRect = e.ClipRectangle;
@@ -66,7 +66,7 @@ namespace Aion_Launcher
             fastStart.Checked = ps.Priority;
             textBox3.Text = ps.Extra;
             checkBox1.Checked = ps.AutoUPD;
-            textBox2.Text = path;
+            textBox2.Text = Environment.CurrentDirectory + @"\aion-game-launcher.settings";
             textBox1.Text = ps.GamePath;
             ServerComboBox.Text = ps.SCCB;
             comboBox2.SelectedIndex = ps.Monitoring;
@@ -81,17 +81,6 @@ namespace Aion_Launcher
             languageComboBox.DisplayMember = "NativeName";
             languageComboBox.ValueMember = "Name";
 
-            //string language = "";
-            //if (ps.Language == "ru-RU")
-            //{
-            //    language = "Русский";
-            //}
-
-            //if (ps.Language == "en-US")
-            //{
-            //    language = "English";
-            //}
-
             if (!String.IsNullOrEmpty(ps.Language))
             {
                 languageComboBox.SelectedValue = ps.Language;
@@ -101,17 +90,6 @@ namespace Aion_Launcher
 
         private void SaveSettingsButton_Click(object sender, EventArgs e)
         {
-            //string language = "";
-            //if (languageComboBox.Text == "Русский")
-            //{
-            //    language = "ru-RU";
-            //}
-
-            //if (languageComboBox.Text == "English")
-            //{
-            //    language = "en-US";
-            //}
-
             ps.Capacity = comboBox1.SelectedIndex;
             ps.Tray = trayCheckBox.Checked;
             ps.Priority = fastStart.Checked;
@@ -134,16 +112,6 @@ namespace Aion_Launcher
                 Application.Restart();
             }
 
-            //if (PubVar.langChange != ps.Language)
-            //{
-            //    DialogResult result = MessageBox.Show(translate.needToRestartText, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            //    if (result == DialogResult.Yes)
-            //    {
-            //        Application.Restart();
-            //    }
-            //}
-
             this.Visible = false;
         }
 
@@ -160,16 +128,20 @@ namespace Aion_Launcher
 
             if (result == DialogResult.Yes)
             {
-                Properties.Settings.Default.Reset();
-                Settings_Load(this, new EventArgs());  
+                File.Delete("aion-game-launcher.settings");
+                Application.Restart();
             }                 
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            label3.Focus();
-            string folder = path.Remove(path.LastIndexOf(@"\user.config"));
-            Process.Start(folder);
+            try
+            {
+                label3.Focus();
+                string folder = Environment.CurrentDirectory + @"\aion-game-launcher.settings";
+                Process.Start("explorer.exe", string.Format("/select,\"{0}\"", folder));
+            }
+            catch { }       
         }
 
         private void fastStart_CheckedChanged(object sender, EventArgs e)
