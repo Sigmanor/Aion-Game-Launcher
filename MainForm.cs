@@ -12,7 +12,7 @@ using System.Globalization;
 
 namespace Aion_Launcher
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         int i;
         Properties.Settings ps = Properties.Settings.Default;
@@ -24,7 +24,7 @@ namespace Aion_Launcher
 
         IniFile ini = new IniFile();
 
-        public Form1(string[] args)
+        public MainForm(string[] args)
         {
             InitializeComponent();
 
@@ -46,7 +46,7 @@ namespace Aion_Launcher
 
             if (ps.License == 0)
             {
-                License l = new License();
+                LicenseForm l = new LicenseForm();
                 l.ShowDialog();
             }
 
@@ -766,7 +766,7 @@ namespace Aion_Launcher
 
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Settings Settings = new Settings();
+            SettingsForm Settings = new SettingsForm();
             Settings.ShowDialog();
         }
 
@@ -796,9 +796,9 @@ namespace Aion_Launcher
 
         private void Form1_Activated(object sender, EventArgs e)
         {
-            if (Settings.PubVar.toggle == true)
+            if (SettingsForm.PubVar.toggle == true)
             {
-                if (Settings.PubVar.langChange != ps.Language)
+                if (SettingsForm.PubVar.langChange != ps.Language)
                 {
                     CultureInfo cultureInfo = new CultureInfo(ps.Language);
                     ChangeLanguage.Instance.localizeForm(this, cultureInfo);
@@ -856,7 +856,7 @@ namespace Aion_Launcher
 
             }
 
-            Settings.PubVar.toggle = false;
+            SettingsForm.PubVar.toggle = false;
         }
 
         private void AutoUPDtimer_Tick(object sender, EventArgs e)
@@ -1023,7 +1023,7 @@ namespace Aion_Launcher
 
         private void aboutToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            About A = new About();
+            AboutForm A = new AboutForm();
             A.ShowDialog();
         }
 
@@ -1236,7 +1236,7 @@ namespace Aion_Launcher
 
         private void menuItem3_Click(object sender, EventArgs e)
         {
-            Settings Settings = new Settings();
+            SettingsForm Settings = new SettingsForm();
             Settings.ShowDialog();
         }
 
@@ -1270,7 +1270,7 @@ namespace Aion_Launcher
 
         private void aboutMenuItem_Click(object sender, EventArgs e)
         {
-            About A = new About();
+            AboutForm A = new AboutForm();
             A.ShowDialog();
         }
 

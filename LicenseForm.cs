@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace Aion_Launcher
 {
-    public partial class License : Form
+    public partial class LicenseForm : Form
     {
         Properties.Settings prop = Properties.Settings.Default;
 
-        public License()
+        public LicenseForm()
         {
             InitializeComponent();
             textBox1.GotFocus += delegate { textBox1.Select(2150, 2150); };

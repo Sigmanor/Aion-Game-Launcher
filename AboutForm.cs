@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace Aion_Launcher
 {
-    public partial class About : Form
+    public partial class AboutForm : Form
     {
-        public About()
+        public AboutForm()
         {
             InitializeComponent();
         }
@@ -30,7 +30,7 @@ namespace Aion_Launcher
 
         private void label6_Click(object sender, EventArgs e)
         {
-            License l = new License();
+            LicenseForm l = new LicenseForm();
             l.ShowDialog();
         }
 	     

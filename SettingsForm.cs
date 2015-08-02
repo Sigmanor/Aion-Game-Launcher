@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Aion_Launcher
 {
-    public partial class Settings : Form
+    public partial class SettingsForm : Form
     {
         //string path = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath.ToString();
 
@@ -20,7 +20,7 @@ namespace Aion_Launcher
             public static string langChange;
         }
 
-        public Settings()
+        public SettingsForm()
         {
             InitializeComponent();
         }

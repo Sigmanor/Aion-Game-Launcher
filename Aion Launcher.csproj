@@ -137,11 +137,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About.cs">
+    <Compile Include="AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="About.Designer.cs">
-      <DependentUpon>About.cs</DependentUpon>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ChangeLanguage.cs" />
     <Compile Include="IniFile.cs" />
@@ -151,11 +151,11 @@
     <Compile Include="LanguageForm.Designer.cs">
       <DependentUpon>LanguageForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="License.cs">
+    <Compile Include="LicenseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="License.Designer.cs">
-      <DependentUpon>License.cs</DependentUpon>
+    <Compile Include="LicenseForm.Designer.cs">
+      <DependentUpon>LicenseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OwnerDrawnMenu.cs">
       <SubType>Component</SubType>
@@ -166,17 +166,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs">
+    <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings.Designer.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
+    <Compile Include="SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -198,29 +198,29 @@
       <DependentUpon>VersionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="VistaMenu.cs" />
-    <EmbeddedResource Include="About.resx">
-      <DependentUpon>About.cs</DependentUpon>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="About.ru-RU.resx">
-      <DependentUpon>About.cs</DependentUpon>
+    <EmbeddedResource Include="AboutForm.ru-RU.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.ru-RU.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.ru-RU.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="LanguageForm.resx">
       <DependentUpon>LanguageForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="License.resx">
-      <DependentUpon>License.cs</DependentUpon>
+    <EmbeddedResource Include="LicenseForm.resx">
+      <DependentUpon>LicenseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="License.ru-RU.resx">
-      <DependentUpon>License.cs</DependentUpon>
+    <EmbeddedResource Include="LicenseForm.ru-RU.resx">
+      <DependentUpon>LicenseForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -228,11 +228,11 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings.resx">
-      <DependentUpon>Settings.cs</DependentUpon>
+    <EmbeddedResource Include="SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings.ru-RU.resx">
-      <DependentUpon>Settings.cs</DependentUpon>
+    <EmbeddedResource Include="SettingsForm.ru-RU.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="translate.resx">
       <Generator>ResXFileCodeGenerator</Generator>
