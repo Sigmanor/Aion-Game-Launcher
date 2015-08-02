@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace Aion_Launcher
 {
@@ -18,5 +16,7 @@ namespace Aion_Launcher
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1(args));
         }
+
+
     }
 }
