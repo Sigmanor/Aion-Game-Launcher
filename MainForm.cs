@@ -167,16 +167,6 @@ namespace Aion_Launcher
         {
             multiAccounts();
 
-            //var count = emailComboBox.Items.Count;
-
-            //MessageBox.Show(count.ToString());
-
-            //ContextMenu menu = new ContextMenu();
-            //menu.MenuItems.Add("Hello");
-            //menu.MenuItems.Add("-"); // yes, this makes a separator !!!
-            //menu.MenuItems.Add("World");
-            //ContextMenu = menu;
-
             CultureInfo cultureInfo = new CultureInfo(ps.Language);
             ChangeLanguage.Instance.localizeForm(this, cultureInfo);
 
