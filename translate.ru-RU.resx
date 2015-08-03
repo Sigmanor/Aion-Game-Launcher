@@ -129,6 +129,9 @@
   <data name="newVersion" xml:space="preserve">
     <value>Доступна новая версия!</value>
   </data>
+  <data name="noLauncherError" xml:space="preserve">
+    <value>Лаунчер не установлен</value>
+  </data>
   <data name="noUpd" xml:space="preserve">
     <value>Установлена последняя версия!</value>
   </data>

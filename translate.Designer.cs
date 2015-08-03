@@ -97,6 +97,15 @@ namespace Aion_Launcher {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на The launcher is not installed.
+        /// </summary>
+        internal static string noLauncherError {
+            get {
+                return ResourceManager.GetString("noLauncherError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на No update available!.
         /// </summary>
         internal static string noUpd {

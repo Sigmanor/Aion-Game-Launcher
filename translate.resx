@@ -129,6 +129,9 @@
   <data name="newVersion" xml:space="preserve">
     <value>New version is available!</value>
   </data>
+  <data name="noLauncherError" xml:space="preserve">
+    <value>The launcher is not installed</value>
+  </data>
   <data name="noUpd" xml:space="preserve">
     <value>No update available!</value>
   </data>
