@@ -33,17 +33,6 @@
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.rememberCheckBox = new System.Windows.Forms.CheckBox();
-            this.SettingsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.moreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.officialLauncherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.docsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.PriorityTimer = new System.Windows.Forms.Timer(this.components);
             this.AutoUPDtimer = new System.Windows.Forms.Timer(this.components);
@@ -59,10 +48,6 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.webSiteButton = new Aion_Launcher.GButton();
-            this.vkButton = new Aion_Launcher.GButton();
-            this.scheduleButton = new Aion_Launcher.GButton();
-            this.usefulButton = new Aion_Launcher.GButton();
             this.pingTimer = new System.Windows.Forms.Timer(this.components);
             this.playButton = new System.Windows.Forms.Button();
             this.eyeButton = new System.Windows.Forms.PictureBox();
@@ -78,8 +63,11 @@
             this.aboutMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.exitMenuItem = new System.Windows.Forms.MenuItem();
+            this.webSiteButton = new Aion_Launcher.GButton();
+            this.vkButton = new Aion_Launcher.GButton();
+            this.scheduleButton = new Aion_Launcher.GButton();
+            this.usefulButton = new Aion_Launcher.GButton();
             this.vistaMenu1 = new wyDay.Controls.VistaMenu(this.components);
-            this.SettingsMenu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -115,83 +103,6 @@
             this.rememberCheckBox.UseVisualStyleBackColor = false;
             this.rememberCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // SettingsMenu
-            // 
-            resources.ApplyResources(this.SettingsMenu, "SettingsMenu");
-            this.SettingsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.settingsToolStripMenuItem,
-            this.moreToolStripMenuItem,
-            this.helpToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.exitToolStripMenuItem});
-            this.SettingsMenu.Name = "contextMenuStrip1";
-            this.SettingsMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            // 
-            // settingsToolStripMenuItem
-            // 
-            resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.настройкиToolStripMenuItem_Click);
-            // 
-            // moreToolStripMenuItem
-            // 
-            this.moreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.officialLauncherToolStripMenuItem});
-            resources.ApplyResources(this.moreToolStripMenuItem, "moreToolStripMenuItem");
-            this.moreToolStripMenuItem.Name = "moreToolStripMenuItem";
-            // 
-            // officialLauncherToolStripMenuItem
-            // 
-            resources.ApplyResources(this.officialLauncherToolStripMenuItem, "officialLauncherToolStripMenuItem");
-            this.officialLauncherToolStripMenuItem.Name = "officialLauncherToolStripMenuItem";
-            this.officialLauncherToolStripMenuItem.Click += new System.EventHandler(this.официальныйЛаунчерToolStripMenuItem_Click_1);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.docsToolStripMenuItem,
-            this.updatesToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            // 
-            // docsToolStripMenuItem
-            // 
-            resources.ApplyResources(this.docsToolStripMenuItem, "docsToolStripMenuItem");
-            this.docsToolStripMenuItem.Name = "docsToolStripMenuItem";
-            this.docsToolStripMenuItem.Click += new System.EventHandler(this.документацияToolStripMenuItem_Click);
-            // 
-            // updatesToolStripMenuItem
-            // 
-            resources.ApplyResources(this.updatesToolStripMenuItem, "updatesToolStripMenuItem");
-            this.updatesToolStripMenuItem.Name = "updatesToolStripMenuItem";
-            this.updatesToolStripMenuItem.Click += new System.EventHandler(this.обновленияToolStripMenuItem_Click_1);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click_1);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
-            // 
-            // exitToolStripMenuItem
-            // 
-            resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
-            // 
-            // menuDropDownButton
-            // 
-            resources.ApplyResources(this.menuDropDownButton, "menuDropDownButton");
-            this.menuDropDownButton.DropDown = this.SettingsMenu;
-            this.menuDropDownButton.Image = global::Aion_Launcher.Properties.Resources.draw_points;
-            this.menuDropDownButton.Margin = new System.Windows.Forms.Padding(0, 2, 5, 0);
-            this.menuDropDownButton.Name = "menuDropDownButton";
-            // 
             // notifyIcon1
             // 
             this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
@@ -218,7 +129,6 @@
             this.pingStatusLabel,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3,
-            this.menuDropDownButton,
             this.toolStripStatusLabel1});
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.SizingGrip = false;
@@ -319,46 +229,6 @@
             this.panel2.Controls.Add(this.usefulButton);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
-            // 
-            // webSiteButton
-            // 
-            this.webSiteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.webSiteButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.webSiteButton, "webSiteButton");
-            this.webSiteButton.ForeColor = System.Drawing.Color.White;
-            this.webSiteButton.Image = null;
-            this.webSiteButton.Name = "webSiteButton";
-            this.webSiteButton.Click += new System.EventHandler(this.gButton1_Click);
-            // 
-            // vkButton
-            // 
-            this.vkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.vkButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.vkButton, "vkButton");
-            this.vkButton.ForeColor = System.Drawing.Color.White;
-            this.vkButton.Image = null;
-            this.vkButton.Name = "vkButton";
-            this.vkButton.Click += new System.EventHandler(this.gButton2_Click);
-            // 
-            // scheduleButton
-            // 
-            this.scheduleButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.scheduleButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.scheduleButton, "scheduleButton");
-            this.scheduleButton.ForeColor = System.Drawing.Color.White;
-            this.scheduleButton.Image = null;
-            this.scheduleButton.Name = "scheduleButton";
-            this.scheduleButton.Click += new System.EventHandler(this.gButton4_Click);
-            // 
-            // usefulButton
-            // 
-            this.usefulButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.usefulButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.usefulButton, "usefulButton");
-            this.usefulButton.ForeColor = System.Drawing.Color.White;
-            this.usefulButton.Image = null;
-            this.usefulButton.Name = "usefulButton";
-            this.usefulButton.Click += new System.EventHandler(this.gButton3_Click);
             // 
             // pingTimer
             // 
@@ -478,11 +348,55 @@
             resources.ApplyResources(this.exitMenuItem, "exitMenuItem");
             this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
+            // webSiteButton
+            // 
+            this.webSiteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.webSiteButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.webSiteButton, "webSiteButton");
+            this.webSiteButton.ForeColor = System.Drawing.Color.White;
+            this.webSiteButton.Image = null;
+            this.webSiteButton.Name = "webSiteButton";
+            this.toolTip1.SetToolTip(this.webSiteButton, resources.GetString("webSiteButton.ToolTip"));
+            this.webSiteButton.Click += new System.EventHandler(this.gButton1_Click);
+            // 
+            // vkButton
+            // 
+            this.vkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.vkButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.vkButton, "vkButton");
+            this.vkButton.ForeColor = System.Drawing.Color.White;
+            this.vkButton.Image = null;
+            this.vkButton.Name = "vkButton";
+            this.toolTip1.SetToolTip(this.vkButton, resources.GetString("vkButton.ToolTip"));
+            this.vkButton.Click += new System.EventHandler(this.gButton2_Click);
+            // 
+            // scheduleButton
+            // 
+            this.scheduleButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.scheduleButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.scheduleButton, "scheduleButton");
+            this.scheduleButton.ForeColor = System.Drawing.Color.White;
+            this.scheduleButton.Image = null;
+            this.scheduleButton.Name = "scheduleButton";
+            this.toolTip1.SetToolTip(this.scheduleButton, resources.GetString("scheduleButton.ToolTip"));
+            this.scheduleButton.Click += new System.EventHandler(this.gButton4_Click);
+            // 
+            // usefulButton
+            // 
+            this.usefulButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.usefulButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.usefulButton, "usefulButton");
+            this.usefulButton.ForeColor = System.Drawing.Color.White;
+            this.usefulButton.Image = null;
+            this.usefulButton.Name = "usefulButton";
+            this.toolTip1.SetToolTip(this.usefulButton, resources.GetString("usefulButton.ToolTip"));
+            this.usefulButton.Click += new System.EventHandler(this.gButton3_Click);
+            // 
             // vistaMenu1
             // 
             this.vistaMenu1.ContainerControl = this;
             // 
-            // Form1
+            // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -502,13 +416,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.Click += new System.EventHandler(this.Form1_Click);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            this.SettingsMenu.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -525,10 +438,7 @@
         private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.CheckBox rememberCheckBox;
-        private System.Windows.Forms.ContextMenuStrip SettingsMenu;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Timer PriorityTimer;
         private System.Windows.Forms.Timer AutoUPDtimer;
         private System.Windows.Forms.Panel panel2;
@@ -537,19 +447,11 @@
         private GButton usefulButton;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripDropDownButton menuDropDownButton;
         public System.Windows.Forms.StatusStrip statusStrip1;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         public System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem docsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem updatesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem moreToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem officialLauncherToolStripMenuItem;
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.ToolStripStatusLabel pingStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;

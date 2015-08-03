@@ -763,23 +763,11 @@ namespace Aion_Launcher
 
         #endregion
 
-
-        private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SettingsForm Settings = new SettingsForm();
-            Settings.ShowDialog();
-        }
-
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Visible = true;
             notifyIcon1.Visible = false;
             this.Opacity = 100;
-        }
-
-        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void PriorityTimer_Tick(object sender, EventArgs e)
@@ -1014,53 +1002,7 @@ namespace Aion_Launcher
                 notifyIcon1.ShowBalloonTip(30000);
             }
         }
-
-        private void обновленияToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            Thread u = new Thread(UpdateCheck);
-            u.Start();
-        }
-
-        private void aboutToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            AboutForm A = new AboutForm();
-            A.ShowDialog();
-        }
-
-        private void документацияToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://sigmanor.pp.ua/aion-game-launcher/manual");
-        }
-
-        private void официальныйЛаунчерToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            string p = "";
-
-            if (File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe"))
-            {
-                p = " (x86)";
-            }
-
-            if (File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe"))
-            {
-                p = "";
-            }
-
-            if ((File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) || (File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
-            {
-                Process pr = new Process();
-                pr.StartInfo.FileName = @"C:\Program Files" + p + @"\NCWest\NCLauncher\NCLauncher.exe";
-                pr.StartInfo.Arguments = @"/LauncherID:""NCWest"" /CompanyID:""12"" /GameID:""AION"" /LUpdateAddr:""updater.nclauncher.ncsoft.com""";
-                pr.Start();
-            }
-
-            if ((!File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) && (!File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
-            {
-                MessageBox.Show("The launcher is not installed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
+       
         void WebBrowser1NewWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
@@ -1156,19 +1098,16 @@ namespace Aion_Launcher
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (passwordTextBox.Text != translate.password)
+            comboindex = emailComboBox.SelectedIndex;
+            passwordTextBox.Text = ini.Read("password" + comboindex, "Password");
+            passwordTextBox.ForeColor = Color.Black;
+
+            ps.account = comboindex;
+            ps.Save();
+
+            if (eyeButton.BackColor == Color.White)
             {
-                comboindex = emailComboBox.SelectedIndex;
-                passwordTextBox.Text = ini.Read("password" + comboindex, "Password");
-                passwordTextBox.ForeColor = Color.Black;
-
-                ps.account = comboindex;
-                ps.Save();
-
-                if (eyeButton.BackColor == Color.White)
-                {
-                    passwordTextBox.UseSystemPasswordChar = true;
-                }
+                passwordTextBox.UseSystemPasswordChar = true;
             }
         }
 
@@ -1264,7 +1203,7 @@ namespace Aion_Launcher
 
             if ((!File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) && (!File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
             {
-                MessageBox.Show("The launcher is not installed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(translate.noLauncherError, translate.updFailedTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
