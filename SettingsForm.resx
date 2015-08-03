@@ -756,7 +756,7 @@
     <value>15</value>
   </data>
   <data name="mainGroupBox.Text" xml:space="preserve">
-    <value>Main</value>
+    <value>General</value>
   </data>
   <data name="&gt;&gt;mainGroupBox.Name" xml:space="preserve">
     <value>mainGroupBox</value>
@@ -915,7 +915,7 @@
     <value>16</value>
   </data>
   <data name="extendedGroupBox.Text" xml:space="preserve">
-    <value>Extended</value>
+    <value>Advanced</value>
   </data>
   <data name="&gt;&gt;extendedGroupBox.Name" xml:space="preserve">
     <value>extendedGroupBox</value>
