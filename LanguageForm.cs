@@ -31,7 +31,7 @@ namespace Aion_Launcher
             langComboBox.DisplayMember = "NativeName";
             langComboBox.ValueMember = "Name";
 
-            if (!String.IsNullOrEmpty(ps.Language) && ci.Name != "ru-RU")
+            if (!string.IsNullOrEmpty(ps.Language) && ci.Name != "ru-RU")
             {
                 langComboBox.SelectedValue = ps.Language;
             }
@@ -40,18 +40,22 @@ namespace Aion_Launcher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (langComboBox.Text == ("русский (Россия)") & !Directory.Exists("ru-RU"))
-            {
-                Directory.CreateDirectory("ru-RU");
-                File.WriteAllBytes(@".\ru-RU\Aion Game Launcher.resources.dll", Properties.Resources.ru);
-            }
-
             ps.LangCheck = true;
             ps.Language = langComboBox.SelectedValue.ToString();
             ps.Save();
             CultureInfo cultureInfo = new CultureInfo(ps.Language);
             ChangeLanguage.Instance.localizeForm(this, cultureInfo);
-            this.Close();
+
+            if (langComboBox.Text == ("русский (Россия)") & !Directory.Exists("ru-RU"))
+            {
+                Directory.CreateDirectory("ru-RU");
+                File.WriteAllBytes(@".\ru-RU\Aion Game Launcher.resources.dll", Properties.Resources.ru);
+                Application.Restart();
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
         private void LanguageForm_FormClosing(object sender, FormClosingEventArgs e)
