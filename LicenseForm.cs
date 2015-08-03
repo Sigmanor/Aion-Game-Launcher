@@ -5,7 +5,7 @@ namespace Aion_Launcher
 {
     public partial class LicenseForm : Form
     {
-        Properties.Settings prop = Properties.Settings.Default;
+        Properties.Settings ps = Properties.Settings.Default;
 
         public LicenseForm()
         {
@@ -23,8 +23,7 @@ namespace Aion_Launcher
 
         private void License_Load(object sender, EventArgs e)
         {
-            Properties.Settings prop = Properties.Settings.Default;
-            if (prop.License == 1)
+            if (ps.License == 1)
             {
                 textBox1.Height = 348;
                 seperator1.Visible = false;
@@ -40,18 +39,18 @@ namespace Aion_Launcher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            prop.License = 1;
-            prop.Save();
+            ps.License = 1;
+            ps.Save();
             this.Hide();
         }
 
         private void License_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (prop.License == 0)
+            if (ps.License == 0)
             {
                 e.Cancel = true;
             }
-            if (prop.License == 1)
+            if (ps.License == 1)
             {
                 e.Cancel = false;
             }
