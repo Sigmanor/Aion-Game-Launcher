@@ -196,7 +196,7 @@
             this.toolTip1.SetToolTip(this.label15, resources.GetString("label15.ToolTip"));
             this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
-            // About
+            // AboutForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -221,7 +221,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "About";
+            this.Name = "AboutForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));

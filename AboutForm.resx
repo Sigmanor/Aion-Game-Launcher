@@ -121,11 +121,15 @@
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 13</value>
   </data>
+  <data name="label7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 100</value>
   </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>VistaMenu:</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
@@ -140,8 +144,8 @@
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="label7.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -152,7 +156,6 @@
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
@@ -165,11 +168,11 @@
   <data name="&gt;&gt;VersionLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;timer1.Name" xml:space="preserve">
-    <value>timer1</value>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="CopyRightLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 8.25pt</value>
@@ -183,9 +186,6 @@
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 218</value>
   </data>
-  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="label11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
@@ -198,17 +198,8 @@
   <data name="&gt;&gt;label6.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 196</value>
-  </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;ProductNameLabel.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="ProductNameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 7</value>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
   </data>
   <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -221,6 +212,9 @@
   </data>
   <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="label1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="ProductNameLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 14.25pt, style=Bold</value>
@@ -237,20 +231,14 @@
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 8.25pt</value>
   </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <data name="label6.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>About</value>
   </data>
   <data name="ProductNameLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>License Agreement</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value>https://github.com/Sigmanor/Aion-Game-Launcher</value>
@@ -264,14 +252,14 @@
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
   </data>
-  <data name="label15.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Consolas, 8.25pt, style=Bold, Underline</value>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
   </data>
   <data name="label13.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="CopyRightLabel.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;ProductNameLabel.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 13</value>
@@ -367,9 +355,6 @@
         AH//AAD//4AB///AA///4Af///AP///4H/8=
 </value>
   </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -382,9 +367,6 @@
   <data name="ProductNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
   <data name="VersionLabel.Text" xml:space="preserve">
     <value>1.0</value>
   </data>
@@ -393,6 +375,9 @@
   </data>
   <data name="&gt;&gt;label11.Name" xml:space="preserve">
     <value>label11</value>
+  </data>
+  <data name="label12.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Consolas, 8.25pt, style=Bold, Underline</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>http://sigmanor.pp.ua/aion-game-launcher/</value>
@@ -406,7 +391,13 @@
   <data name="label13.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="label5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="VersionLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CopyRightLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;label12.Parent" xml:space="preserve">
@@ -415,8 +406,14 @@
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>AutoSize</value>
   </data>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="label13.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;ProductNameLabel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -424,8 +421,14 @@
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
   </data>
+  <data name="label10.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
   </data>
   <data name="label12.Text" xml:space="preserve">
     <value>http://wyday.com/vistamenu/</value>
@@ -436,20 +439,23 @@
   <data name="&gt;&gt;CopyRightLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="label15.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Consolas, 8.25pt, style=Bold, Underline</value>
+  </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 13</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Icons:</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 175</value>
   </data>
-  <data name="label8.ToolTip" xml:space="preserve">
-    <value />
+  <data name="CopyRightLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 153</value>
@@ -464,10 +470,7 @@
     <value>1</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>About</value>
-  </data>
-  <data name="&gt;&gt;label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>AboutForm</value>
   </data>
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -487,6 +490,9 @@
   <data name="ProductNameLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="label8.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
@@ -496,20 +502,17 @@
   <data name="&gt;&gt;label11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Consolas, 8.25pt</value>
+  <data name="label4.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;VersionLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 14</value>
-  </data>
   <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 8.25pt, style=Bold, Underline</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>VistaMenu:</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 102</value>
@@ -520,26 +523,29 @@
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>56, 102</value>
   </data>
+  <data name="&gt;&gt;label14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="label4.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="&gt;&gt;VersionLabel.Name" xml:space="preserve">
     <value>VersionLabel</value>
-  </data>
-  <data name="&gt;&gt;label13.Name" xml:space="preserve">
-    <value>label13</value>
   </data>
   <data name="&gt;&gt;label14.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ProductNameLabel.Name" xml:space="preserve">
     <value>ProductNameLabel</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
   </data>
   <data name="label12.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -556,38 +562,26 @@
   <data name="label15.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;VersionLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CopyRightLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;timer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>49, 124</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>External libraries:</value>
+  <data name="pictureBox1.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+  <data name="CopyRightLabel.Text" xml:space="preserve">
+    <value>developed by Sigmanor</value>
   </data>
-  <data name="CopyRightLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
   </data>
+  <data name="CopyRightLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
   <data name="&gt;&gt;label12.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 175</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>http://www.fatcow.com/free-icons</value>
@@ -598,14 +592,17 @@
   <data name="label9.Text" xml:space="preserve">
     <value>Github:</value>
   </data>
-  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="&gt;&gt;label12.Name" xml:space="preserve">
     <value>label12</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;timer1.Name" xml:space="preserve">
+    <value>timer1</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 13</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -628,7 +625,7 @@
   <data name="ProductNameLabel.Text" xml:space="preserve">
     <value>Aion Game Launcher</value>
   </data>
-  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;label9.Name" xml:space="preserve">
@@ -636,9 +633,6 @@
   </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;CopyRightLabel.ZOrder" xml:space="preserve">
-    <value>11</value>
   </data>
   <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -649,11 +643,17 @@
   <data name="label13.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 8.25pt, style=Bold, Underline</value>
   </data>
-  <data name="label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="label14.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;label7.Parent" xml:space="preserve">
     <value>$this</value>
@@ -670,14 +670,14 @@
   <data name="&gt;&gt;label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label11.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -688,11 +688,14 @@
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label12.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;label15.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="label5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 175</value>
   </data>
   <data name="&gt;&gt;label8.Name" xml:space="preserve">
     <value>label8</value>
@@ -709,35 +712,35 @@
   <data name="VersionLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="label6.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 218</value>
   </data>
-  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 14</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="label13.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;CopyRightLabel.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="VersionLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>191, 7</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label14.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Consolas, 8.25pt, style=Bold, Underline</value>
   </data>
-  <data name="pictureBox1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label1.Text" xml:space="preserve">
+    <value>External libraries:</value>
   </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
@@ -751,8 +754,8 @@
   <data name="label15.Text" xml:space="preserve">
     <value>http://www.codeproject.com/Articles/20917/Creating-a-Custom-Settings-Provider</value>
   </data>
-  <data name="label12.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;VersionLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 13</value>
@@ -760,17 +763,17 @@
   <data name="&gt;&gt;label10.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>239, 1</value>
   </data>
-  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="CopyRightLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 31</value>
   </data>
-  <data name="&gt;&gt;label14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label13.Text" xml:space="preserve">
+    <value>License Agreement</value>
   </data>
   <data name="VersionLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 14.25pt, style=Bold</value>
@@ -781,23 +784,26 @@
   <data name="label15.ToolTip" xml:space="preserve">
     <value>http://www.codeproject.com/Articles/20917/Creating-a-Custom-Settings-Provider</value>
   </data>
-  <data name="CopyRightLabel.Text" xml:space="preserve">
-    <value>developed by Sigmanor</value>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Consolas, 9pt</value>
+  </data>
+  <data name="label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>340, 237</value>
   </data>
-  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Consolas, 8.25pt, style=Bold, Underline</value>
+  <data name="&gt;&gt;ProductNameLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;label15.Name" xml:space="preserve">
+    <value>label15</value>
   </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
+  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="label12.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Consolas, 8.25pt, style=Bold, Underline</value>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 196</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>13</value>
@@ -805,11 +811,11 @@
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>66, 196</value>
   </data>
-  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Consolas, 9pt</value>
+  <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Consolas, 8.25pt</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;label14.Name" xml:space="preserve">
     <value>label14</value>
@@ -820,14 +826,11 @@
   <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 13</value>
   </data>
-  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="ProductNameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 7</value>
   </data>
-  <data name="CopyRightLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 31</value>
-  </data>
-  <data name="&gt;&gt;label15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label13.Name" xml:space="preserve">
+    <value>label13</value>
   </data>
   <data name="label14.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 8.25pt</value>
@@ -835,14 +838,11 @@
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 49</value>
   </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 13</value>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
-  </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 13</value>
@@ -850,8 +850,8 @@
   <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 8.25pt, style=Bold, Underline</value>
   </data>
-  <data name="label10.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;timer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 13</value>
@@ -859,8 +859,8 @@
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
   </data>
-  <data name="&gt;&gt;label15.Name" xml:space="preserve">
-    <value>label15</value>
+  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
     <value>$this</value>
@@ -868,17 +868,17 @@
   <data name="label14.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;ProductNameLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 68</value>
   </data>
-  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="VersionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 7</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Icons:</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -891,5 +891,8 @@
   </metadata>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>104, 16</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ru-RU</value>
   </metadata>
 </root>
