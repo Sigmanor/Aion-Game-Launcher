@@ -235,6 +235,7 @@ namespace Aion_Launcher.Properties {
         ///&lt;head&gt;
         ///    &lt;title&gt;&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///
         ///    &lt;style&gt;
         ///        html {
         ///            -ms-overflow-style: scrollbar;
@@ -258,7 +259,7 @@ namespace Aion_Launcher.Properties {
         ///        a,
         ///        a:active,
         ///        a:visited {
-        ///            color: #25519A;        /// [остаток строки не уместился]&quot;;.
+        ///            color: #25519A [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string historyen {
             get {
