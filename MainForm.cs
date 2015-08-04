@@ -599,8 +599,8 @@ namespace Aion_Launcher
                 int ver = Convert.ToInt32(version.Replace(".", ""));
 
                 string C;
-                string RS = "Wednesday";
-
+                string RS = "Tuesday";
+                //Wednesday
                 req = (HttpWebRequest)WebRequest.Create("http://24timezones.com/usa_time/tx_galveston/texas_city.htm");
                 resp = (HttpWebResponse)req.GetResponse();
                 sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("UTF-8"));
@@ -778,8 +778,25 @@ namespace Aion_Launcher
             {
                 if (SettingsForm.PubVar.langChange != ps.Language)
                 {
+
                     CultureInfo cultureInfo = new CultureInfo(ps.Language);
-                    ChangeLanguage.Instance.localizeForm(this, cultureInfo);
+
+                    if (statusLabel.Text == translate.newVersion)
+                    {
+                        ChangeLanguage.Instance.localizeForm(this, cultureInfo);
+                        statusLabel.Text = translate.newVersion;
+                    }
+
+                    if (statusLabel.Text == translate.serverRestart)
+                    {
+                        ChangeLanguage.Instance.localizeForm(this, cultureInfo);
+                        statusLabel.Text = translate.serverRestart;
+                    }
+
+                    if (statusLabel.Text == translate.ready)
+                    {
+                        ChangeLanguage.Instance.localizeForm(this, cultureInfo);
+                    }
 
                     try { SendPing(); } catch { }
 
@@ -1160,7 +1177,6 @@ namespace Aion_Launcher
             statusStrip1.ContextMenu = contextMenu1;
 
             contextMenu1.Show(statusStrip1, new Point(510, 25));
-
         }
 
         private void menuItem3_Click(object sender, EventArgs e)
@@ -1222,6 +1238,16 @@ namespace Aion_Launcher
             }
         }
 
+        private void toolStripStatusLabel1_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.BackColor = SystemColors.ButtonFace;
+        }
+
+        private void toolStripStatusLabel1_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.BackColor = Color.FromArgb(213, 213, 213/*145, 201, 247*/);
+
+        }
     }
 }
 
