@@ -599,8 +599,8 @@ namespace Aion_Launcher
                 int ver = Convert.ToInt32(version.Replace(".", ""));
 
                 string C;
-                string RS = "Tuesday";
-                //Wednesday
+                string RS = "Wednesday";
+
                 req = (HttpWebRequest)WebRequest.Create("http://24timezones.com/usa_time/tx_galveston/texas_city.htm");
                 resp = (HttpWebResponse)req.GetResponse();
                 sr = new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding("UTF-8"));
