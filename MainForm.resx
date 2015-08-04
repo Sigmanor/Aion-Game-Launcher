@@ -118,34 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="loginTextBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8.25pt</value>
-  </data>
-  <data name="loginTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 250</value>
-  </data>
-  <data name="loginTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 21</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="loginTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="loginTextBox.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;loginTextBox.Name" xml:space="preserve">
-    <value>loginTextBox</value>
-  </data>
-  <data name="&gt;&gt;loginTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;loginTextBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;loginTextBox.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="passwordTextBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
   </data>
@@ -155,6 +127,7 @@
   <data name="passwordTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 21</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="passwordTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
   </data>
@@ -6475,7 +6448,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="toolStripStatusLabel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 21</value>
+    <value>188, 21</value>
   </data>
   <data name="pingStatusLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -6526,7 +6499,7 @@
     <value>TextBeforeImage</value>
   </data>
   <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 21</value>
+    <value>67, 21</value>
   </data>
   <data name="toolStripStatusLabel1.Text" xml:space="preserve">
     <value>Menu</value>
@@ -6535,7 +6508,7 @@
     <value>TopCenter</value>
   </data>
   <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 317</value>
+    <value>0, 314</value>
   </data>
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>587, 26</value>
@@ -6781,7 +6754,7 @@
     <value>NoControl</value>
   </data>
   <data name="playButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>481, 255</value>
+    <value>481, 253</value>
   </data>
   <data name="playButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 48</value>
@@ -6874,7 +6847,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>587, 343</value>
+    <value>587, 340</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 8.25pt</value>
@@ -13091,9 +13064,6 @@
         PihcXU9AaGlfR21zdkTQ2ONAg4aNHwAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP+/AACAAQAAgAEAAIAB
         AAAEIQAACAAAAAgQAAAQEAAAABAAAAggAAAAYQAAB8EAAIADAADABwAA6B8AAA==
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
