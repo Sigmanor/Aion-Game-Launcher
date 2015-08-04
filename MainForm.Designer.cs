@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.loginTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.rememberCheckBox = new System.Windows.Forms.CheckBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -48,6 +47,10 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.webSiteButton = new Aion_Launcher.GButton();
+            this.vkButton = new Aion_Launcher.GButton();
+            this.scheduleButton = new Aion_Launcher.GButton();
+            this.usefulButton = new Aion_Launcher.GButton();
             this.pingTimer = new System.Windows.Forms.Timer(this.components);
             this.playButton = new System.Windows.Forms.Button();
             this.eyeButton = new System.Windows.Forms.PictureBox();
@@ -63,10 +66,6 @@
             this.aboutMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.exitMenuItem = new System.Windows.Forms.MenuItem();
-            this.webSiteButton = new Aion_Launcher.GButton();
-            this.vkButton = new Aion_Launcher.GButton();
-            this.scheduleButton = new Aion_Launcher.GButton();
-            this.usefulButton = new Aion_Launcher.GButton();
             this.vistaMenu1 = new wyDay.Controls.VistaMenu(this.components);
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -74,14 +73,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.eyeButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vistaMenu1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // loginTextBox
-            // 
-            this.loginTextBox.BackColor = System.Drawing.SystemColors.Window;
-            resources.ApplyResources(this.loginTextBox, "loginTextBox");
-            this.loginTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.loginTextBox.Name = "loginTextBox";
-            this.loginTextBox.Tag = "Email";
             // 
             // passwordTextBox
             // 
@@ -190,9 +181,11 @@
             this.toolStripStatusLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.toolStripStatusLabel1.LinkColor = System.Drawing.Color.Black;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.toolStripStatusLabel1.Padding = new System.Windows.Forms.Padding(7, 0, 5, 0);
             resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click_1);
+            this.toolStripStatusLabel1.MouseEnter += new System.EventHandler(this.toolStripStatusLabel1_MouseEnter);
+            this.toolStripStatusLabel1.MouseLeave += new System.EventHandler(this.toolStripStatusLabel1_MouseLeave);
             // 
             // toolStripSeparator1
             // 
@@ -229,6 +222,50 @@
             this.panel2.Controls.Add(this.usefulButton);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
+            // 
+            // webSiteButton
+            // 
+            this.webSiteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.webSiteButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.webSiteButton, "webSiteButton");
+            this.webSiteButton.ForeColor = System.Drawing.Color.White;
+            this.webSiteButton.Image = null;
+            this.webSiteButton.Name = "webSiteButton";
+            this.toolTip1.SetToolTip(this.webSiteButton, resources.GetString("webSiteButton.ToolTip"));
+            this.webSiteButton.Click += new System.EventHandler(this.gButton1_Click);
+            // 
+            // vkButton
+            // 
+            this.vkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.vkButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.vkButton, "vkButton");
+            this.vkButton.ForeColor = System.Drawing.Color.White;
+            this.vkButton.Image = null;
+            this.vkButton.Name = "vkButton";
+            this.toolTip1.SetToolTip(this.vkButton, resources.GetString("vkButton.ToolTip"));
+            this.vkButton.Click += new System.EventHandler(this.gButton2_Click);
+            // 
+            // scheduleButton
+            // 
+            this.scheduleButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.scheduleButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.scheduleButton, "scheduleButton");
+            this.scheduleButton.ForeColor = System.Drawing.Color.White;
+            this.scheduleButton.Image = null;
+            this.scheduleButton.Name = "scheduleButton";
+            this.toolTip1.SetToolTip(this.scheduleButton, resources.GetString("scheduleButton.ToolTip"));
+            this.scheduleButton.Click += new System.EventHandler(this.gButton4_Click);
+            // 
+            // usefulButton
+            // 
+            this.usefulButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.usefulButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.usefulButton, "usefulButton");
+            this.usefulButton.ForeColor = System.Drawing.Color.White;
+            this.usefulButton.Image = null;
+            this.usefulButton.Name = "usefulButton";
+            this.toolTip1.SetToolTip(this.usefulButton, resources.GetString("usefulButton.ToolTip"));
+            this.usefulButton.Click += new System.EventHandler(this.gButton3_Click);
             // 
             // pingTimer
             // 
@@ -348,50 +385,6 @@
             resources.ApplyResources(this.exitMenuItem, "exitMenuItem");
             this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
-            // webSiteButton
-            // 
-            this.webSiteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.webSiteButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.webSiteButton, "webSiteButton");
-            this.webSiteButton.ForeColor = System.Drawing.Color.White;
-            this.webSiteButton.Image = null;
-            this.webSiteButton.Name = "webSiteButton";
-            this.toolTip1.SetToolTip(this.webSiteButton, resources.GetString("webSiteButton.ToolTip"));
-            this.webSiteButton.Click += new System.EventHandler(this.gButton1_Click);
-            // 
-            // vkButton
-            // 
-            this.vkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.vkButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.vkButton, "vkButton");
-            this.vkButton.ForeColor = System.Drawing.Color.White;
-            this.vkButton.Image = null;
-            this.vkButton.Name = "vkButton";
-            this.toolTip1.SetToolTip(this.vkButton, resources.GetString("vkButton.ToolTip"));
-            this.vkButton.Click += new System.EventHandler(this.gButton2_Click);
-            // 
-            // scheduleButton
-            // 
-            this.scheduleButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.scheduleButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.scheduleButton, "scheduleButton");
-            this.scheduleButton.ForeColor = System.Drawing.Color.White;
-            this.scheduleButton.Image = null;
-            this.scheduleButton.Name = "scheduleButton";
-            this.toolTip1.SetToolTip(this.scheduleButton, resources.GetString("scheduleButton.ToolTip"));
-            this.scheduleButton.Click += new System.EventHandler(this.gButton4_Click);
-            // 
-            // usefulButton
-            // 
-            this.usefulButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.usefulButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.usefulButton, "usefulButton");
-            this.usefulButton.ForeColor = System.Drawing.Color.White;
-            this.usefulButton.Image = null;
-            this.usefulButton.Name = "usefulButton";
-            this.toolTip1.SetToolTip(this.usefulButton, resources.GetString("usefulButton.ToolTip"));
-            this.usefulButton.Click += new System.EventHandler(this.gButton3_Click);
-            // 
             // vistaMenu1
             // 
             this.vistaMenu1.ContainerControl = this;
@@ -410,7 +403,6 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.rememberCheckBox);
             this.Controls.Add(this.passwordTextBox);
-            this.Controls.Add(this.loginTextBox);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -434,8 +426,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.CheckBox rememberCheckBox;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
