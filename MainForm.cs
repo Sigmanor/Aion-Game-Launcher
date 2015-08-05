@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Globalization;
+using System.ComponentModel;
 
 namespace Aion_Launcher
 {
@@ -21,6 +22,8 @@ namespace Aion_Launcher
         AutoResetEvent resetEvent = new AutoResetEvent(false);
 
         public int comboindex = 0;
+
+        public int updStatus;
 
         IniFile ini = new IniFile();
 
@@ -54,30 +57,6 @@ namespace Aion_Launcher
             statusStrip1.Padding = new Padding(statusStrip1.Padding.Left,
             statusStrip1.Padding.Top, statusStrip1.Padding.Left, statusStrip1.Padding.Bottom);
         }
-
-        private System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        #region RemoteFileExists
-        private bool RemoteFileExists(string url)
-        {
-            try
-            {
-                HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
-                request.Method = "HEAD";
-                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
-                return (response.StatusCode == HttpStatusCode.OK);
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        #endregion
-
 
         private void PasswordTextBox_Enter(object sender, EventArgs e)
         {
@@ -169,6 +148,9 @@ namespace Aion_Launcher
 
             CultureInfo cultureInfo = new CultureInfo(ps.Language);
             ChangeLanguage.Instance.localizeForm(this, cultureInfo);
+
+            //Thread thread = new Thread(() => RemoteFileExists("https://github.com/Sigmanor/Aion-Game-Launcher/releases/download/v2.6/AionGameLauncher.exe"));
+            //thread.Start();
 
             Thread s = new Thread(ServerStatus);
             s.Start();
@@ -584,7 +566,6 @@ namespace Aion_Launcher
         {
             try
             {
-
                 WebClient client = new WebClient();
                 Stream stream = client.OpenRead("https://raw.githubusercontent.com/Sigmanor/sigmanor.github.io/master/soft/Aion-Game-Launcher/version");
                 StreamReader reader = new StreamReader(stream);
@@ -879,6 +860,41 @@ namespace Aion_Launcher
             }
         }
 
+        void downloader_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                Thread ar = new Thread(autoUpd_restart);
+                ar.Start();
+                File.Delete("aiongamelauncher.update");
+                MessageBox.Show(translate.updFailedText, translate.updFailedTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (e.Error == null)
+            {
+                string N = "agl_update.bat";
+                using (StreamWriter sw = new StreamWriter(N))
+                {
+                    sw.WriteLine(":first");
+                    sw.WriteLine("del \"Aion Game Launcher.exe\"");
+                    sw.WriteLine("if exist \"Aion Game Launcher.exe\" goto :first");
+                    sw.WriteLine("rename \"aiongamelauncher.update\" \"Aion Game Launcher.exe\"");
+                    sw.WriteLine("start \"\" \"Aion Game Launcher.exe\" upd");
+                    sw.WriteLine("del /q /f \"%~f0\" >nul 2>&1 & exit /b 0");
+                    sw.Close();
+                }
+
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                startInfo.FileName = N;
+
+                Process.Start(startInfo);
+
+                Application.Exit();
+            }
+
+        }
+
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
             WebClient webClient = new WebClient();
@@ -889,46 +905,15 @@ namespace Aion_Launcher
 
                 if (result == DialogResult.OK)
                 {
+                    statusLabel.Image = Properties.Resources.load_anim;
+                    statusLabel.Text = translate.processUpdate;
+                    statusLabel.IsLink = false;
+                    statusLabel.Font = new Font(statusLabel.Text, 8, FontStyle.Regular);
+                    statusLabel.ForeColor = Color.Black;
 
-                    if (RemoteFileExists("https://github.com/Sigmanor/sigmanor.github.io/tree/master/soft/Aion-Game-Launcher/AionGameLauncher.exe"))
-                    {
-                        statusLabel.Image = Properties.Resources.load_anim;
-                        statusLabel.Text = translate.processUpdate;
-                        statusLabel.IsLink = false;
-                        statusLabel.Font = new Font(statusLabel.Text, 8, FontStyle.Regular);
-                        statusLabel.ForeColor = Color.Black;
+                    webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(downloader_DownloadFileCompleted);
 
-                        webClient.DownloadFileCompleted += (s, bg) =>
-                        {
-                            string N = "agl_update.bat";
-                            using (StreamWriter sw = new StreamWriter(N))
-                            {
-                                sw.WriteLine(":first");
-                                sw.WriteLine("del \"Aion Game Launcher.exe\"");
-                                sw.WriteLine("if exist \"Aion Game Launcher.exe\" goto :first");
-                                sw.WriteLine("rename \"aiongamelauncher.update\" \"Aion Game Launcher.exe\"");
-                                sw.WriteLine("start \"\" \"Aion Game Launcher.exe\" upd");
-                                sw.WriteLine("del /q /f \"%~f0\" >nul 2>&1 & exit /b 0");
-                                sw.Close();
-                            }
-
-                            ProcessStartInfo startInfo = new ProcessStartInfo();
-                            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                            startInfo.FileName = N;
-
-                            Process.Start(startInfo);
-
-                            Application.Exit();
-                        };
-
-                        webClient.DownloadFileAsync(new Uri("https://github.com/Sigmanor/sigmanor.github.io/tree/master/soft/Aion-Game-Launcher/AionGameLauncher.exe"), "aiongamelauncher.update");
-                    }
-
-                    else
-                    {
-                        MessageBox.Show(translate.updFailedText, translate.updFailedTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
+                    webClient.DownloadFileAsync(new Uri("https://github.com/Sigmanor/Aion-Game-Launcher/releases/download/v2.6/AionGameLauncher.exe"), "aiongamelauncher.update");
                 }
             }
         }
@@ -945,8 +930,7 @@ namespace Aion_Launcher
 
         private void gButton3_Click(object sender, EventArgs e)
         {
-            Process.Start("http://aion.im");
-
+            Process.Start("http://aion.im");        
         }
 
         private void gButton4_Click(object sender, EventArgs e)
