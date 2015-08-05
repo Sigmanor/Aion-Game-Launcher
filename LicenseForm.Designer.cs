@@ -33,6 +33,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.seperator1 = new Aion_Launcher.Seperator();
+            this.seperator2 = new Aion_Launcher.Seperator();
             this.SuspendLayout();
             // 
             // textBox1
@@ -70,17 +71,28 @@
             resources.ApplyResources(this.seperator1, "seperator1");
             this.seperator1.Name = "seperator1";
             // 
-            // License
+            // seperator2
+            // 
+            this.seperator2.BackColor = System.Drawing.Color.Transparent;
+            this.seperator2.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.seperator2.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.seperator2.Direction = System.Windows.Forms.Orientation.Horizontal;
+            this.seperator2.Image = null;
+            resources.ApplyResources(this.seperator2, "seperator2");
+            this.seperator2.Name = "seperator2";
+            // 
+            // LicenseForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.seperator2);
             this.Controls.Add(this.seperator1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.Name = "License";
+            this.Name = "LicenseForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.License_FormClosing);
             this.Load += new System.EventHandler(this.License_Load);
             this.Shown += new System.EventHandler(this.License_Shown);
@@ -95,5 +107,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private Seperator seperator1;
+        private Seperator seperator2;
     }
 }
