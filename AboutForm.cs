@@ -77,7 +77,7 @@ namespace Aion_Launcher
 
         private void label15_Click(object sender, EventArgs e)
         {    
-            Process.Start("http://www.codeproject.com/Articles/20917/Creating-a-Custom-Settings-Provider");
+            Process.Start("http://www.codeproject.com/KB/vb/CustomSettingsProvider.aspx");
         }
     }
 }

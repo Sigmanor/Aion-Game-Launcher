@@ -54,12 +54,11 @@
             // 
             // pictureBox1
             // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = global::Aion_Launcher.Properties.Resources.ai_eye2;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
-            this.toolTip1.SetToolTip(this.pictureBox1, resources.GetString("pictureBox1.ToolTip"));
             this.pictureBox1.Click += new System.EventHandler(this.PictureBox1Click);
             // 
             // label7
@@ -68,7 +67,6 @@
             this.label7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label7.ForeColor = System.Drawing.Color.SteelBlue;
             this.label7.Name = "label7";
-            this.toolTip1.SetToolTip(this.label7, resources.GetString("label7.ToolTip"));
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label5
@@ -77,7 +75,6 @@
             this.label5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label5.ForeColor = System.Drawing.Color.SteelBlue;
             this.label5.Name = "label5";
-            this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
@@ -86,7 +83,6 @@
             this.label6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label6.ForeColor = System.Drawing.Color.Transparent;
             this.label6.Name = "label6";
-            this.toolTip1.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
             this.label6.Click += new System.EventHandler(this.label6_Click_1);
             // 
             // label4
@@ -94,7 +90,6 @@
             resources.ApplyResources(this.label4, "label4");
             this.label4.ForeColor = System.Drawing.Color.Transparent;
             this.label4.Name = "label4";
-            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
             // 
             // VersionLabel
             // 
@@ -102,7 +97,6 @@
             this.VersionLabel.Cursor = System.Windows.Forms.Cursors.Default;
             this.VersionLabel.ForeColor = System.Drawing.Color.Transparent;
             this.VersionLabel.Name = "VersionLabel";
-            this.toolTip1.SetToolTip(this.VersionLabel, resources.GetString("VersionLabel.ToolTip"));
             // 
             // CopyRightLabel
             // 
@@ -110,14 +104,12 @@
             this.CopyRightLabel.Cursor = System.Windows.Forms.Cursors.Default;
             this.CopyRightLabel.ForeColor = System.Drawing.Color.Transparent;
             this.CopyRightLabel.Name = "CopyRightLabel";
-            this.toolTip1.SetToolTip(this.CopyRightLabel, resources.GetString("CopyRightLabel.ToolTip"));
             // 
             // ProductNameLabel
             // 
             resources.ApplyResources(this.ProductNameLabel, "ProductNameLabel");
             this.ProductNameLabel.ForeColor = System.Drawing.Color.Transparent;
             this.ProductNameLabel.Name = "ProductNameLabel";
-            this.toolTip1.SetToolTip(this.ProductNameLabel, resources.GetString("ProductNameLabel.ToolTip"));
             // 
             // timer1
             // 
@@ -129,21 +121,18 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.ForeColor = System.Drawing.Color.Transparent;
             this.label1.Name = "label1";
-            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // label8
             // 
             resources.ApplyResources(this.label8, "label8");
             this.label8.ForeColor = System.Drawing.Color.Transparent;
             this.label8.Name = "label8";
-            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
             // 
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.ForeColor = System.Drawing.Color.Transparent;
             this.label9.Name = "label9";
-            this.toolTip1.SetToolTip(this.label9, resources.GetString("label9.ToolTip"));
             // 
             // label10
             // 
@@ -151,7 +140,6 @@
             this.label10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label10.ForeColor = System.Drawing.Color.SteelBlue;
             this.label10.Name = "label10";
-            this.toolTip1.SetToolTip(this.label10, resources.GetString("label10.ToolTip"));
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label11
@@ -159,7 +147,6 @@
             resources.ApplyResources(this.label11, "label11");
             this.label11.ForeColor = System.Drawing.Color.Transparent;
             this.label11.Name = "label11";
-            this.toolTip1.SetToolTip(this.label11, resources.GetString("label11.ToolTip"));
             // 
             // label12
             // 
@@ -167,7 +154,6 @@
             this.label12.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label12.ForeColor = System.Drawing.Color.SteelBlue;
             this.label12.Name = "label12";
-            this.toolTip1.SetToolTip(this.label12, resources.GetString("label12.ToolTip"));
             this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // label13
@@ -176,7 +162,6 @@
             this.label13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label13.ForeColor = System.Drawing.Color.Transparent;
             this.label13.Name = "label13";
-            this.toolTip1.SetToolTip(this.label13, resources.GetString("label13.ToolTip"));
             this.label13.Click += new System.EventHandler(this.label6_Click);
             // 
             // label14
@@ -184,13 +169,12 @@
             resources.ApplyResources(this.label14, "label14");
             this.label14.ForeColor = System.Drawing.Color.Transparent;
             this.label14.Name = "label14";
-            this.toolTip1.SetToolTip(this.label14, resources.GetString("label14.ToolTip"));
             // 
             // label15
             // 
-            resources.ApplyResources(this.label15, "label15");
             this.label15.AutoEllipsis = true;
             this.label15.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.label15, "label15");
             this.label15.ForeColor = System.Drawing.Color.SteelBlue;
             this.label15.Name = "label15";
             this.toolTip1.SetToolTip(this.label15, resources.GetString("label15.ToolTip"));
@@ -224,7 +208,6 @@
             this.Name = "AboutForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.About_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.About_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
