@@ -15,11 +15,11 @@ namespace Aion_Launcher
 {
     public partial class MainForm : Form
     {
-        int i;
-        Properties.Settings ps = Properties.Settings.Default;
-        string[] arg;
+        int timerCount;
 
-        AutoResetEvent resetEvent = new AutoResetEvent(false);
+        Properties.Settings ps = Properties.Settings.Default;
+
+        string[] arg;
 
         public int comboindex = 0;
 
@@ -43,14 +43,12 @@ namespace Aion_Launcher
 
             if (ps.LangCheck == false)
             {
-                LanguageForm l = new LanguageForm();
-                l.ShowDialog();
+                new LanguageForm().ShowDialog();
             }
 
             if (ps.License == 0)
             {
-                LicenseForm l = new LicenseForm();
-                l.ShowDialog();
+                new LicenseForm().ShowDialog();
             }
 
 
@@ -148,9 +146,6 @@ namespace Aion_Launcher
 
             CultureInfo cultureInfo = new CultureInfo(ps.Language);
             ChangeLanguage.Instance.localizeForm(this, cultureInfo);
-
-            //Thread thread = new Thread(() => RemoteFileExists("https://github.com/Sigmanor/Aion-Game-Launcher/releases/download/v2.6/AionGameLauncher.exe"));
-            //thread.Start();
 
             Thread s = new Thread(ServerStatus);
             s.Start();
@@ -267,8 +262,8 @@ namespace Aion_Launcher
                     this.WindowState = FormWindowState.Minimized;
                     statusLabel.Visible = false;
                     toolStripDropDownButton1.Visible = true;
-                    i = 3;
-                    toolStripDropDownButton1.Text = translate.runAfter + i.ToString();
+                    timerCount = 3;
+                    toolStripDropDownButton1.Text = translate.runAfter + timerCount.ToString();
                     PriorityTimer.Interval = 1000;
                     PriorityTimer.Enabled = true;
                     PriorityTimer.Start();
@@ -277,14 +272,12 @@ namespace Aion_Launcher
 
             else if (arg[0] == "upd") /* Аргумент = upd */
             {
-                string f = Path.GetDirectoryName(Application.ExecutablePath) + @"\Updater.exe";
-                if (File.Exists(f))
-                {
-                    File.Delete(f);
-                }
-
-                VersionForm v = new VersionForm();
-                v.ShowDialog();
+                //string file = Path.GetDirectoryName(Application.ExecutablePath) + @"\Updater.exe";
+                //if (File.Exists(file))
+                //{
+                //    File.Delete(file);
+                //}
+                new VersionForm().ShowDialog();
             }
         }
 
@@ -678,11 +671,12 @@ namespace Aion_Launcher
 
         private void SendPing()
         {
+            //AutoResetEvent resetEvent = new AutoResetEvent(false);
             System.Net.NetworkInformation.Ping pingSender = new System.Net.NetworkInformation.Ping();
             pingSender.PingCompleted += new PingCompletedEventHandler(pingSender_Complete);
             byte[] packetData = Encoding.ASCII.GetBytes("................................");
             PingOptions packetOptions = new PingOptions(50, true);
-            pingSender.SendAsync("64.25.35.103", 5000, packetData, packetOptions, resetEvent);
+            pingSender.SendAsync("64.25.35.103", 5000, packetData, packetOptions, new AutoResetEvent(false));
         }
 
         private void pingSender_Complete(object sender, PingCompletedEventArgs e)
@@ -743,8 +737,8 @@ namespace Aion_Launcher
 
         private void PriorityTimer_Tick(object sender, EventArgs e)
         {
-            toolStripDropDownButton1.Text = translate.runAfter + (--i).ToString();
-            if (i < 0)
+            toolStripDropDownButton1.Text = translate.runAfter + (--timerCount).ToString();
+            if (timerCount < 0)
             {
                 PriorityTimer.Stop();
                 playButton_Click(this, new EventArgs());
@@ -1165,8 +1159,7 @@ namespace Aion_Launcher
 
         private void menuItem3_Click(object sender, EventArgs e)
         {
-            SettingsForm Settings = new SettingsForm();
-            Settings.ShowDialog();
+            new SettingsForm().ShowDialog();
         }
 
         private void menuItem5_Click(object sender, EventArgs e)
@@ -1199,8 +1192,7 @@ namespace Aion_Launcher
 
         private void aboutMenuItem_Click(object sender, EventArgs e)
         {
-            AboutForm A = new AboutForm();
-            A.ShowDialog();
+            new AboutForm().ShowDialog();
         }
 
         private void updatesMenuItem_Click(object sender, EventArgs e)
@@ -1232,6 +1224,7 @@ namespace Aion_Launcher
             toolStripStatusLabel1.BackColor = Color.FromArgb(213, 213, 213/*145, 201, 247*/);
 
         }
+
     }
 }
 
