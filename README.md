@@ -21,7 +21,7 @@ The latest version always available **<a href="http://sigmanor.pp.ua/aion-game-l
 
 Beta
 ==================
-The latest beta version from dev brach available **<a href="https://github.com/Sigmanor/Aion-Game-Launcher/releases/download/v2.6/Aion-Game-Launcher.7zip" target="_blank">here</a>**.
+The latest beta version from dev brach available **<a href="https://github.com/Sigmanor/Aion-Game-Launcher/releases/download/v2.6/Aion-Game-Launcher.zip" target="_blank">here</a>**.
 
 Build
 ==================
