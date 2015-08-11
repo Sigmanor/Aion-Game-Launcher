@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -104,13 +103,6 @@ namespace Aion_Launcher
             ps.Save();
 
             PubVar.toggle = true;
-
-            if (languageComboBox.Text == ("русский (Россия)") & !Directory.Exists("ru-RU"))
-            {
-                Directory.CreateDirectory("ru-RU");
-                File.WriteAllBytes(@".\ru-RU\Aion Game Launcher.resources.dll", Properties.Resources.ru);
-                Application.Restart();
-            }
 
             this.Visible = false;
         }
