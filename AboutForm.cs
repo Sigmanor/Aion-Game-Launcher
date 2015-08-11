@@ -79,5 +79,11 @@ namespace Aion_Launcher
         {    
             Process.Start("http://www.codeproject.com/KB/vb/CustomSettingsProvider.aspx");
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://dotnetzip.codeplex.com/");
+
+        }
     }
 }
