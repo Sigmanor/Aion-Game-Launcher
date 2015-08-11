@@ -13224,17 +13224,6 @@
   <data name="settingsMenuItem.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="menuItem5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABEklEQVQ4T52TT08CMRDF+4k5CWqUZHcN
-        q0YOGj8OF78Ie2gP9LQ9lUPTZJw/TKkLqOElv/TNm+FdAEP6fHmFP5jx4TnRwddmA5dEu0lZoRRcIy2+
-        uoB0UkC+pta5nHwpqA9qLu00LwXvqx4+EFU9Tz1B+lHw1nawbjr2pHXbcia+Q9+yr1UKUs7w/LiEHkk5
-        QUb6hyVnKSV+xWe+zZiRLwUx7uHp7p6J+4hzlPlWZnrZa364KwVhDNDMF8wYRqa5mTNj0B3N+HK+gIB5
-        KfA7L0e49N7DDtFCmo/7KkNKgbMOLOEsQq94x/MBK0jm8DP2WEAMw/B/tvRupUD/Dyfgd62efvfTEt1x
-        wW/Co5keTzHGmG+i0vhz8FpWywAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="menuItem5.Text" xml:space="preserve">
     <value>Official Launcher</value>
   </data>

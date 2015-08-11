@@ -297,9 +297,6 @@
         qqXXQfPCAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="ru" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ru.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="bullet_red" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -3761,5 +3758,8 @@
         KfA7L0e49N7DDtFCmo/7KkNKgbMOLOEsQq94x/MBK0jm8DP2WEAMw/B/tvRupUD/Dyfgd62efvfTEt1x
         wW/Co5keTzHGmG+i0vhz8FpWywAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="Updater" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Updater.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
