@@ -34,7 +34,7 @@ namespace Aion_Launcher
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,13 +46,12 @@ namespace Aion_Launcher
 
         private void License_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (ps.License == 0)
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                e.Cancel = true;
-            }
-            if (ps.License == 1)
-            {
-                e.Cancel = false;
+                if (ps.License == 0)
+                {
+                    Environment.Exit(0);
+                }
             }
         }
 
