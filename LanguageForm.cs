@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Windows.Forms;
 
 namespace Aion_Launcher
@@ -45,30 +44,13 @@ namespace Aion_Launcher
             ps.Save();
             CultureInfo cultureInfo = new CultureInfo(ps.Language);
             ChangeLanguage.Instance.localizeForm(this, cultureInfo);
-
-            if (langComboBox.Text == ("русский (Россия)") & !Directory.Exists("ru-RU"))
-            {
-                Directory.CreateDirectory("ru-RU");
-                File.WriteAllBytes(@".\ru-RU\Aion Game Launcher.resources.dll", Properties.Resources.ru);
-                Application.Restart();
-            }
-            else
-            {
-                this.Close();
-            }
+            this.Close();
         }
 
         private void LanguageForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (ps.LangCheck == false)
-            {
-                e.Cancel = true;
-            }
-            if (ps.LangCheck == true)
-            {
-                e.Cancel = false;
-            }
-        }   
+
+        }
 
     }
 }
