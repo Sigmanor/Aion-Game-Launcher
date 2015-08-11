@@ -2,14 +2,13 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Globalization;
-using System.ComponentModel;
 
 namespace Aion_Launcher
 {
@@ -143,7 +142,6 @@ namespace Aion_Launcher
         private void Form1_Load(object sender, EventArgs e)
         {
             multiAccounts();
-
             CultureInfo cultureInfo = new CultureInfo(ps.Language);
             ChangeLanguage.Instance.localizeForm(this, cultureInfo);
 
@@ -229,8 +227,8 @@ namespace Aion_Launcher
                     ps.Save();
                     registryKey2.Close();
                 }
-            }
-            /* Получить путь к игре */
+            }/* Получить путь к игре */
+
 
             if (emailComboBox.Text == translate.email | passwordTextBox.Text == translate.password | emailComboBox.Text == "" | passwordTextBox.Text == "")
             {
@@ -255,7 +253,7 @@ namespace Aion_Launcher
                 passwordTextBox.ForeColor = Color.Black;
             }
 
-            if (arg.Length == 0) /* Аргумент = 0 */
+            if (arg.Length == 0) /* arg == 0 */
             {
                 if (ps.Priority == true)
                 {
@@ -270,15 +268,42 @@ namespace Aion_Launcher
                 }
             }
 
-            else if (arg[0] == "upd") /* Аргумент = upd */
+            else if (arg[0] == "/u") /* arg == update */
             {
-                //string file = Path.GetDirectoryName(Application.ExecutablePath) + @"\Updater.exe";
-                //if (File.Exists(file))
-                //{
-                //    File.Delete(file);
-                //}
+                string updater = Path.GetDirectoryName(Application.ExecutablePath) + @".\Updater.exe";
+                string zip = Path.GetDirectoryName(Application.ExecutablePath) + @".\Aion-Game-Launcher-Update.zip";
+
+                if (File.Exists(updater))
+                {
+                    File.Delete(updater);
+                }
+
+                if (File.Exists(zip))
+                {
+                    File.Delete(zip);
+                }
+
                 new VersionForm().ShowDialog();
             }
+
+            else if (arg[0] == "/e") /* arg == error */
+            {
+                string file = Path.GetDirectoryName(Application.ExecutablePath) + @".\Updater.exe";
+                if (File.Exists(file))
+                {
+                    File.Delete(file);
+                }
+
+                string file2 = Path.GetDirectoryName(Application.ExecutablePath) + @".\Aion-Game-Launcher-Update.zip";
+                if (File.Exists(file2))
+                {
+                    File.Delete(file2);
+                }
+
+                MessageBox.Show(translate.updFailedText, translate.updFailedTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
         }
 
         public void ServerStatusCheck()
@@ -854,61 +879,19 @@ namespace Aion_Launcher
             }
         }
 
-        void downloader_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                Thread ar = new Thread(autoUpd_restart);
-                ar.Start();
-                File.Delete("aiongamelauncher.update");
-                MessageBox.Show(translate.updFailedText, translate.updFailedTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            if (e.Error == null)
-            {
-                string N = "agl_update.bat";
-                using (StreamWriter sw = new StreamWriter(N))
-                {
-                    sw.WriteLine(":first");
-                    sw.WriteLine("del \"Aion Game Launcher.exe\"");
-                    sw.WriteLine("if exist \"Aion Game Launcher.exe\" goto :first");
-                    sw.WriteLine("rename \"aiongamelauncher.update\" \"Aion Game Launcher.exe\"");
-                    sw.WriteLine("start \"\" \"Aion Game Launcher.exe\" upd");
-                    sw.WriteLine("del /q /f \"%~f0\" >nul 2>&1 & exit /b 0");
-                    sw.Close();
-                }
-
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                startInfo.FileName = N;
-
-                Process.Start(startInfo);
-
-                Application.Exit();
-            }
-
-        }
-
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
-            WebClient webClient = new WebClient();
+            DialogResult result = MessageBox.Show(translate.updMsgBoxText, translate.updMsgBoxTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
-            if (statusLabel.Text == translate.newVersion)
+            if (result == DialogResult.OK)
             {
-                DialogResult result = MessageBox.Show(translate.updMsgBoxText, translate.updMsgBoxTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                File.WriteAllBytes("Updater.exe", Properties.Resources.Updater);
 
-                if (result == DialogResult.OK)
-                {
-                    statusLabel.Image = Properties.Resources.load_anim;
-                    statusLabel.Text = translate.processUpdate;
-                    statusLabel.IsLink = false;
-                    statusLabel.Font = new Font(statusLabel.Text, 8, FontStyle.Regular);
-                    statusLabel.ForeColor = Color.Black;
-
-                    webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(downloader_DownloadFileCompleted);
-
-                    webClient.DownloadFileAsync(new Uri("https://github.com/Sigmanor/Aion-Game-Launcher/releases/download/v2.6/AionGameLauncher.exe"), "aiongamelauncher.update");
-                }
+                var pr = new Process();
+                pr.StartInfo.FileName = "Updater.exe";
+                pr.StartInfo.Arguments = "/u";
+                pr.Start();
+                Application.Exit();
             }
         }
 
@@ -924,7 +907,7 @@ namespace Aion_Launcher
 
         private void gButton3_Click(object sender, EventArgs e)
         {
-            Process.Start("http://aion.im");        
+            Process.Start("http://aion.im");  
         }
 
         private void gButton4_Click(object sender, EventArgs e)
@@ -1171,12 +1154,7 @@ namespace Aion_Launcher
                 p = " (x86)";
             }
 
-            if (File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe"))
-            {
-                p = "";
-            }
-
-            if ((File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) || (File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
+            if ((File.Exists(@"C:\Program Files"+ p + @"\NCWest\NCLauncher\NCLauncher.exe")))
             {
                 Process pr = new Process();
                 pr.StartInfo.FileName = @"C:\Program Files" + p + @"\NCWest\NCLauncher\NCLauncher.exe";
@@ -1184,7 +1162,7 @@ namespace Aion_Launcher
                 pr.Start();
             }
 
-            if ((!File.Exists(@"C:\Program Files\NCWest\NCLauncher\NCLauncher.exe")) && (!File.Exists(@"C:\Program Files (x86)\NCWest\NCLauncher\NCLauncher.exe")))
+            if ((!File.Exists(@"C:\Program Files" + p + @"\NCWest\NCLauncher\NCLauncher.exe")))
             {
                 MessageBox.Show(translate.noLauncherError, translate.updFailedTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -1225,6 +1203,10 @@ namespace Aion_Launcher
 
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
     }
 }
 
