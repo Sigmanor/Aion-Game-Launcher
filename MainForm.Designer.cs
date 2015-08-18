@@ -47,10 +47,6 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.webSiteButton = new Aion_Launcher.GButton();
-            this.vkButton = new Aion_Launcher.GButton();
-            this.scheduleButton = new Aion_Launcher.GButton();
-            this.usefulButton = new Aion_Launcher.GButton();
             this.pingTimer = new System.Windows.Forms.Timer(this.components);
             this.playButton = new System.Windows.Forms.Button();
             this.eyeButton = new System.Windows.Forms.PictureBox();
@@ -66,6 +62,10 @@
             this.aboutMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.exitMenuItem = new System.Windows.Forms.MenuItem();
+            this.webSiteButton = new Aion_Launcher.GButton();
+            this.vkButton = new Aion_Launcher.GButton();
+            this.scheduleButton = new Aion_Launcher.GButton();
+            this.usefulButton = new Aion_Launcher.GButton();
             this.vistaMenu1 = new wyDay.Controls.VistaMenu(this.components);
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -83,7 +83,6 @@
             this.passwordTextBox.UseSystemPasswordChar = true;
             this.passwordTextBox.TextChanged += new System.EventHandler(this.passwordTextBox_TextChanged);
             this.passwordTextBox.Enter += new System.EventHandler(this.PasswordTextBox_Enter);
-            this.passwordTextBox.Leave += new System.EventHandler(this.passwordTextBox_Leave);
             // 
             // rememberCheckBox
             // 
@@ -158,8 +157,8 @@
             // 
             // toolStripStatusLabel2
             // 
-            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             resources.ApplyResources(this.toolStripStatusLabel2, "toolStripStatusLabel2");
+            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.toolStripStatusLabel2.Image = global::Aion_Launcher.Properties.Resources.loadgif;
             this.toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
@@ -223,50 +222,6 @@
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
-            // webSiteButton
-            // 
-            this.webSiteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.webSiteButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.webSiteButton, "webSiteButton");
-            this.webSiteButton.ForeColor = System.Drawing.Color.White;
-            this.webSiteButton.Image = null;
-            this.webSiteButton.Name = "webSiteButton";
-            this.toolTip1.SetToolTip(this.webSiteButton, resources.GetString("webSiteButton.ToolTip"));
-            this.webSiteButton.Click += new System.EventHandler(this.gButton1_Click);
-            // 
-            // vkButton
-            // 
-            this.vkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.vkButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.vkButton, "vkButton");
-            this.vkButton.ForeColor = System.Drawing.Color.White;
-            this.vkButton.Image = null;
-            this.vkButton.Name = "vkButton";
-            this.toolTip1.SetToolTip(this.vkButton, resources.GetString("vkButton.ToolTip"));
-            this.vkButton.Click += new System.EventHandler(this.gButton2_Click);
-            // 
-            // scheduleButton
-            // 
-            this.scheduleButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.scheduleButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.scheduleButton, "scheduleButton");
-            this.scheduleButton.ForeColor = System.Drawing.Color.White;
-            this.scheduleButton.Image = null;
-            this.scheduleButton.Name = "scheduleButton";
-            this.toolTip1.SetToolTip(this.scheduleButton, resources.GetString("scheduleButton.ToolTip"));
-            this.scheduleButton.Click += new System.EventHandler(this.gButton4_Click);
-            // 
-            // usefulButton
-            // 
-            this.usefulButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.usefulButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.usefulButton, "usefulButton");
-            this.usefulButton.ForeColor = System.Drawing.Color.White;
-            this.usefulButton.Image = null;
-            this.usefulButton.Name = "usefulButton";
-            this.toolTip1.SetToolTip(this.usefulButton, resources.GetString("usefulButton.ToolTip"));
-            this.usefulButton.Click += new System.EventHandler(this.gButton3_Click);
-            // 
             // pingTimer
             // 
             this.pingTimer.Interval = 3000;
@@ -294,7 +249,6 @@
             this.eyeButton.Name = "eyeButton";
             this.eyeButton.TabStop = false;
             this.eyeButton.Paint += new System.Windows.Forms.PaintEventHandler(this.eyeButton_Paint);
-            this.eyeButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.eyeButton_MouseDown);
             this.eyeButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.eyeButton_MouseUp);
             // 
             // emailComboBox
@@ -305,7 +259,6 @@
             this.emailComboBox.Tag = "Email";
             this.emailComboBox.DropDown += new System.EventHandler(this.emailComboBox_DropDown);
             this.emailComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            this.emailComboBox.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
             this.emailComboBox.Enter += new System.EventHandler(this.emailComboBox_Enter);
             this.emailComboBox.Leave += new System.EventHandler(this.emailComboBox_Leave);
             this.emailComboBox.MouseEnter += new System.EventHandler(this.emailComboBox_MouseEnter);
@@ -385,6 +338,50 @@
             resources.ApplyResources(this.exitMenuItem, "exitMenuItem");
             this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
+            // webSiteButton
+            // 
+            this.webSiteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.webSiteButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.webSiteButton, "webSiteButton");
+            this.webSiteButton.ForeColor = System.Drawing.Color.White;
+            this.webSiteButton.Image = null;
+            this.webSiteButton.Name = "webSiteButton";
+            this.toolTip1.SetToolTip(this.webSiteButton, resources.GetString("webSiteButton.ToolTip"));
+            this.webSiteButton.Click += new System.EventHandler(this.gButton1_Click);
+            // 
+            // vkButton
+            // 
+            this.vkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.vkButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.vkButton, "vkButton");
+            this.vkButton.ForeColor = System.Drawing.Color.White;
+            this.vkButton.Image = null;
+            this.vkButton.Name = "vkButton";
+            this.toolTip1.SetToolTip(this.vkButton, resources.GetString("vkButton.ToolTip"));
+            this.vkButton.Click += new System.EventHandler(this.gButton2_Click);
+            // 
+            // scheduleButton
+            // 
+            this.scheduleButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.scheduleButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.scheduleButton, "scheduleButton");
+            this.scheduleButton.ForeColor = System.Drawing.Color.White;
+            this.scheduleButton.Image = null;
+            this.scheduleButton.Name = "scheduleButton";
+            this.toolTip1.SetToolTip(this.scheduleButton, resources.GetString("scheduleButton.ToolTip"));
+            this.scheduleButton.Click += new System.EventHandler(this.gButton4_Click);
+            // 
+            // usefulButton
+            // 
+            this.usefulButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.usefulButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.usefulButton, "usefulButton");
+            this.usefulButton.ForeColor = System.Drawing.Color.White;
+            this.usefulButton.Image = null;
+            this.usefulButton.Name = "usefulButton";
+            this.toolTip1.SetToolTip(this.usefulButton, resources.GetString("usefulButton.ToolTip"));
+            this.usefulButton.Click += new System.EventHandler(this.gButton3_Click);
+            // 
             // vistaMenu1
             // 
             this.vistaMenu1.ContainerControl = this;
@@ -394,15 +391,15 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Controls.Add(this.emailComboBox);
             this.Controls.Add(this.eyeButton);
+            this.Controls.Add(this.passwordTextBox);
+            this.Controls.Add(this.emailComboBox);
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.rememberCheckBox);
-            this.Controls.Add(this.passwordTextBox);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -410,7 +407,6 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Activated += new System.EventHandler(this.Form1_Activated);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.Click += new System.EventHandler(this.Form1_Click);
@@ -432,10 +428,8 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.Timer PriorityTimer;
         private System.Windows.Forms.Timer AutoUPDtimer;
-        private System.Windows.Forms.Panel panel2;
         private GButton scheduleButton;
         private GButton vkButton;
-        private GButton usefulButton;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         public System.Windows.Forms.StatusStrip statusStrip1;
@@ -448,7 +442,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
         private System.Windows.Forms.Timer pingTimer;
         private GButton webSiteButton;
-        private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.PictureBox eyeButton;
         private System.Windows.Forms.ComboBox emailComboBox;
         private System.Windows.Forms.ToolTip toolTip1;
@@ -463,7 +456,10 @@
         private System.Windows.Forms.MenuItem aboutMenuItem;
         private wyDay.Controls.VistaMenu vistaMenu1;
         private System.Windows.Forms.ContextMenu contextMenu1;
+        private System.Windows.Forms.Panel panel2;
+        private GButton usefulButton;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button playButton;
     }
 }
 

@@ -47,10 +47,5 @@ namespace Aion_Launcher
             this.Close();
         }
 
-        private void LanguageForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
-        }
-
     }
 }

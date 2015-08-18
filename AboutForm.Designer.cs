@@ -33,11 +33,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.releaseNotesLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.VersionLabel = new System.Windows.Forms.Label();
-            this.CopyRightLabel = new System.Windows.Forms.Label();
-            this.ProductNameLabel = new System.Windows.Forms.Label();
+            this.productNameLabel = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -45,12 +44,13 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.licenseLabel = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.copyrightLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,14 +82,14 @@
             this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // label6
+            // releaseNotesLabel
             // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label6.ForeColor = System.Drawing.Color.Transparent;
-            this.label6.Name = "label6";
-            this.toolTip1.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
-            this.label6.Click += new System.EventHandler(this.label6_Click_1);
+            resources.ApplyResources(this.releaseNotesLabel, "releaseNotesLabel");
+            this.releaseNotesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.releaseNotesLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.releaseNotesLabel.Name = "releaseNotesLabel";
+            this.toolTip1.SetToolTip(this.releaseNotesLabel, resources.GetString("releaseNotesLabel.ToolTip"));
+            this.releaseNotesLabel.Click += new System.EventHandler(this.releaseNotesLabel_Click);
             // 
             // label4
             // 
@@ -106,20 +106,12 @@
             this.VersionLabel.Name = "VersionLabel";
             this.toolTip1.SetToolTip(this.VersionLabel, resources.GetString("VersionLabel.ToolTip"));
             // 
-            // CopyRightLabel
+            // productNameLabel
             // 
-            resources.ApplyResources(this.CopyRightLabel, "CopyRightLabel");
-            this.CopyRightLabel.Cursor = System.Windows.Forms.Cursors.Default;
-            this.CopyRightLabel.ForeColor = System.Drawing.Color.Transparent;
-            this.CopyRightLabel.Name = "CopyRightLabel";
-            this.toolTip1.SetToolTip(this.CopyRightLabel, resources.GetString("CopyRightLabel.ToolTip"));
-            // 
-            // ProductNameLabel
-            // 
-            resources.ApplyResources(this.ProductNameLabel, "ProductNameLabel");
-            this.ProductNameLabel.ForeColor = System.Drawing.Color.Transparent;
-            this.ProductNameLabel.Name = "ProductNameLabel";
-            this.toolTip1.SetToolTip(this.ProductNameLabel, resources.GetString("ProductNameLabel.ToolTip"));
+            resources.ApplyResources(this.productNameLabel, "productNameLabel");
+            this.productNameLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.productNameLabel.Name = "productNameLabel";
+            this.toolTip1.SetToolTip(this.productNameLabel, resources.GetString("productNameLabel.ToolTip"));
             // 
             // timer1
             // 
@@ -172,14 +164,14 @@
             this.toolTip1.SetToolTip(this.label12, resources.GetString("label12.ToolTip"));
             this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
-            // label13
+            // licenseLabel
             // 
-            resources.ApplyResources(this.label13, "label13");
-            this.label13.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label13.ForeColor = System.Drawing.Color.Transparent;
-            this.label13.Name = "label13";
-            this.toolTip1.SetToolTip(this.label13, resources.GetString("label13.ToolTip"));
-            this.label13.Click += new System.EventHandler(this.label6_Click);
+            resources.ApplyResources(this.licenseLabel, "licenseLabel");
+            this.licenseLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.licenseLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.licenseLabel.Name = "licenseLabel";
+            this.toolTip1.SetToolTip(this.licenseLabel, resources.GetString("licenseLabel.ToolTip"));
+            this.licenseLabel.Click += new System.EventHandler(this.licenseLabel_Click);
             // 
             // label14
             // 
@@ -215,6 +207,14 @@
             this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
+            // copyrightLabel
+            // 
+            resources.ApplyResources(this.copyrightLabel, "copyrightLabel");
+            this.copyrightLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.copyrightLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.copyrightLabel.Name = "copyrightLabel";
+            this.toolTip1.SetToolTip(this.copyrightLabel, resources.GetString("copyrightLabel.ToolTip"));
+            // 
             // AboutForm
             // 
             resources.ApplyResources(this, "$this");
@@ -229,12 +229,12 @@
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.ProductNameLabel);
+            this.Controls.Add(this.productNameLabel);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.CopyRightLabel);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.copyrightLabel);
+            this.Controls.Add(this.licenseLabel);
+            this.Controls.Add(this.releaseNotesLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label11);
@@ -259,9 +259,8 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label VersionLabel;
-        private System.Windows.Forms.Label ProductNameLabel;
-        private System.Windows.Forms.Label CopyRightLabel;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label productNameLabel;
+        private System.Windows.Forms.Label releaseNotesLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
@@ -271,11 +270,12 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label licenseLabel;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label copyrightLabel;
     }
 }

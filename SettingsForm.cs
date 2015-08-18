@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
@@ -13,6 +12,8 @@ namespace Aion_Launcher
 
         Properties.Settings ps = Properties.Settings.Default;
 
+        PortableSettingsProvider psp = new PortableSettingsProvider();
+
         public class PubVar
         {
             public static bool toggle = false;
@@ -22,40 +23,16 @@ namespace Aion_Launcher
         public SettingsForm()
         {
             InitializeComponent();
+
+            comboBox1.MouseWheel += new MouseEventHandler(comboBox1_MouseWheel);
+            languageComboBox.MouseWheel += new MouseEventHandler(comboBox1_MouseWheel);
+            ServerComboBox.MouseWheel += new MouseEventHandler(comboBox1_MouseWheel);
+            comboBox2.MouseWheel += new MouseEventHandler(comboBox1_MouseWheel);
         }
 
-        public class MyGroupBox : GroupBox
+        void comboBox1_MouseWheel(object sender, MouseEventArgs e)
         {
-            private Color _borderColor = Color.Black;
-
-            public Color BorderColor
-            {
-                get
-                {
-                    return this._borderColor;
-                }
-                set
-                {
-                    this._borderColor = value;
-                }
-            }
-
-            protected override void OnPaint(PaintEventArgs e)
-            {
-                Size tSize = TextRenderer.MeasureText(this.Text, this.Font);
-
-                Rectangle borderRect = e.ClipRectangle;
-                borderRect.Y = (borderRect.Y + (tSize.Height / 2));
-                borderRect.Height = (borderRect.Height - (tSize.Height / 2));
-                ControlPaint.DrawBorder(e.Graphics, borderRect, this._borderColor, ButtonBorderStyle.Solid);
-
-                Rectangle textRect = e.ClipRectangle;
-                textRect.X = (textRect.X + 6);
-                textRect.Width = tSize.Width;
-                textRect.Height = tSize.Height;
-                e.Graphics.FillRectangle(new SolidBrush(this.BackColor), textRect);
-                e.Graphics.DrawString(this.Text, this.Font, new SolidBrush(this.ForeColor), textRect);
-            }
+            ((HandledMouseEventArgs)e).Handled = true;
         }
 
         private void Settings_Load(object sender, EventArgs e)
@@ -65,7 +42,7 @@ namespace Aion_Launcher
             fastStart.Checked = ps.Priority;
             textBox3.Text = ps.Extra;
             checkBox1.Checked = ps.AutoUPD;
-            textBox2.Text = Environment.CurrentDirectory + @"\aion-game-launcher.settings";
+            textBox2.Text = Environment.CurrentDirectory + @"\" + psp.GetAppSettingsFilename();
             textBox1.Text = ps.GamePath;
             ServerComboBox.Text = ps.SCCB;
             comboBox2.SelectedIndex = ps.Monitoring;
@@ -80,7 +57,7 @@ namespace Aion_Launcher
             languageComboBox.DisplayMember = "NativeName";
             languageComboBox.ValueMember = "Name";
 
-            if (!String.IsNullOrEmpty(ps.Language))
+            if (!string.IsNullOrEmpty(ps.Language))
             {
                 languageComboBox.SelectedValue = ps.Language;
                 PubVar.langChange = ps.Language;
@@ -120,7 +97,7 @@ namespace Aion_Launcher
 
             if (result == DialogResult.Yes)
             {
-                File.Delete("aion-game-launcher.settings");
+                File.Delete(psp.GetAppSettingsFilename());
                 Application.Restart();
             }                 
         }
@@ -130,7 +107,7 @@ namespace Aion_Launcher
             try
             {
                 label3.Focus();
-                string folder = Environment.CurrentDirectory + @"\aion-game-launcher.settings";
+                string folder = Environment.CurrentDirectory + @"\"+ psp.GetAppSettingsFilename();
                 Process.Start("explorer.exe", string.Format("/select,\"{0}\"", folder));
             }
             catch { }       
@@ -147,7 +124,6 @@ namespace Aion_Launcher
             {
                 trayCheckBox.Enabled = false;
                 trayCheckBox.Checked = false;
-
             }
         }
 
@@ -159,21 +135,6 @@ namespace Aion_Launcher
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             panel1.Focus();
-        }
-
-        private void ServerComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            panel1.Focus();
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            panel1.Focus();
-        }
-
-        private void languageComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            panel1.Focus();            
         }
 
     }
