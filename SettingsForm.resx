@@ -148,7 +148,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>mainGroupBox</value>
+    <value>generalGroupBox</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -178,7 +178,7 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;comboBox1.Parent" xml:space="preserve">
-    <value>mainGroupBox</value>
+    <value>generalGroupBox</value>
   </data>
   <data name="&gt;&gt;comboBox1.ZOrder" xml:space="preserve">
     <value>10</value>
@@ -211,7 +211,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>mainGroupBox</value>
+    <value>generalGroupBox</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -235,7 +235,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBox1.Parent" xml:space="preserve">
-    <value>mainGroupBox</value>
+    <value>generalGroupBox</value>
   </data>
   <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -268,7 +268,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>extendedGroupBox</value>
+    <value>advancedGroupBox</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -292,7 +292,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBox2.Parent" xml:space="preserve">
-    <value>extendedGroupBox</value>
+    <value>advancedGroupBox</value>
   </data>
   <data name="&gt;&gt;textBox2.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -341,7 +341,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ViewButton.Parent" xml:space="preserve">
-    <value>mainGroupBox</value>
+    <value>generalGroupBox</value>
   </data>
   <data name="&gt;&gt;ViewButton.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -387,7 +387,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button1.Parent" xml:space="preserve">
-    <value>extendedGroupBox</value>
+    <value>advancedGroupBox</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -423,7 +423,7 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ServerComboBox.Parent" xml:space="preserve">
-    <value>mainGroupBox</value>
+    <value>generalGroupBox</value>
   </data>
   <data name="&gt;&gt;ServerComboBox.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -456,7 +456,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label10.Parent" xml:space="preserve">
-    <value>mainGroupBox</value>
+    <value>generalGroupBox</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -489,7 +489,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>mainGroupBox</value>
+    <value>generalGroupBox</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -513,7 +513,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBox3.Parent" xml:space="preserve">
-    <value>mainGroupBox</value>
+    <value>generalGroupBox</value>
   </data>
   <data name="&gt;&gt;textBox3.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -549,7 +549,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;trayCheckBox.Parent" xml:space="preserve">
-    <value>extendedGroupBox</value>
+    <value>advancedGroupBox</value>
   </data>
   <data name="&gt;&gt;trayCheckBox.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -582,7 +582,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkBox1.Parent" xml:space="preserve">
-    <value>extendedGroupBox</value>
+    <value>advancedGroupBox</value>
   </data>
   <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -615,7 +615,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fastStart.Parent" xml:space="preserve">
-    <value>extendedGroupBox</value>
+    <value>advancedGroupBox</value>
   </data>
   <data name="&gt;&gt;fastStart.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -708,7 +708,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>mainGroupBox</value>
+    <value>generalGroupBox</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -738,36 +738,36 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;languageComboBox.Parent" xml:space="preserve">
-    <value>mainGroupBox</value>
+    <value>generalGroupBox</value>
   </data>
   <data name="&gt;&gt;languageComboBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="mainGroupBox.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="generalGroupBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="mainGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="generalGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 2</value>
   </data>
-  <data name="mainGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="generalGroupBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 210</value>
   </data>
-  <data name="mainGroupBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="generalGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="mainGroupBox.Text" xml:space="preserve">
+  <data name="generalGroupBox.Text" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="&gt;&gt;mainGroupBox.Name" xml:space="preserve">
-    <value>mainGroupBox</value>
+  <data name="&gt;&gt;generalGroupBox.Name" xml:space="preserve">
+    <value>generalGroupBox</value>
   </data>
-  <data name="&gt;&gt;mainGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;generalGroupBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mainGroupBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;generalGroupBox.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;mainGroupBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;generalGroupBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pingCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -798,7 +798,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pingCheckBox.Parent" xml:space="preserve">
-    <value>extendedGroupBox</value>
+    <value>advancedGroupBox</value>
   </data>
   <data name="&gt;&gt;pingCheckBox.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -831,7 +831,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;RestartCheckBox.Parent" xml:space="preserve">
-    <value>extendedGroupBox</value>
+    <value>advancedGroupBox</value>
   </data>
   <data name="&gt;&gt;RestartCheckBox.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -864,7 +864,7 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;comboBox2.Parent" xml:space="preserve">
-    <value>extendedGroupBox</value>
+    <value>advancedGroupBox</value>
   </data>
   <data name="&gt;&gt;comboBox2.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -897,36 +897,36 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>extendedGroupBox</value>
+    <value>advancedGroupBox</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="extendedGroupBox.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="advancedGroupBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="extendedGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="advancedGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 226</value>
   </data>
-  <data name="extendedGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="advancedGroupBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 249</value>
   </data>
-  <data name="extendedGroupBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="advancedGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="extendedGroupBox.Text" xml:space="preserve">
+  <data name="advancedGroupBox.Text" xml:space="preserve">
     <value>Advanced</value>
   </data>
-  <data name="&gt;&gt;extendedGroupBox.Name" xml:space="preserve">
-    <value>extendedGroupBox</value>
+  <data name="&gt;&gt;advancedGroupBox.Name" xml:space="preserve">
+    <value>advancedGroupBox</value>
   </data>
-  <data name="&gt;&gt;extendedGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;advancedGroupBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;extendedGroupBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;advancedGroupBox.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;extendedGroupBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;advancedGroupBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panel1.AutoScroll" type="System.Boolean, mscorlib">

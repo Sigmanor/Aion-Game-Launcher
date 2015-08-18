@@ -249,9 +249,6 @@
   <data name="fastStart.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="ResetSettingsButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
   <data name="ResetSettingsButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 23</value>
   </data>
@@ -260,9 +257,6 @@
   </data>
   <data name="ResetSettingsButton.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="SaveSettingsButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="SaveSettingsButton.Text" xml:space="preserve">
     <value>Сохранить</value>
@@ -282,10 +276,10 @@
   <data name="languageComboBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="mainGroupBox.Text" xml:space="preserve">
-    <value>Основные</value>
+  <data name="generalGroupBox.Text" xml:space="preserve">
+    <value>Общие</value>
   </data>
-  <data name="mainGroupBox.ToolTip" xml:space="preserve">
+  <data name="generalGroupBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="pingCheckBox.Size" type="System.Drawing.Size, System.Drawing">
@@ -318,10 +312,10 @@
   <data name="label4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="extendedGroupBox.Text" xml:space="preserve">
+  <data name="advancedGroupBox.Text" xml:space="preserve">
     <value>Расширенные</value>
   </data>
-  <data name="extendedGroupBox.ToolTip" xml:space="preserve">
+  <data name="advancedGroupBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="panel1.ToolTip" xml:space="preserve">
