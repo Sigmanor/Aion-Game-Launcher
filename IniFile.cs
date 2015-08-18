@@ -18,7 +18,7 @@ namespace Aion_Launcher
 
         public IniFile(string IniPath = null)
         {
-            Path = new FileInfo(IniPath ?? "aion-game-launcher" + ".accounts").FullName.ToString();
+            Path = new FileInfo(IniPath ?? "accounts" + ".cfg").FullName.ToString();
         }
 
         public string Read(string Key, string Section = null)

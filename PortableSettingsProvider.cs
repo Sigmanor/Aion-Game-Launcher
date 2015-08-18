@@ -62,7 +62,7 @@ public class PortableSettingsProvider : SettingsProvider
     public virtual string GetAppSettingsFilename()
     {
         //Used to determine the filename to store the settings
-        return "aion-game-launcher" + ".settings";
+        return "settings" + ".cfg";
     }
 
     public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection propvals)
