@@ -13,15 +13,11 @@ Features
 * Quick Launch.
 * Configuring additional settings for the game.
 * Monitoring the status of servers.
-* Displaing your ingame ping 
+* Displaying your ingame ping
 
 Download and Install
 ==================
-The latest version always available **<a href="http://sigmanor.pp.ua/aion-game-launcher/" target="_blank">here</a>**. Just extract downloaded zip wherever you want.
-
-Beta
-==================
-The latest beta version from dev brach available **<a href="https://github.com/Sigmanor/Aion-Game-Launcher/releases/download/v2.6/Aion-Game-Launcher.zip" target="_blank">here</a>**.
+The latest release/beta version always available **<a href="https://github.com/Sigmanor/Aion-Game-Launcher/releases">here</a>**. Just extract downloaded zip wherever you want.
 
 Build
 ==================
