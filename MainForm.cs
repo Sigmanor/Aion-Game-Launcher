@@ -757,15 +757,18 @@ namespace Aion_Launcher
 
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(translate.updMsgBoxText, translate.updMsgBoxTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            if (result == DialogResult.OK)
+            if (toolStripStatusLabel1.Text == translate.newVersion)
             {
-                File.WriteAllBytes("Updater.exe", Properties.Resources.Updater);
-                var pr = new Process();
-                pr.StartInfo.FileName = "Updater.exe";
-                pr.StartInfo.Arguments = "/u";
-                pr.Start();
-                Application.Exit();
+                DialogResult result = MessageBox.Show(translate.updMsgBoxText, translate.updMsgBoxTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.OK)
+                {
+                    File.WriteAllBytes("Updater.exe", Properties.Resources.Updater);
+                    var pr = new Process();
+                    pr.StartInfo.FileName = "Updater.exe";
+                    pr.StartInfo.Arguments = "/u";
+                    pr.Start();
+                    Application.Exit();
+                }
             }
         }
 
