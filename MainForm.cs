@@ -311,7 +311,7 @@ namespace Aion_Launcher
             try
             {
                 WebClient client = new WebClient();
-                Stream stream = client.OpenRead("https://raw.githubusercontent.com/Sigmanor/sigmanor.github.io/master/soft/Aion-Game-Launcher/version");
+                Stream stream = client.OpenRead("http://sigmanor.pp.ua/soft/Aion-Game-Launcher/version");
                 StreamReader reader = new StreamReader(stream);
                 string content = reader.ReadToEnd();
                 string version = Application.ProductVersion;
@@ -509,7 +509,7 @@ namespace Aion_Launcher
             try
             {
                 WebClient client = new WebClient();
-                Stream stream = client.OpenRead("https://raw.githubusercontent.com/Sigmanor/sigmanor.github.io/master/soft/Aion-Game-Launcher/version");
+                Stream stream = client.OpenRead("http://sigmanor.pp.ua/soft/Aion-Game-Launcher/version");
                 StreamReader reader = new StreamReader(stream);
                 HttpWebRequest req;
                 HttpWebResponse resp;
@@ -614,6 +614,7 @@ namespace Aion_Launcher
 
         /*THREADS*/
 
+
         #region Асинхронная проверка пинга
 
         private void SendPing(string IP)
@@ -643,6 +644,7 @@ namespace Aion_Launcher
         }
 
         #endregion
+
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -755,23 +757,6 @@ namespace Aion_Launcher
             }
         }
 
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
-        {
-            if (toolStripStatusLabel1.Text == translate.newVersion)
-            {
-                DialogResult result = MessageBox.Show(translate.updMsgBoxText, translate.updMsgBoxTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (result == DialogResult.OK)
-                {
-                    File.WriteAllBytes("Updater.exe", Properties.Resources.Updater);
-                    var pr = new Process();
-                    pr.StartInfo.FileName = "Updater.exe";
-                    pr.StartInfo.Arguments = "/u";
-                    pr.Start();
-                    Application.Exit();
-                }
-            }
-        }
-
         private void gButton2_Click(object sender, EventArgs e)
         {
             Process.Start("http://vk.com/aion_community");
@@ -835,16 +820,26 @@ namespace Aion_Launcher
             };
             Process.Start(startInfo);
 
-            if (ps.Tray == false)
-            {
-                Application.Exit();
-            }
+            statusStrip1.Focus();
 
-            if (ps.Tray == true)
+            switch (ps.AfterStart)
             {
-                this.Hide();
-                notifyIcon1.Visible = true;
-                notifyIcon1.ShowBalloonTip(30000);
+                case 0:
+                    this.WindowState = FormWindowState.Minimized;
+                    break;
+
+                case 1:
+                    this.Hide();
+                    notifyIcon1.Visible = true;
+                    notifyIcon1.ShowBalloonTip(30000);
+                    break;
+
+                case 2:
+                    break;
+
+                case 3:
+                    Application.Exit();
+                    break;
             }
         }
 
@@ -1051,8 +1046,27 @@ namespace Aion_Launcher
 
         private void toolStripStatusLabel1_MouseEnter(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.BackColor = Color.FromArgb(213, 213, 213/*145, 201, 247*/);
+            toolStripStatusLabel1.BackColor = Color.FromArgb(213, 213, 213);
         }
+
+        private void statusLabel_Click(object sender, EventArgs e)
+        {
+            if (statusLabel.Text == translate.newVersion)
+            {
+                DialogResult result = MessageBox.Show(translate.updMsgBoxText, translate.updMsgBoxTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.OK)
+                {
+                    File.WriteAllBytes("Updater.exe", Properties.Resources.Updater);
+                    var pr = new Process();
+                    pr.StartInfo.FileName = "Updater.exe";
+                    pr.StartInfo.Arguments = "/u";
+                    pr.Start();
+                    Application.Exit();
+                }
+            }
+        }
+
+
     }
 }
 

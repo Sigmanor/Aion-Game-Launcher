@@ -8,8 +8,6 @@ namespace Aion_Launcher
 {
     public partial class SettingsForm : Form
     {
-        //string path = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath.ToString();
-
         Properties.Settings ps = Properties.Settings.Default;
 
         PortableSettingsProvider psp = new PortableSettingsProvider();
@@ -28,6 +26,7 @@ namespace Aion_Launcher
             languageComboBox.MouseWheel += new MouseEventHandler(comboBox1_MouseWheel);
             ServerComboBox.MouseWheel += new MouseEventHandler(comboBox1_MouseWheel);
             comboBox2.MouseWheel += new MouseEventHandler(comboBox1_MouseWheel);
+            comboBox3.MouseWheel += new MouseEventHandler(comboBox1_MouseWheel);
         }
 
         void comboBox1_MouseWheel(object sender, MouseEventArgs e)
@@ -38,7 +37,7 @@ namespace Aion_Launcher
         private void Settings_Load(object sender, EventArgs e)
         {
             comboBox1.SelectedIndex = ps.Capacity;
-            trayCheckBox.Checked = ps.Tray;
+            comboBox3.SelectedIndex = ps.AfterStart;
             fastStart.Checked = ps.Priority;
             textBox3.Text = ps.Extra;
             checkBox1.Checked = ps.AutoUPD;
@@ -67,7 +66,7 @@ namespace Aion_Launcher
         private void SaveSettingsButton_Click(object sender, EventArgs e)
         {
             ps.Capacity = comboBox1.SelectedIndex;
-            ps.Tray = trayCheckBox.Checked;
+            ps.AfterStart = comboBox3.SelectedIndex;
             ps.Priority = fastStart.Checked;
             ps.GamePath = textBox1.Text;
             ps.Extra = textBox3.Text;
@@ -111,20 +110,6 @@ namespace Aion_Launcher
                 Process.Start("explorer.exe", string.Format("/select,\"{0}\"", folder));
             }
             catch { }       
-        }
-
-        private void fastStart_CheckedChanged(object sender, EventArgs e)
-        {
-            if (fastStart.Checked == true)
-            {
-                trayCheckBox.Enabled = true;
-            }
-
-            if (fastStart.Checked == false)
-            {
-                trayCheckBox.Enabled = false;
-                trayCheckBox.Checked = false;
-            }
         }
 
         private void Settings_Shown(object sender, EventArgs e)

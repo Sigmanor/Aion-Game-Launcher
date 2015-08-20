@@ -43,7 +43,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.trayCheckBox = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.fastStart = new System.Windows.Forms.CheckBox();
             this.ResetSettingsButton = new System.Windows.Forms.Button();
@@ -52,13 +51,15 @@
             this.label5 = new System.Windows.Forms.Label();
             this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.advancedGroupBox = new System.Windows.Forms.GroupBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.pingCheckBox = new System.Windows.Forms.CheckBox();
             this.RestartCheckBox = new System.Windows.Forms.CheckBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.seperator1 = new Aion_Launcher.Seperator();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.generalGroupBox.SuspendLayout();
             this.advancedGroupBox.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -156,12 +157,6 @@
             resources.ApplyResources(this.textBox3, "textBox3");
             this.textBox3.Name = "textBox3";
             // 
-            // trayCheckBox
-            // 
-            resources.ApplyResources(this.trayCheckBox, "trayCheckBox");
-            this.trayCheckBox.Name = "trayCheckBox";
-            this.trayCheckBox.UseVisualStyleBackColor = true;
-            // 
             // checkBox1
             // 
             resources.ApplyResources(this.checkBox1, "checkBox1");
@@ -175,7 +170,6 @@
             resources.ApplyResources(this.fastStart, "fastStart");
             this.fastStart.Name = "fastStart";
             this.fastStart.UseVisualStyleBackColor = true;
-            this.fastStart.CheckedChanged += new System.EventHandler(this.fastStart_CheckedChanged);
             // 
             // ResetSettingsButton
             // 
@@ -226,11 +220,12 @@
             // 
             // advancedGroupBox
             // 
+            this.advancedGroupBox.Controls.Add(this.comboBox3);
+            this.advancedGroupBox.Controls.Add(this.label6);
             this.advancedGroupBox.Controls.Add(this.pingCheckBox);
             this.advancedGroupBox.Controls.Add(this.RestartCheckBox);
             this.advancedGroupBox.Controls.Add(this.comboBox2);
             this.advancedGroupBox.Controls.Add(this.label4);
-            this.advancedGroupBox.Controls.Add(this.trayCheckBox);
             this.advancedGroupBox.Controls.Add(this.label3);
             this.advancedGroupBox.Controls.Add(this.button1);
             this.advancedGroupBox.Controls.Add(this.fastStart);
@@ -239,6 +234,23 @@
             resources.ApplyResources(this.advancedGroupBox, "advancedGroupBox");
             this.advancedGroupBox.Name = "advancedGroupBox";
             this.advancedGroupBox.TabStop = false;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            resources.GetString("comboBox3.Items"),
+            resources.GetString("comboBox3.Items1"),
+            resources.GetString("comboBox3.Items2"),
+            resources.GetString("comboBox3.Items3")});
+            resources.ApplyResources(this.comboBox3, "comboBox3");
+            this.comboBox3.Name = "comboBox3";
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
             // 
             // pingCheckBox
             // 
@@ -332,7 +344,6 @@
         private System.Windows.Forms.ComboBox ServerComboBox;
         private Seperator seperator1;
         private System.Windows.Forms.CheckBox fastStart;
-        private System.Windows.Forms.CheckBox trayCheckBox;
         private System.Windows.Forms.GroupBox generalGroupBox;
         private System.Windows.Forms.GroupBox advancedGroupBox;
         private System.Windows.Forms.Panel panel1;
@@ -342,5 +353,7 @@
         private System.Windows.Forms.CheckBox pingCheckBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox languageComboBox;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label6;
     }
 }
