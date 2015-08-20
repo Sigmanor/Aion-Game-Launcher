@@ -18,7 +18,7 @@ namespace Aion_Launcher
         private void About_Load(object sender, EventArgs e)
         {
         	Version vrs = new Version(Application.ProductVersion);
-            VersionLabel.Text = string.Format("{0}.{1}", vrs.Major, vrs.Minor/*, vrs.Build*/);
+            VersionLabel.Text = string.Format("{0}.{1}.{2}", vrs.Major, vrs.Minor, vrs.Build);
         }
 
         private void label7_Click(object sender, EventArgs e)
