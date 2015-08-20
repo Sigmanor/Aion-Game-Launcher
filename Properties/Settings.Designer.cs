@@ -117,19 +117,6 @@ namespace Aion_Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Configuration.SettingsProviderAttribute(typeof(PortableSettingsProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Tray {
-            get {
-                return ((bool)(this["Tray"]));
-            }
-            set {
-                this["Tray"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.SettingsProviderAttribute(typeof(PortableSettingsProvider))]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int Monitoring {
             get {
@@ -215,6 +202,18 @@ namespace Aion_Launcher.Properties {
             }
             set {
                 this["accountCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int AfterStart {
+            get {
+                return ((int)(this["AfterStart"]));
+            }
+            set {
+                this["AfterStart"] = value;
             }
         }
     }
