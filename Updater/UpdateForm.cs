@@ -67,7 +67,7 @@ namespace Updater
 
                 webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(downloader_DownloadFileCompleted);
 
-                webClient.DownloadFileAsync(new Uri("http://sigmanor.tk/soft/Aion-Game-Launcher/Update.zip"), "Aion-Game-Launcher-Update.zip");
+                webClient.DownloadFileAsync(new Uri("http://sigmanor.pp.ua/soft/Aion-Game-Launcher/Update.zip"), "Aion-Game-Launcher-Update.zip");
             }
         }
 
