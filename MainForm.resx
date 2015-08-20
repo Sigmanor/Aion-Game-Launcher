@@ -6448,7 +6448,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="toolStripStatusLabel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>16, 21</value>
   </data>
   <data name="pingStatusLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -13067,9 +13067,6 @@
         PihcXU9AaGlfR21zdkTQ2ONAg4aNHwAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP+/AACAAQAAgAEAAIAB
         AAAEIQAACAAAAAgQAAAQEAAAABAAAAggAAAAYQAAB8EAAIADAADABwAA6B8AAA==
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

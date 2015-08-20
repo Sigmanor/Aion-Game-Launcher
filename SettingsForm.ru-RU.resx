@@ -124,17 +124,11 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Разрядность</value>
   </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="comboBox1.Items" xml:space="preserve">
     <value>32-бит</value>
   </data>
   <data name="comboBox1.Items1" xml:space="preserve">
     <value>64-бит</value>
-  </data>
-  <data name="comboBox1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -142,23 +136,11 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Папка с игрой</value>
   </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="textBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 13</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Файл параметров</value>
-  </data>
-  <data name="label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="textBox2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ViewButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -198,17 +180,11 @@
   <data name="button1.ToolTip" xml:space="preserve">
     <value>Обзор</value>
   </data>
-  <data name="ServerComboBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 13</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value>Игровой сервер</value>
-  </data>
-  <data name="label10.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -216,20 +192,11 @@
   <data name="label8.Text" xml:space="preserve">
     <value>Доп. Параметры</value>
   </data>
-  <data name="label8.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="textBox3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="trayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 17</value>
   </data>
   <data name="trayCheckBox.Text" xml:space="preserve">
     <value>Свернуть в трей</value>
-  </data>
-  <data name="trayCheckBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 17</value>
@@ -237,17 +204,11 @@
   <data name="checkBox1.Text" xml:space="preserve">
     <value>Авто. Проверка обновлений</value>
   </data>
-  <data name="checkBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="fastStart.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 17</value>
   </data>
   <data name="fastStart.Text" xml:space="preserve">
     <value>Быстрый запуск</value>
-  </data>
-  <data name="fastStart.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ResetSettingsButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 23</value>
@@ -255,14 +216,8 @@
   <data name="ResetSettingsButton.Text" xml:space="preserve">
     <value>Сбросить настройки</value>
   </data>
-  <data name="ResetSettingsButton.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="SaveSettingsButton.Text" xml:space="preserve">
     <value>Сохранить</value>
-  </data>
-  <data name="SaveSettingsButton.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 13</value>
@@ -270,17 +225,26 @@
   <data name="label5.Text" xml:space="preserve">
     <value>Язык лаунчера</value>
   </data>
-  <data name="label5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="languageComboBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="generalGroupBox.Text" xml:space="preserve">
     <value>Общие</value>
   </data>
-  <data name="generalGroupBox.ToolTip" xml:space="preserve">
-    <value />
+  <data name="comboBox3.Items" xml:space="preserve">
+    <value>Свернуть окно</value>
+  </data>
+  <data name="comboBox3.Items1" xml:space="preserve">
+    <value>Свернуть в трей</value>
+  </data>
+  <data name="comboBox3.Items2" xml:space="preserve">
+    <value>Ничего не делать</value>
+  </data>
+  <data name="comboBox3.Items3" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 13</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>После запуска игры</value>
   </data>
   <data name="pingCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 17</value>
@@ -288,20 +252,11 @@
   <data name="pingCheckBox.Text" xml:space="preserve">
     <value>Показывать пинг</value>
   </data>
-  <data name="pingCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="RestartCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 17</value>
   </data>
   <data name="RestartCheckBox.Text" xml:space="preserve">
     <value>Предупреждение о рестарте</value>
-  </data>
-  <data name="RestartCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="comboBox2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 13</value>
@@ -309,20 +264,8 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Сайт мониторинга</value>
   </data>
-  <data name="label4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="advancedGroupBox.Text" xml:space="preserve">
     <value>Расширенные</value>
-  </data>
-  <data name="advancedGroupBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="panel1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="seperator1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -402,8 +345,5 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>
