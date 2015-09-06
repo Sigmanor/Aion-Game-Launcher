@@ -148,7 +148,7 @@
     <value>Ready</value>
   </data>
   <data name="resetSettingsText" xml:space="preserve">
-    <value>Reset program settings?</value>
+    <value>Set settings to default values?</value>
   </data>
   <data name="runAfter" xml:space="preserve">
     <value>Running after: </value>

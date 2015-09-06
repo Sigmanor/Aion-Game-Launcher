@@ -148,7 +148,7 @@
     <value>Готово</value>
   </data>
   <data name="resetSettingsText" xml:space="preserve">
-    <value>Сбросить настройки программы?</value>
+    <value>Cбросить настройки в исходное состояние?</value>
   </data>
   <data name="runAfter" xml:space="preserve">
     <value>Запуск через: </value>
