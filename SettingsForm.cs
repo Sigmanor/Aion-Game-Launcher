@@ -63,21 +63,42 @@ namespace Aion_Launcher
             }
         }
 
+        private void SetSettings(string value)
+        {
+            if (value == "Save")
+            {
+                ps.Capacity = comboBox1.SelectedIndex;
+                ps.AfterStart = comboBox3.SelectedIndex;
+                ps.Priority = fastStart.Checked;
+                ps.GamePath = textBox1.Text;
+                ps.Extra = textBox3.Text;
+                ps.AutoUPD = checkBox1.Checked;
+                ps.SCCB = ServerComboBox.Text;
+                ps.Monitoring = comboBox2.SelectedIndex;
+                ps.RestartAlert = RestartCheckBox.Checked;
+                ps.Ping = pingCheckBox.Checked;
+                ps.Language = languageComboBox.SelectedValue.ToString();
+                ps.Save();
+            }
+
+            if (value == "Default")
+            {
+                comboBox1.SelectedIndex = 0;
+                comboBox3.SelectedIndex = 0;
+                fastStart.Checked = false;
+                textBox3.Text = "";
+                checkBox1.Checked = true;
+                ServerComboBox.Text = "Siel";
+                comboBox2.SelectedIndex = 2;
+                RestartCheckBox.Checked = true;
+                pingCheckBox.Checked = true;
+                languageComboBox.SelectedValue = "en-US";
+            }
+        }
+
         private void SaveSettingsButton_Click(object sender, EventArgs e)
         {
-            ps.Capacity = comboBox1.SelectedIndex;
-            ps.AfterStart = comboBox3.SelectedIndex;
-            ps.Priority = fastStart.Checked;
-            ps.GamePath = textBox1.Text;
-            ps.Extra = textBox3.Text;
-            ps.AutoUPD = checkBox1.Checked;
-            ps.SCCB = ServerComboBox.Text;
-            ps.Monitoring = comboBox2.SelectedIndex;
-            ps.RestartAlert = RestartCheckBox.Checked;
-            ps.Ping = pingCheckBox.Checked;
-            ps.Language = languageComboBox.SelectedValue.ToString();
-            ps.Save();
-
+            SetSettings("Save");
             PubVar.toggle = true;
 
             this.Visible = false;
@@ -96,9 +117,8 @@ namespace Aion_Launcher
 
             if (result == DialogResult.Yes)
             {
-                File.Delete(psp.GetAppSettingsFilename());
-                Application.Restart();
-            }                 
+                SetSettings("Default");
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
