@@ -192,12 +192,6 @@
   <data name="label8.Text" xml:space="preserve">
     <value>Доп. Параметры</value>
   </data>
-  <data name="trayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 17</value>
-  </data>
-  <data name="trayCheckBox.Text" xml:space="preserve">
-    <value>Свернуть в трей</value>
-  </data>
   <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 17</value>
   </data>
@@ -211,10 +205,10 @@
     <value>Быстрый запуск</value>
   </data>
   <data name="ResetSettingsButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="ResetSettingsButton.Text" xml:space="preserve">
-    <value>Сбросить настройки</value>
+    <value>По умолчанию</value>
   </data>
   <data name="SaveSettingsButton.Text" xml:space="preserve">
     <value>Сохранить</value>
