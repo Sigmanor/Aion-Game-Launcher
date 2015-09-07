@@ -118,6 +118,7 @@ namespace Aion_Launcher
             if (result == DialogResult.Yes)
             {
                 SetSettings("Default");
+                SaveSettingsButton.Focus();
             }
         }
 
