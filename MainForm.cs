@@ -255,6 +255,8 @@ namespace Aion_Launcher
                 DeleteUpdateFiles();
                 MessageBox.Show(translate.updFailedText, translate.updFailedTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            MessageBox.Show(translate.brokenMsg);
         }
 
         public void DeleteUpdateFiles()
