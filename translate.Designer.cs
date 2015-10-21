@@ -61,6 +61,15 @@ namespace Aion_Launcher {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на After updating 10/13/2015 launcher does not work anymore..
+        /// </summary>
+        internal static string brokenMsg {
+            get {
+                return ResourceManager.GetString("brokenMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Email.
         /// </summary>
         internal static string email {
