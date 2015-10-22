@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="brokenMsg" xml:space="preserve">
-    <value>После обновления 13.10.2015 лаунчер больше не работает.</value>
+    <value>После обновления игры 13.10.2015 лаунчер больше не работает.</value>
   </data>
   <data name="email" xml:space="preserve">
     <value>Логин</value>

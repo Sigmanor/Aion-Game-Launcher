@@ -61,7 +61,7 @@ namespace Aion_Launcher {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на After updating 10/13/2015 launcher does not work anymore..
+        ///   Ищет локализованную строку, похожую на After game update 10/13/2015 launcher does not work anymore..
         /// </summary>
         internal static string brokenMsg {
             get {
