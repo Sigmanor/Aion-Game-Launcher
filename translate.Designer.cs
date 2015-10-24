@@ -61,6 +61,15 @@ namespace Aion_Launcher {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на After game update 10/13/2015 launcher does not work anymore..
+        /// </summary>
+        internal static string brokenMsg {
+            get {
+                return ResourceManager.GetString("brokenMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Email.
         /// </summary>
         internal static string email {
@@ -151,7 +160,7 @@ namespace Aion_Launcher {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Reset program settings?.
+        ///   Ищет локализованную строку, похожую на Set settings to default values?.
         /// </summary>
         internal static string resetSettingsText {
             get {

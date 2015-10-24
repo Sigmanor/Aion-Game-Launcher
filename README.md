@@ -1,3 +1,5 @@
+# Attention! After <a href="http://na.aiononline.com/en/news/server-updates/weekly-server-maintenance-10142015.php">this</a> update, launcher doesn't work anymore.
+
 Description
 ==================
 

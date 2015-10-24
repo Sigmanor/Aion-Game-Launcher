@@ -594,13 +594,13 @@
     <value>4, 271</value>
   </data>
   <data name="ResetSettingsButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 23</value>
+    <value>99, 23</value>
   </data>
   <data name="ResetSettingsButton.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="ResetSettingsButton.Text" xml:space="preserve">
-    <value>Reset Settings</value>
+    <value>Reset to defaults</value>
   </data>
   <data name="&gt;&gt;ResetSettingsButton.Name" xml:space="preserve">
     <value>ResetSettingsButton</value>

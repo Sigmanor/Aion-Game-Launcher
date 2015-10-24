@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="brokenMsg" xml:space="preserve">
+    <value>After game update 10/13/2015 launcher does not work anymore.</value>
+  </data>
   <data name="email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -148,7 +151,7 @@
     <value>Ready</value>
   </data>
   <data name="resetSettingsText" xml:space="preserve">
-    <value>Reset program settings?</value>
+    <value>Set settings to default values?</value>
   </data>
   <data name="runAfter" xml:space="preserve">
     <value>Running after: </value>

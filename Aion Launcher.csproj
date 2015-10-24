@@ -181,8 +181,16 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Themes.cs" />
-    <Compile Include="translate.Designer.cs" />
-    <Compile Include="translate.ru-RU.Designer.cs" />
+    <Compile Include="translate.ru-RU.Designer.cs">
+      <DependentUpon>translate.ru-RU.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="translate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>translate.resx</DependentUpon>
+    </Compile>
     <Compile Include="VersionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,11 +235,13 @@
     <EmbeddedResource Include="SettingsForm.ru-RU.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="translate.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="translate.ru-RU.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>translate.ru-RU.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="translate.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>translate.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="VersionForm.resx">
       <DependentUpon>VersionForm.cs</DependentUpon>

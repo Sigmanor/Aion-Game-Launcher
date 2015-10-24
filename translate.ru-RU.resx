@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="brokenMsg" xml:space="preserve">
+    <value>После обновления игры 13.10.2015 лаунчер больше не работает.</value>
+  </data>
   <data name="email" xml:space="preserve">
     <value>Логин</value>
   </data>
@@ -148,7 +151,7 @@
     <value>Готово</value>
   </data>
   <data name="resetSettingsText" xml:space="preserve">
-    <value>Сбросить настройки программы?</value>
+    <value>Cбросить настройки в исходное состояние?</value>
   </data>
   <data name="runAfter" xml:space="preserve">
     <value>Запуск через: </value>
